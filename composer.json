@@ -1,5 +1,5 @@
 {
-    "name": "bnomei/kloppy",
+    "name": "bnomei/kirby3-plopfile",
     "type": "kirby-plugin",
     "version": "1.0.0",
     "description": "CLI tool to generate various files for Kirby3 CMS using PLOP",
@@ -9,16 +9,17 @@
         "kirby3-cms",
         "cli",
         "commandline",
-        "artisan",
         "make",
         "generator",
         "generate",
         "template",
         "plop",
+        "prompt",
         "inquirer",
         "handlebars",
         "hbs",
         "automate",
+        "consistency",
         "workflow"
     ],
     "config": {
@@ -29,11 +30,6 @@
         "php": ">=7.3.0",
         "getkirby/composer-installer": "^1.2"
     },
-    "autoload": {
-        "psr-4": {
-            "Bnomei\\Kloppy\\": "classes/"
-        }
-    },
     "authors": [
         {
             "name": "Bruno Meilick",
@@ -41,8 +37,6 @@
         }
     ],
     "scripts": {
-        "analyze": "phpstan analyse",
-        "fix": "php-cs-fixer fix",
         "dist": [
             "composer install --no-dev --optimize-autoloader",
             "git rm -rf --cached .; git add .;"
