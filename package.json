@@ -1,0 +1,12 @@
+{
+  "name": "kirby3-plopfile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:bnomei/kirby3-plopfile.git",
+  "author": "Bruno Meilick <b@bnomei.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "fast-glob": "^3.2.7"
+  }
+}

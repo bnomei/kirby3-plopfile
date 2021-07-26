@@ -1,4 +1,5 @@
-const Slugify = require('./slugify.js');
+const Kirby = require('./helpers/kirby.js');
+const Slugify = require('./helpers/slugify.js');
 
 module.exports = function (plop) {
     plop.setHelper('slugify', function (text) {
@@ -11,7 +12,7 @@ module.exports = function (plop) {
         return text.toLowerCase();
     });
     
-    var basepath = "./"; // TODO: use helper to guess kirby root by globing
+    var basepath = Kirby.root('content');
 
     plop.setGenerator('content', {
         description: 'make a content file',
@@ -23,8 +24,9 @@ module.exports = function (plop) {
         {
             type: 'input',
             name: 'parent',
-            basePath: basepath,
-            message: 'Enter UID of the parent folder'
+            // basePath: basepath,
+            message: 'Enter UID of the parent folder',
+            default: basepath + '/',
         },
         {
             type: 'input',
@@ -37,7 +39,7 @@ module.exports = function (plop) {
         // TODO: loop and add data for additional fields
         actions: [{
             type: 'add',
-            path: '{{trimTrailingSlash parent }}/{{slugify title }}/{{toLowerCase template }}.txt',
+            path: basepath + '/{{trimTrailingSlash parent }}/{{slugify title }}/{{toLowerCase template }}.txt',
             templateFile: 'content.hbs'
         }]
     });

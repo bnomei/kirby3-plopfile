@@ -1,3 +1,5 @@
+const Kirby = require('./helpers/kirby.js');
+
 module.exports = function (plop) {
     plop.setHelper('saveFilename', function (text) {
         return text.toLowerCase()
@@ -5,7 +7,7 @@ module.exports = function (plop) {
             .replace(' ', '-');
     });
 
-    var basepath = "./site/config/"; // TODO: use helper to guess kirby root by globing
+    var basepath = Kirby.root("config");
 
     plop.setGenerator('config', {
         description: 'make a config file',
@@ -18,7 +20,7 @@ module.exports = function (plop) {
         // TODO: loop and add data for additional fields
         actions: [{
             type: 'add',
-            path: basepath . '{{saveFilename filename }}.php',
+            path: basepath + '/{{saveFilename filename }}.php',
             templateFile: 'config.hbs'
         }]
     });

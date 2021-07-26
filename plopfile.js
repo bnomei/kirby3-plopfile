@@ -10,6 +10,7 @@ module.exports = function (plop) {
         './src/model.js', 
         './src/plugin.js', 
         './src/robotstxt.js', 
+        './src/snippet.js', 
         './src/template.js', 
         './src/user.js', 
     ]);

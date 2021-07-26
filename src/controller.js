@@ -1,9 +1,11 @@
+const Kirby = require('./helpers/kirby.js');
+
 module.exports = function (plop) {
     plop.setHelper('toLowerCase', function (text) {
         return text.toLowerCase();
     });
 
-    var basepath = "./site/controllers/"; // TODO: use helper to guess kirby root by globing
+    var basepath = Kirby.root('controllers');
 
     plop.setGenerator('controller', {
         description: 'make a controller file',
@@ -15,7 +17,7 @@ module.exports = function (plop) {
         }],
         actions: [{
             type: 'add',
-            path: basepath . '{{toLowerCase template }}.php',
+            path: basepath + '/{{toLowerCase template }}.php',
             templateFile: 'controller.hbs'
         }]
     });
