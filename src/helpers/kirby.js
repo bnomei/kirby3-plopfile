@@ -34,3 +34,13 @@ module.exports.blueprintTypes = function()
         return (types.indexOf(item) == index);  
     }).sort();
 }
+
+module.exports.userRoles = function()
+{
+    var roles = fg.sync(['**/blueprints/users/*.yml'], { onlyFiles: true, objectMode: true })
+        .map(function (file) {
+            return file.name.replace('.yml', '');
+        });
+    if (roles.indexOf('admin') == -1) roles.push = 'admin';
+    return roles.sort();
+}

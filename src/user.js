@@ -1,6 +1,5 @@
 const Kirby = require('./helpers/kirby.js');
 const Slugify = require('./helpers/slugify.js');
-const fg = require('fast-glob');
 
 module.exports = function (plop) {
     plop.setHelper('userIdFrom', function (text) {
@@ -11,11 +10,6 @@ module.exports = function (plop) {
     });
 
     var basepath = Kirby.root('users');
-    var roles = fg.sync(['**/blueprints/users/*.yml'], { onlyFiles: true, objectMode: true })
-        .map(function (file) {
-            return file.name.replace('.yml', '');
-        });
-    if (roles.length == 0) roles = ['admin'];
 
     plop.setGenerator('user', {
         description: 'make a user',
@@ -38,7 +32,7 @@ module.exports = function (plop) {
             type: 'list',
             name: 'role',
             message: 'Role',
-            choices: roles,
+            choices: Kirby.userRoles(),
         },
         {
             type: 'input',
