@@ -21,7 +21,7 @@ module.exports = function (plop) {
         },
         {
             type: 'input',
-            name: 'template',
+            name: 'template', // subfolders can be done like this: 'mysub/tempname'
             message: 'Template',
         },
         {
@@ -31,7 +31,6 @@ module.exports = function (plop) {
             default: '.yml',
         }
         ],
-        // TODO: subfolders
         actions: [{
             type: 'add',
             path: basepath + '/{{ type }}/{{saveFilename template }}.{{trimFirstDot extension }}',
