@@ -41,6 +41,6 @@ module.exports.userRoles = function()
         .map(function (file) {
             return file.name.replace('.yml', '');
         });
-    if (roles.indexOf('admin') == -1) roles.push = 'admin';
+    if (roles.indexOf('admin') == -1) roles.push('admin');
     return roles.sort();
 }
