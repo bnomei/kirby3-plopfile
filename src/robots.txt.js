@@ -18,7 +18,7 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: basepath + 'robots.txt',
-            templateFile: 'robotstxt.hbs'
+            templateFile: 'robots.txt.hbs'
         }]
     });
 };

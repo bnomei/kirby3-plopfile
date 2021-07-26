@@ -14,3 +14,23 @@ module.exports.root = function(root)
 
     return "./";
 }
+
+module.exports.languages = function()
+{
+    return fg.sync(['**/languages/??.php'], {onlyFiles: true, objectMode: true})
+        .map(function(file) {
+            return file.name.replace('.php', '');   
+        });
+}
+
+module.exports.blueprintTypes = function()
+{
+    // merge without duplicates
+    var types = ['fields', 'files', 'layouts', 'pages', 'sections', 'users']
+        .concat(fg.sync(['**/blueprints/*'], { onlyDirectories: true, objectMode: true }).map(function(folder) {
+            return folder.name;
+        }));
+    return types.filter((item, index) => {
+        return (types.indexOf(item) == index);  
+    }).sort();
+}

@@ -6,9 +6,8 @@ module.exports = function (plop) {
         return text.toLowerCase()
             .replace(' ', '');
     });
-
     var basepath = Kirby.root('languages');
-    const existingLanguages = fg.sync(['languages/[a-z]{2}.php'], {onlyFiles: true});
+    const existingLanguages = Kirby.languages();
 
     plop.setGenerator('language', {
         description: 'make a language file',

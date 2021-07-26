@@ -20,7 +20,7 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: '{{saveFoldername folder }}/index.php',
-            templateFile: 'indexphp.hbs'
+            templateFile: 'index.php.hbs'
         }]
     });
 };

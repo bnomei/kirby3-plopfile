@@ -14,9 +14,7 @@ module.exports = function (plop) {
     
     var basepath = Kirby.root('content');
 
-    plop.setGenerator('content', {
-        description: 'make a content file',
-        prompts: [{
+    var prompts = [{
             type: 'input',
             name: 'title',
             message: 'Title'
@@ -24,7 +22,6 @@ module.exports = function (plop) {
         {
             type: 'input',
             name: 'parent',
-            // basePath: basepath,
             message: 'Enter UID of the parent folder',
             default: basepath + '/',
         },
@@ -33,13 +30,31 @@ module.exports = function (plop) {
             name: 'template',
             message: 'Template',
             default: 'default',
-        }],
-        // TODO: optional language via select or input
-        // TODO: if language ask for different slug
+        }
+    ];
+
+    const existingLanguages = Kirby.languages();
+    if (existingLanguages.length) {
+        prompts.push({
+            type: 'list',
+            name: 'language',
+            message: 'Language',
+            choices: existingLanguages,
+        });
+        prompts.push({
+            type: 'input',
+            name: 'slug',
+            message: 'Language specific slug (optional)',
+        });
+    }
+
+    plop.setGenerator('content', {
+        description: 'make a content file',
+        prompts: prompts,
         // TODO: loop and add data for additional fields
         actions: [{
             type: 'add',
-            path: basepath + '/{{trimTrailingSlash parent }}/{{slugify title }}/{{toLowerCase template }}.txt',
+            path: basepath + '/{{trimTrailingSlash parent }}/{{slugify title }}/{{toLowerCase template }}{{#if language}}.{{ language }}{{/if}}.txt',
             templateFile: 'content.hbs'
         }]
     });

@@ -11,9 +11,9 @@ module.exports = function (plop) {
     });
 
     var basepath = Kirby.root('users');
-    var roles = fg.sync(['**/blueprints/users/*.yml'], { onlyFiles: true })
-        .map(function (text) {
-            return text.replace('.yml', '');
+    var roles = fg.sync(['**/blueprints/users/*.yml'], { onlyFiles: true, objectMode: true })
+        .map(function (file) {
+            return file.name.replace('.yml', '');
         });
     if (roles.length == 0) roles = ['admin'];
 
@@ -49,12 +49,12 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: basepath + '/{{userIdFrom email }}/index.php',
-            templateFile: 'user.hbs'
+            templateFile: 'user.index.php.hbs'
         },
         {
             type: 'add',
-            path: basepath + '/{{userIdFrom email}}/.htaccess',
-            templateFile: 'userhtaccess.hbs'
+            path: basepath + '/{{userIdFrom email }}/.htaccess',
+            templateFile: 'user.htaccess.hbs'
         }]
     });
 };

@@ -60,6 +60,8 @@ plop template blogpost
 plop content "Consistency made simple!" "blog/" blogpost
 ```
 
+> INFO: The plugin will `glob` to find the locations of your [Kirby roots](https://getkirby.com/docs/guide/configuration#custom-folder-setup) automatically. 
+
 ## Generators
 
 - blueprint
@@ -88,6 +90,13 @@ module.exports = function (plop) {
     // or any plop code here
 };
 ```
+
+## Major dependencies
+
+- [plop.js](https://github.com/plopjs/plop)
+- [inquirer.js](https://github.com/SBoudrias/Inquirer.js)
+- [handlebars.js](https://github.com/handlebars-lang/handlebars.js)
+- [fast-glob](https://github.com/mrmlnc/fast-glob)
 
 ## Disclaimer
 

@@ -14,7 +14,7 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: basepath + '/.htaccess',
-            templateFile: 'htaccess.hbs'
+            templateFile: 'htaccess.starterkit.hbs'
         }]
     });
 };

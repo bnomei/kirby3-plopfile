@@ -6,6 +6,9 @@ module.exports = function (plop) {
             .replace('.php', '')
             .replace('.yml', '');
     });
+    plop.setHelper('trimFirstDot', function (text) {
+        return text.replace(/^\./, "");
+    });
 
     const basepath = Kirby.root("blueprints");
 
@@ -14,19 +17,25 @@ module.exports = function (plop) {
         prompts: [{
             type: 'list',
             name: 'type',
-            choices: ['fields', 'files', 'layouts', 'pages', 'sections', 'users']
+            choices: Kirby.blueprintTypes(),
         },
         {
             type: 'input',
             name: 'template',
             message: 'Template',
-        }],
-        // TODO: php files
+        },
+        {
+            type: 'input',
+            name: 'extension',
+            message: 'Extension',
+            default: '.yml',
+        }
+        ],
         // TODO: subfolders
         actions: [{
             type: 'add',
-            path: basepath + '/{{ type }}/{{saveFilename template }}.yml',
-            templateFile: 'blueprint.hbs'
+            path: basepath + '/{{ type }}/{{saveFilename template }}.{{trimFirstDot extension }}',
+            templateFile: 'blueprint.{{trimFirstDot extension }}.hbs'
         }]
     });
 };

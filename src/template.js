@@ -7,13 +7,16 @@ module.exports = function (plop) {
             .replace('.php', '');
     });
     plop.setHelper('trimFirstDot', function (text) {
-        return text.replace(/^\./, "");
+        return text.replace(/^\./, '');
+    });
+    plop.setHelper('removeExtensionUnlessPHP', function (text) {
+        return text == '.php' ? '.php' : ''; // match exactly for better blade/twig support
     });
 
     var basepath = Kirby.root('templates'); 
 
     plop.setGenerator('template', {
-        description: 'make a model file',
+        description: 'make a template file',
         prompts: [{
             type: 'input',
             name: 'template',
@@ -28,7 +31,7 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: basepath + '/{{saveFilename template }}.{{trimFirstDot extension }}',
-            templateFile: 'template.hbs'
+            templateFile: 'template{{removeExtensionUnlessPHP extension}}.hbs'
         }]
     });
 };
