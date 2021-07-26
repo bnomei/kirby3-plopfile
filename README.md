@@ -2,9 +2,6 @@
 
 ![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-plopfile?color=ae81ff)
 ![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-plopfile?color=272822)
-[![Build Status](https://flat.badgen.net/travis/bnomei/kirby3-plopfile)](https://travis-ci.com/bnomei/kirby3-plopfile)
-[![Coverage Status](https://flat.badgen.net/coveralls/c/github/bnomei/kirby3-plopfile)](https://coveralls.io/github/bnomei/kirby3-plopfile) 
-[![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-plopfile)](https://codeclimate.com/github/bnomei/kirby3-plopfile) 
 [![Twitter](https://flat.badgen.net/badge/twitter/bnomei?color=66d9ef)](https://twitter.com/bnomei)
 
 CLI tool to generate various files for Kirby3 CMS using PLOP
