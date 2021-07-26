@@ -1,4 +1,3 @@
-/node_modules/
-
-# testing plops
-/tests/
+.env*
+/tests/*
+!/tests/.gitkeep
