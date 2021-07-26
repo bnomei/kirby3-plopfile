@@ -2,7 +2,7 @@
     "name": "bnomei/kirby3-plopfile",
     "type": "kirby-plugin",
     "version": "1.0.0",
-    "description": "CLI tool to generate various files for Kirby3 CMS using PLOP",
+    "description": "Plopfile to generate various files for Kirby3 CMS using Plop.js",
     "license": "MIT",
     "keywords": [
         "kirby3",

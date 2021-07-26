@@ -4,7 +4,7 @@
 ![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-plopfile?color=272822)
 [![Twitter](https://flat.badgen.net/badge/twitter/bnomei?color=66d9ef)](https://twitter.com/bnomei)
 
-CLI tool to generate various files for Kirby3 CMS using PLOP
+Plopfile to generate various files for Kirby3 CMS using Plop.js
 
 ## Commerical Usage
 
@@ -21,9 +21,9 @@ This plugin is free but if you use it in a commercial project please consider to
 
 ## Requirements
 
-Install [Plop globally](https://plopjs.com). 
+Install [Plop.js globally](https://plopjs.com). 
 
-> Plop is simplified just glue code between [inquirer](https://github.com/SBoudrias/Inquirer.js/) prompts and [handlebar](https://github.com/wycats/handlebars.js/) templates.
+> Plop.js is simplified just glue code between [inquirer](https://github.com/SBoudrias/Inquirer.js/) prompts and [handlebar](https://github.com/wycats/handlebars.js/) templates.
 
 ```bash
 npm install -g plop
@@ -76,7 +76,7 @@ plop content "Consistency made simple!" "blog/" blogpost
 
 ## Extending the plopfile
 
-You can add custom [inquirer](https://github.com/SBoudrias/Inquirer.js/) code to your new plopfile as inline code or using `load`.
+You can add custom code to your new plopfile as inline code or using files with `plop.load()`.
 
 ```js
 module.exports = function (plop) {
