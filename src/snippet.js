@@ -19,7 +19,7 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: basepath + '/{{saveFilename template }}.php',
-            templateFile: 'snippet.hbs'
+            templateFile: 'snippet.php.hbs'
         }]
     });
 };

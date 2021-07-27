@@ -18,7 +18,7 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: basepath + '/{{saveFilename template }}.php',
-            templateFile: 'model.hbs'
+            templateFile: 'model.php.hbs'
         }]
     });
 };

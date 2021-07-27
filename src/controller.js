@@ -18,7 +18,7 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: basepath + '/{{toLowerCase template }}.php',
-            templateFile: 'controller.hbs'
+            templateFile: 'controller.php.hbs'
         }]
     });
 };

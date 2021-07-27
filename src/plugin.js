@@ -31,7 +31,7 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: basepath + '/{{ folderprefix }}{{saveFilename repository }}/index.php',
-            templateFile: 'plugin.hbs'
+            templateFile: 'plugin.php.hbs'
         }]
     });
 };

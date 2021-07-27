@@ -32,7 +32,7 @@ module.exports = function (plop) {
         {
             type: 'add',
             path: basepath + '/{{saveFilename filename }}.php',
-            templateFile: 'config.hbs'
+            templateFile: 'config.php.hbs'
         }]
     });
 };

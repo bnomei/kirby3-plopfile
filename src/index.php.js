@@ -4,8 +4,7 @@ module.exports = function (plop) {
     plop.setHelper('saveFoldername', function (text) {
         return text.toLowerCase()
             .replace('index.php', '')
-            .replace(/\/$/, "") // trim trailing slash
-            .replace(/\/$/, "") // trim trailing slash
+            .replace(/\/$/, ""); // trim trailing slash
     });
 
     var basepath = Kirby.root('index');

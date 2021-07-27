@@ -20,7 +20,7 @@ module.exports = function (plop) {
         actions: [{
             type: 'add',
             path: basepath + '/{{saveFilename code }}.php',
-            templateFile: 'language.hbs'
+            templateFile: 'language.php.hbs'
         }]
     });
 };
