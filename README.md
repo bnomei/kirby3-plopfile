@@ -75,6 +75,11 @@ plop content "Consistency made simple!" "blog/" blogpost
 - template [template, extension]
 - user [email, name, password, role, language]
 
+## Examples
+
+*blueprint cloning*
+`plop blueprint fields dvd .yml cd.yml`
+
 ## Extending the plopfile
 
 You can add custom code to your new plopfile as inline code or using files with `plop.load()`.

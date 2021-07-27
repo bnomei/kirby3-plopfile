@@ -4,7 +4,7 @@ const YAML = require('js-yaml');
 
 module.exports.findFile = function (filepath) {
     if (! fs.existsSync(filepath)) {
-        const files = fg.sync(['./' + filepath], { onlyFiles: true });
+        const files = fg.sync(['./**/' + filepath], { onlyFiles: true });
         if (files.length) filepath = files[0];
         else return undefined;
     }
@@ -16,7 +16,7 @@ module.exports.parseJson = function(data)
     try {
         return JSON.parse(data);
     } catch(err) {
-        console.log(err)
+        //console.log(err)
         return undefined;
     }
 }
@@ -26,7 +26,7 @@ module.exports.parseYaml = function(data)
     try {
         return YAML.load(data);
     } catch(err) {
-        console.log(err)
+        //console.log(err)
         return undefined;
     }
 }

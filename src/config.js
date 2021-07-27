@@ -1,4 +1,5 @@
 const Kirby = require('./helpers/kirby.js');
+const F = require('./helpers/f.js');
 
 module.exports = function (plop) {
     plop.setHelper('saveFilename', function (text) {
