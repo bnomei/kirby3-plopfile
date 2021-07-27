@@ -1,14 +1,14 @@
-Title: {{ title }}
+Title: {{{ title }}}
 
 {{#if slug }}
 ----
 
-Slug: {{ slug }}
+Slug: {{{ slug }}}
 
 {{/if }}
 {{#each data}}
 ----
 
-{{ucfirst @key }}: {{ this }}
+{{{ucfirst @key }}}: {{{ this }}}
 
 {{/each }}

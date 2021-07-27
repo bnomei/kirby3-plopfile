@@ -2,6 +2,11 @@ const fs = require('fs');
 const fg = require('fast-glob');
 const YAML = require('js-yaml');
 
+module.exports.read = function(filepath)
+{
+    return fs.readFileSync(filepath, { encoding: 'utf-8' });
+}
+
 module.exports.findFile = function (filepath) {
     if (! fs.existsSync(filepath)) {
         const files = fg.sync(['./**/' + filepath], { onlyFiles: true });

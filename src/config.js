@@ -1,11 +1,21 @@
 const Kirby = require('./helpers/kirby.js');
 const F = require('./helpers/f.js');
+const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
     plop.setHelper('saveFilename', function (text) {
         return text.toLowerCase()
             .replace('.php', '')
             .replace(' ', '-');
+    });
+    plop.setHelper('wrapValue', function (value) {
+        if (typeof value === 'number' || typeof value === 'boolean') {
+            return value;
+        }
+        if (typeof value === 'string' && value.startsWith('function')) {
+            return value;
+        }
+        return "'"+ value +"'";
     });
 
     var basepath = Kirby.root("config");
@@ -28,11 +38,18 @@ module.exports = function (plop) {
         actions: [
         function (data) {
             data['data'] = F.load(data['import']);
+            return data['data'];
         },
         {
             type: 'add',
             path: basepath + '/{{saveFilename filename }}.php',
             templateFile: 'config.php.hbs'
+        },
+        function(data) {
+            let path = plop.renderString(basepath + '/{{saveFilename filename }}.php', data);
+            console.log(F.read(path));
+            Clipboardy.writeSync(path);
+            return 'Path has been copied to clipboard.'
         }]
     });
 };

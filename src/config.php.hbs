@@ -1,10 +1,8 @@
 <?php
 
 return [
-    {{#keyvalues}}
-    {{#if isBoolean}}"{{ key }}" => {{ value }},{{/if}}
-    {{#if isInteger}}"{{ key }}" => {{ value }},{{/if}}
-    {{#if isString}}"{{ key }}" => '{{ value }}',{{/if}}
-    {{#if isClosure}}"{{ key }}" => {{ value }},{{/if}}
-    {{/keyvalues}}
+    {{#each data}}
+    '{{{ @key }}}' => {{{wrapValue this }}},
+    {{/each }}
+    // @PLOP_APPEND_HERE
 ];

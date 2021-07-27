@@ -1,5 +1,6 @@
 const Kirby = require('./helpers/kirby.js');
 const F = require('./helpers/f.js');
+const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
     plop.setHelper('saveFilename', function (text) {
@@ -41,11 +42,18 @@ module.exports = function (plop) {
         actions: [
         function (data) {
             data['data'] = F.load(data['import']);
+            return data['data'];
         },
         {
             type: 'add',
             path: basepath + '/{{ type }}/{{saveFilename template }}.{{trimFirstDot extension }}',
             templateFile: 'blueprint.{{trimFirstDot extension }}.hbs'
+        },
+        function(data) {
+            let path = plop.renderString(basepath + '/{{saveFilename filename }}.php', data);
+            console.log(F.read(path));
+            Clipboardy.writeSync(path);
+            return 'Path has been copied to clipboard.'
         }]
     });
 };

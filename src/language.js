@@ -1,5 +1,6 @@
 const Kirby = require('./helpers/kirby.js');
 const fg = require('fast-glob');
+const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
     plop.setHelper('saveFilename', function (text) {
@@ -21,6 +22,12 @@ module.exports = function (plop) {
             type: 'add',
             path: basepath + '/{{saveFilename code }}.php',
             templateFile: 'language.php.hbs'
+        },
+        function(data) {
+            let path = plop.renderString(basepath + '/{{saveFilename code }}.php', data);
+            console.log(F.read(path));
+            Clipboardy.writeSync(path);
+            return 'Path has been copied to clipboard.'
         }]
     });
 };

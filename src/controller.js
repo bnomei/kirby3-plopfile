@@ -1,7 +1,8 @@
 const Kirby = require('./helpers/kirby.js');
+const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
-    plop.setHelper('toLowerCase', function (text) {
+    plop.setHelper('saveFilename', function (text) {
         return text.toLowerCase();
     });
 
@@ -17,8 +18,14 @@ module.exports = function (plop) {
         }],
         actions: [{
             type: 'add',
-            path: basepath + '/{{toLowerCase template }}.php',
+            path: basepath + '/{{saveFilename template }}.php',
             templateFile: 'controller.php.hbs'
+        },
+        function(data) {
+            let path = plop.renderString(basepath + '/{{saveFilename template }}.php', data);
+            console.log(F.read(path));
+            Clipboardy.writeSync(path);
+            return 'Path has been copied to clipboard.'
         }]
     });
 };

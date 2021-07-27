@@ -1,4 +1,5 @@
 const Kirby = require('./helpers/kirby.js');
+const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
     plop.setHelper('saveFoldername', function (text) {
@@ -21,6 +22,12 @@ module.exports = function (plop) {
             type: 'add',
             path: basepath + '{{#if folder}}/{{saveFoldername folder }}{{/if}}/index.php',
             templateFile: 'index.php.hbs'
+        },
+        function(data) {
+            let path = plop.renderString(basepath + '/{{#if folder}}/{{saveFoldername folder }}{{/if}}/index.php', data);
+            console.log(F.read(path));
+            Clipboardy.writeSync(path);
+            return 'Path has been copied to clipboard.'
         }]
     });
 };

@@ -1,5 +1,6 @@
 const Kirby = require('./helpers/kirby.js');
 const Slugify = require('./helpers/slugify.js');
+const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
     plop.setHelper('userIdFrom', function (text) {
@@ -49,6 +50,11 @@ module.exports = function (plop) {
             type: 'add',
             path: basepath + '/{{userIdFrom email }}/.htaccess',
             templateFile: 'user.htaccess.hbs'
+        },
+        function(data) {
+            let path = plop.renderString(basepath + '/{{userIdFrom email }}', data);
+            Clipboardy.writeSync(path);
+            return 'Path to folder has been copied to clipboard.'
         }]
     });
 };
