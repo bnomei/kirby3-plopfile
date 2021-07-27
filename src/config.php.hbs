@@ -1,0 +1,10 @@
+<?php
+
+return [
+    {{#keyvalues}}
+    {{#if isBoolean}}"{{ key }}" => {{ value }},{{/if}}
+    {{#if isInteger}}"{{ key }}" => {{ value }},{{/if}}
+    {{#if isString}}"{{ key }}" => '{{ value }}',{{/if}}
+    {{#if isClosure}}"{{ key }}" => {{ value }},{{/if}}
+    {{/keyvalues}}
+];
