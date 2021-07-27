@@ -16,9 +16,19 @@ module.exports = function (plop) {
             name: 'filename',
             message: 'Filename',
             default: 'config'
-        }],
-        // TODO: loop and add data for additional fields
-        actions: [{
+        },
+        {
+            type: 'input',
+            name: 'import',
+            message: 'Import data from json string, json or yml file (optional)',
+            default: '{}'
+        }
+        ],
+        actions: [
+        function (data) {
+            data['data'] = F.load(data['import']);
+        },
+        {
             type: 'add',
             path: basepath + '/{{saveFilename filename }}.php',
             templateFile: 'config.hbs'

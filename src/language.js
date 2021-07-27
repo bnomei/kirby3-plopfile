@@ -13,13 +13,13 @@ module.exports = function (plop) {
         description: 'make a language file',
         prompts: [{
             type: 'input',
-            name: 'filename',
+            name: 'code',
             message: 'Language Code (' + existingLanguages.join(',') +')',
             default: 'en',
         }],
         actions: [{
             type: 'add',
-            path: basepath + '/{{saveFilename filename }}.php',
+            path: basepath + '/{{saveFilename code }}.php',
             templateFile: 'language.hbs'
         }]
     });

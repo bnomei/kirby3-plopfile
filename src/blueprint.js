@@ -29,9 +29,19 @@ module.exports = function (plop) {
             name: 'extension',
             message: 'Extension',
             default: '.yml',
+        },
+        {
+            type: 'input',
+            name: 'import',
+            message: 'Import data from json string, json or yml file (optional)',
+            default: '{}'
         }
         ],
-        actions: [{
+        actions: [
+        function (data) {
+            data['data'] = F.load(data['import']);
+        },
+        {
             type: 'add',
             path: basepath + '/{{ type }}/{{saveFilename template }}.{{trimFirstDot extension }}',
             templateFile: 'blueprint.{{trimFirstDot extension }}.hbs'

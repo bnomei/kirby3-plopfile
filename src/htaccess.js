@@ -8,12 +8,13 @@ module.exports = function (plop) {
         description: 'make default starterkit htaccess file',
         prompts: [{
             type: 'input',
-            name: 'name',
-            message: 'controller name please'
+            name: 'folder',
+            message: 'Folder (optional)',
+            default: basepath,
         }],
         actions: [{
             type: 'add',
-            path: basepath + '/.htaccess',
+            path: basepath + '{{#if folder}}/{{saveFoldername folder }}{{/if}}/.htaccess',
             templateFile: 'htaccess.starterkit.hbs'
         }]
     });

@@ -4,7 +4,8 @@ module.exports = function (plop) {
     plop.setHelper('saveFoldername', function (text) {
         return text.toLowerCase()
             .replace('index.php', '')
-            .replace(/\/$/, ""); // trim trailing slash
+            .replace(/\/$/, "") // trim trailing slash
+            .replace(/\/$/, "") // trim trailing slash
     });
 
     var basepath = Kirby.root('index');
@@ -14,12 +15,12 @@ module.exports = function (plop) {
         prompts: [{
             type: 'input',
             name: 'folder',
-            message: 'Folder',
+            message: 'Folder (optional)',
             default: basepath,
         }],
         actions: [{
             type: 'add',
-            path: '{{saveFoldername folder }}/index.php',
+            path: basepath + '{{#if folder}}/{{saveFoldername folder }}{{/if}}/index.php',
             templateFile: 'index.php.hbs'
         }]
     });

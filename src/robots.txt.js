@@ -10,14 +10,15 @@ module.exports = function (plop) {
 
     plop.setGenerator('robotstxt', {
         description: 'make a robots.txt file',
-        prompts: [/*{
+        prompts: [{
             type: 'input',
-            name: 'template',
-            message: 'Template',
-        }*/],
+            name: 'folder',
+            message: 'Folder (optional)',
+            default: basepath,
+        }],
         actions: [{
             type: 'add',
-            path: basepath + 'robots.txt',
+            path: basepath + '{{#if folder}}/{{saveFoldername folder }}{{/if}}/robots.txt',
             templateFile: 'robots.txt.hbs'
         }]
     });

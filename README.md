@@ -61,18 +61,19 @@ plop content "Consistency made simple!" "blog/" blogpost
 
 ## Generators
 
-- blueprint
-- config
-- content
-- controller
-- htaccess
-- indexphp
-- model
-- plugin
-- robotstxt
-- snippet
-- template
-- user
+- blueprint [type, template, extension, import]
+- config [filename, import]
+- content [title, parent, template, (language, slug), import]
+- controller [template]
+- htaccess [folder]
+- indexphp [folder]
+- language [code]
+- model [template]
+- plugin [user, repository, folderprefix]
+- robotstxt [folder]
+- snippet [filename]
+- template [template, extension]
+- user [email, name, password, role, language]
 
 ## Extending the plopfile
 

@@ -12,12 +12,25 @@ module.exports = function (plop) {
         description: 'make a plugin index.php file',
         prompts: [{
             type: 'input',
-            name: 'pluginname',
-            message: 'Plugin name',
+            name: 'user',
+            message: 'Plugin created by user',
+            default: 'kirby',
+        },
+        {
+            type: 'input',
+            name: 'repository',
+            message: 'Plugin repository Id',
+            default: 'plugin'
+        },
+        {
+            type: 'input',
+            name: 'folderprefix',
+            message: 'Folder prefix',
+            default: '',
         }],
         actions: [{
             type: 'add',
-            path: basepath + '/{{saveFilename pluginname }}/index.php',
+            path: basepath + '/{{ folderprefix }}{{saveFilename repository }}/index.php',
             templateFile: 'plugin.hbs'
         }]
     });
