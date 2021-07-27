@@ -3,7 +3,6 @@ const fg = require('fast-glob');
 module.exports.root = function(root)
 {
     if (root == 'user' || root == 'users') root = 'accounts';
-
     if (root == 'index') {
         const indexphp = fg.sync(['**/index.php'], { onlyFiles: true, absolute: true });
         if (indexphp.length) return indexphp[0].replace('/index.php', ''); 
@@ -11,7 +10,6 @@ module.exports.root = function(root)
         const folder = fg.sync(['**/' + root], { onlyDirectories: true, absolute: true });
         if (folder.length) return folder[0];
     }
-
     return "./";
 }
 
@@ -26,7 +24,7 @@ module.exports.languages = function()
 module.exports.blueprintTypes = function()
 {
     // merge without duplicates
-    var types = ['fields', 'files', 'layouts', 'pages', 'sections', 'users']
+    let types = ['fields', 'files', 'layouts', 'pages', 'sections', 'users']
         .concat(fg.sync(['**/blueprints/*'], { onlyDirectories: true, objectMode: true }).map(function(folder) {
             return folder.name;
         }));
@@ -37,7 +35,7 @@ module.exports.blueprintTypes = function()
 
 module.exports.userRoles = function()
 {
-    var roles = fg.sync(['**/blueprints/users/*.yml'], { onlyFiles: true, objectMode: true })
+    let roles = fg.sync(['**/blueprints/users/*.yml'], { onlyFiles: true, objectMode: true })
         .map(function (file) {
             return file.name.replace('.yml', '');
         });

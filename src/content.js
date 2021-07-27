@@ -1,5 +1,6 @@
 const Kirby = require('./helpers/kirby.js');
 const Slugify = require('./helpers/slugify.js');
+const F = require('./helpers/f.js');
 
 module.exports = function (plop) {
     plop.setHelper('slugify', function (text) {
@@ -11,7 +12,10 @@ module.exports = function (plop) {
     plop.setHelper('toLowerCase', function (text) {
         return text.toLowerCase();
     });
-    
+    plop.setHelper('ucfirst', function (text) {
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    });
+
     var basepath = Kirby.root('content');
 
     var prompts = [{
@@ -48,11 +52,21 @@ module.exports = function (plop) {
         });
     }
 
+    prompts.push({
+        type: 'input',
+        name: 'import',
+        message: 'Import data from json string, json or yml file (optional)',
+        default: '{}'
+    });
+
     plop.setGenerator('content', {
         description: 'make a content file',
         prompts: prompts,
-        // TODO: loop and add data for additional fields
-        actions: [{
+        actions: [
+        function (data) {
+            data['data'] = F.load(data['import']);
+        },
+        {
             type: 'add',
             path: basepath + '/{{trimTrailingSlash parent }}/{{slugify title }}/{{toLowerCase template }}{{#if language}}.{{ language }}{{/if}}.txt',
             templateFile: 'content.hbs'
