@@ -39,6 +39,7 @@
     "scripts": {
         "dist": [
             "composer install --no-dev --optimize-autoloader",
+            "yarn upgrade",
             "git rm -rf --cached .; git add .;"
         ]
     }
