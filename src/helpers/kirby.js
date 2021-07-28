@@ -4,7 +4,7 @@ module.exports.root = function(root)
 {
     if (root == 'user' || root == 'users') root = 'accounts';
     if (root == 'index') {
-        const indexphp = fg.sync(['**/index.php'], { onlyFiles: true, absolute: true });
+        const indexphp = fg.sync(['**/index.php'], { onlyFiles: true, absolute: true, deep: 2 });
         if (indexphp.length) return indexphp[0].replace('/index.php', ''); 
     } else {
         const folder = fg.sync(['**/' + root], { onlyDirectories: true, absolute: true });

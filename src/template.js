@@ -1,4 +1,6 @@
 const Kirby = require('./helpers/kirby.js');
+const F = require('./helpers/f.js');
+const A = require('./helpers/a.js');
 const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
@@ -28,8 +30,22 @@ module.exports = function (plop) {
             name: 'extension',
             message: 'Extension',
             default: '.php',
+        },
+        {
+            type: 'checkbox',
+            name: 'options',
+            message: 'Options',
+            choices: [
+                { name: 'declare strict types', value: 'declareStrictTypes', checked: false},
+                { name: 'add type hints for $page, $site and $kirby', value: 'typeHintCoreObjects', checked: false},
+            ]
         }],
-        actions: [{
+        actions: [
+        function (data)
+        {
+            data['options'] = A.flip(data['options']);
+        },
+        {
             type: 'add',
             path: basepath + '/{{saveFilename template }}.{{trimFirstDot extension }}',
             templateFile: 'template{{removeExtensionUnlessPHP extension}}.hbs'

@@ -1,0 +1,18 @@
+<?php
+
+return [
+    'code' => '{{{ code }}}',
+    'default' => {{#if default}}true{{else}}false{{#if}},
+    'direction' => '{{{ direction}}}ltr',
+    'locale' => [
+        'LC_ALL' => '{{{ locale }}}'
+    ],
+    'name' => '{{{ name }}}',
+    'translations' => [
+        {{#each data}}
+        '{{{ @key }}}' => {{{wrapValue this }}},
+        {{/each }}
+    ],
+    'url' => {{#if url}}'{{{ url }}}'{{else}}null{{/if}},
+];
+

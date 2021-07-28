@@ -4,6 +4,7 @@ module.exports = function (plop) {
         './src/config.js', 
         './src/content.js', 
         './src/controller.js',
+        //'./src/extension.js',
         './src/file.js',
         './src/htaccess.js', 
         './src/index.php.js', 
@@ -11,9 +12,10 @@ module.exports = function (plop) {
         './src/model.js', 
         './src/plugin.js', 
         './src/robots.txt.js', 
+        //'./src/setup.js', 
         './src/snippet.js', 
         './src/template.js', 
-        './src/user.js', 
+        //'./src/user.js', 
     ]);
 };
 

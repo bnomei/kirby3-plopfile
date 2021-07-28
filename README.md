@@ -64,26 +64,26 @@ plop content "Consistency made simple!" "blog/" blogpost
 - [x] blueprint (type, template, extension, import)
 - [x] config (filename, import)
 - [x] content (title, parent, template, [language, slug,] import)
-- [x] controller (template, options)
+- [x] controller (template, extension, options)
 - [x] file (file, parent, template, [language,] import)
-- htaccess (folder)
-- indexphp (folder)
-- language (code)
-- model (template)
+- [x] htaccess (folder, type)
+- [x] indexphp (folder, type)
+- language (code, default, direction, locale, name, url, import)
+- [x] model (template, options)
 - plugin (user, repository, folderprefix)
-- robotstxt (folder)
-- snippet (filename)
-- template (template, extension)
+- [x] robotstxt (folder)
+- [x] snippet (filename)
+- [x] template (template, extension, options)
 
 > `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be properly escaped.
 
 ## Roadmap
 
-- [ ] extension (file, type, name, ...)
-- [ ] setup (scaffolding)
-- [ ] user (email, name, password, role, language)
+- [ ] extension (file, type, name, ...) => to append to config and plugins // add more types
+- [ ] setup (scaffolding) => creating default folders and index.html files
+- [ ] user (email, name, password, role, language) => needs uid and encrypt
 
-> Please [create a new issue](https://github.com/bnomei/kirby3-plopfile/issues/new) if you have something in mind.
+> Please [create a new issue](https://github.com/bnomei/kirby3-plopfile/issues/new) if you want to suggest an idea or discuss existing generators.
 
 ## Examples
 
@@ -140,7 +140,7 @@ module.exports = function (plop) {
 - [js-yaml](https://github.com/nodeca/js-yaml)
 - [clipboardy](https://github.com/sindresorhus/clipboardy)
 
-All node_module dependencies (~450 files with ~2.5MB in total) are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip (without any further build step).
+All node_module dependencies (~400 files with ~4MB in total) are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip (without any further build step).
 
 ## Disclaimer
 

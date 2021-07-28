@@ -4,19 +4,12 @@
 declare(strict_types=1);
 
 {{/if}}
-{{#if useNamespaces}}
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
 use Kirby\Cms\Site;
 
-return function(Page $page, Site $site, App $kirby)
+class {{camelize template}}Page extends Page
 {
-    return [];
-};
-{{else}}
-return function($page, $site, $kirby)
-{
-    return [];
-};
-{{/if}}
+    
+}
 
