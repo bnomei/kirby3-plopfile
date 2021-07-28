@@ -15,11 +15,11 @@ module.exports = function (plop) {
         }],
         actions: [{
             type: 'add',
-            path: basepath + '{{#if folder}}/{{ folder }}{{/if}}/robots.txt',
+            path: '{{#if folder}}{{ folder }}{{else}}'+ basepath +'{{/if}}/robots.txt',
             templateFile: 'robots.txt.hbs'
         },
         function(data) {
-            let path = plop.renderString(basepath + '{{#if folder}}/{{ folder }}{{/if}}/robots.txt', data);
+            let path = plop.renderString('{{#if folder}}{{ folder }}{{else}}'+ basepath +'{{/if}}/robots.txt', data);
             console.log("\n" + F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'

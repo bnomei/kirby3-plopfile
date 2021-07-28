@@ -1,0 +1,14 @@
+# https://getkirby.com/docs/cookbook/setup/kirby-meets-docker
+
+version: '3'
+services:
+  webserver:
+    build: .
+    image: docker-starterkit
+    container_name: webserver
+    ports:
+      - "80:80"
+    volumes:
+      - ./starterkit:/var/www/html/
+    env_file:
+      - ./id.env

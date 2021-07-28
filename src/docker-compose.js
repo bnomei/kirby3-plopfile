@@ -24,7 +24,7 @@ module.exports = function (plop) {
             name: 'type',
             message: 'Type',
             choices: [
-                { name: 'default', value: 'default' },  
+                { name: 'starterkit (https://getkirby.com/docs/cookbook/setup/kirby-meets-docker)', value: 'starterkit' },  
                 { name: 'webdevops', value: 'webdevops' },  
             ],
         },
@@ -53,11 +53,11 @@ module.exports = function (plop) {
         ],
         actions: [{
             type: 'add',
-            path: basepath + '{{#if folder}}/{{saveFoldername folder }}{{/if}}/docker-compose.yml',
+            path: '{{#if folder}}{{saveFoldername folder }}{{else}}'+ basepath +'{{/if}}/docker-compose.yml',
             templateFile: 'docker-compose.{{ type }}.yml.hbs'
         },
         function(data) {
-            let path = plop.renderString(basepath + '/{{#if folder}}/{{saveFoldername folder }}{{/if}}/docker-compose.yml', data);
+            let path = plop.renderString('{{#if folder}}{{saveFoldername folder }}{{else}}'+ basepath +'{{/if}}/docker-compose.yml', data);
             console.log("\n" + F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'

@@ -24,16 +24,17 @@ module.exports = function (plop) {
             name: 'type',
             message: 'Type',
             choices: [
-                { name: 'default revision 2020-06-15', value: 'starterkit' },  
+                { name: 'default (revision 2020-06-15)', value: 'starterkit' },  
+                { name: 'html5-boilerplate htaccess + default', value: 'h5bp' },  
             ],
         }],
         actions: [{
             type: 'add',
-            path: basepath + '{{#if folder}}/{{saveFoldername folder }}{{/if}}/.htaccess',
+            path: '{{#if folder}}{{saveFoldername folder }}{{else}}'+ basepath +'{{/if}}/.htaccess',
             templateFile: 'htaccess.{{ type }}.hbs'
         },
         function(data) {
-            let path = plop.renderString(basepath + '/{{#if folder}}/{{saveFoldername folder }}{{/if}}/.htaccess', data);
+            let path = plop.renderString('{{#if folder}}{{saveFoldername folder }}{{else}}'+ basepath +'{{/if}}/.htaccess', data);
             console.log("\n" + F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'

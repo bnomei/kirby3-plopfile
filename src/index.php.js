@@ -30,11 +30,11 @@ module.exports = function (plop) {
         }],
         actions: [{
             type: 'add',
-            path: basepath + '{{#if folder}}/{{saveFoldername folder }}{{/if}}/index.php',
+            path: '{{#if folder}}{{saveFoldername folder }}{{else}}'+ basepath +'{{/if}}/index.php',
             templateFile: 'index.{{ type }}.php.hbs'
         },
         function(data) {
-            let path = plop.renderString(basepath + '/{{#if folder}}/{{saveFoldername folder }}{{/if}}/index.php', data);
+            let path = plop.renderString('{{#if folder}}{{saveFoldername folder }}{{else}}'+ basepath +'{{/if}}/index.php', data);
             console.log("\n" + F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'
