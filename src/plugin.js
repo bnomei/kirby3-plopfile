@@ -47,6 +47,9 @@ module.exports = function (plop) {
                 // { name: '[composer.json] require getkirby/composer-installer', value: 'composerInstaller', checked: false},
             ]
         },
+        // TODO: confirm prompt: parcel package.js https://github.com/getkirby/pluginkit/blob/4-panel/package.json
+        // TODO: confirm prompt: .gitignore https://github.com/getkirby/pluginkit/blob/4-panel/.gitignore & https://getkirby.com/docs/guide/plugins/plugin-setup-composer#support-for-plugin-installation-without-composer
+        // TODO: confirm prompt: unittesting in phpunit.xml, dev-require, scripts, extras
         ],
         actions:[
         function (data)
