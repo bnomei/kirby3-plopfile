@@ -9,7 +9,7 @@ module.exports.read = function(filepath)
 
 module.exports.findFile = function (filepath) {
     if (! fs.existsSync(filepath)) {
-        const files = fg.sync(['./**/' + filepath], { onlyFiles: true });
+        const files = fg.sync(['**/' + filepath], { onlyFiles: true });
         if (files.length) filepath = files[0];
         else return undefined;
     }

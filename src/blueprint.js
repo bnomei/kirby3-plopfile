@@ -50,7 +50,7 @@ module.exports = function (plop) {
             templateFile: 'blueprint.{{trimFirstDot extension }}.hbs'
         },
         function(data) {
-            let path = plop.renderString(basepath + '/{{saveFilename filename }}.php', data);
+            let path = plop.renderString(basepath + '/{{ type }}/{{saveFilename template }}.{{trimFirstDot extension }}', data);
             console.log(F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'

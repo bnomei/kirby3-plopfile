@@ -65,6 +65,7 @@ plop content "Consistency made simple!" "blog/" blogpost
 - config [filename, import]
 - content [title, parent, template, (language, slug), import]
 - controller [template]
+- file [file, parent, template, (language), import]
 - htaccess [folder]
 - indexphp [folder]
 - language [code]
@@ -75,10 +76,40 @@ plop content "Consistency made simple!" "blog/" blogpost
 - template [template, extension]
 - user [email, name, password, role, language]
 
+> `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be properly escaped.
+
 ## Examples
+
+*start interactive generator*
+`plop`
+
+*start blueprint genertor directly*
+`plop blueprint`
+
+*blueprint with bypassed prompts (values forwarded from command line)*
+`plop blueprint page article .yml {}`
+`plop blueprint --type page --template article --extension .yml --import {}`
+
+*content with known parent and template but prompt for title*
+`plop content _ blog default {}`
+`plop content -- --parent blog --template default --import {}`
+> `_`/`--` let you skip bypassing a prompt.
 
 *blueprint cloning*
 `plop blueprint fields dvd .yml cd.yml`
+
+*config with options from escaped json string*
+```bash 
+plop config config.staging "{\"debug\": true, \"home\": \"staging\", \"ready\": \"function() { return ['my.option' => kirby()->root('index') . '/resources']; }\"}"
+```
+
+*content with fields from json/yml file*
+`plop content "Consistency, made easy!" blog default n123.json`
+
+*file with template and sorting number*
+`plop file imgs/i456.jpg blog/consitency-made-easy hero "{\"sort\": 4}"`
+
+> see [Kirby docs on sorting files](https://getkirby.com/docs/cookbook/content/sorting#sorting-files)
 
 ## Extending the plopfile
 

@@ -2,10 +2,15 @@ const Kirby = require('./helpers/kirby.js');
 const Slugify = require('./helpers/slugify.js');
 const F = require('./helpers/f.js');
 const Clipboardy = require('clipboardy');
+const Path = require('path');
+const FS = require('fs');
 
 module.exports = function (plop) {
-    plop.setHelper('slugify', function (text) {
-        return Slugify.parse(text);
+    plop.setHelper('saveFilename', function (text) {
+        let filename = Path.basename(text);
+        return filename.split('.').map(function (part) {
+            return Slugify.parse(part);
+        }).join('.');
     });
     plop.setHelper('trimTrailingSlash', function (text) {
         return text.replace(/\/$/, "");
@@ -21,8 +26,8 @@ module.exports = function (plop) {
 
     var prompts = [{
             type: 'input',
-            name: 'title',
-            message: 'Title'
+            name: 'file',
+            message: 'Source File'
         },
         {
             type: 'input',
@@ -34,7 +39,7 @@ module.exports = function (plop) {
             type: 'input',
             name: 'template',
             message: 'Template',
-            default: 'default',
+            default: '',
         }
     ];
 
@@ -46,11 +51,6 @@ module.exports = function (plop) {
             message: 'Language',
             choices: existingLanguages,
         });
-        prompts.push({
-            type: 'input',
-            name: 'slug',
-            message: 'Language specific slug (optional)',
-        });
     }
 
     prompts.push({
@@ -60,8 +60,8 @@ module.exports = function (plop) {
         default: '{}'
     });
 
-    plop.setGenerator('content', {
-        description: 'make a content file',
+    plop.setGenerator('file', {
+        description: 'copy file to a content folder',
         prompts: prompts,
         actions: [
         function (data) {
@@ -70,11 +70,17 @@ module.exports = function (plop) {
         },
         {
             type: 'add',
-            path: basepath + '/{{trimTrailingSlash parent }}/{{slugify title }}/{{toLowerCase template }}{{#if language}}.{{ language }}{{/if}}.txt',
-            templateFile: 'content.txt.hbs'
+            path: basepath + '/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt',
+            templateFile: 'file.txt.hbs'
+        },
+        function (data) {
+            let source = F.findFile(data['file']); // TODO: this does not work for ./tests/img.png or tests/img.png
+            let target = plop.renderString(basepath + '/{{trimTrailingSlash parent }}/{{saveFilename file }}', data);
+            FS.copyFileSync(source, target);
+            return source + ' -> ' + target;
         },
         function(data) {
-            let path = plop.renderString(basepath + '/{{trimTrailingSlash parent }}/{{slugify title }}/{{toLowerCase template }}{{#if language}}.{{ language }}{{/if}}.txt', data);
+            let path = plop.renderString(basepath + '/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt', data);
             console.log(F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'

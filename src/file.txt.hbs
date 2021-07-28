@@ -1,0 +1,13 @@
+Title: {{saveFilename file }}
+
+{{#if template}}
+----
+Template: {{ template }}
+
+{{/if}}
+{{#each data}}
+----
+
+{{{ucfirst @key }}}: {{{ this }}}
+
+{{/each }}
