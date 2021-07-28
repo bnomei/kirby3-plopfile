@@ -65,12 +65,14 @@ plop content "Consistency made simple!" "blog/" blogpost
 - [x] config (filename, import)
 - [x] content (title, parent, template, [language, slug,] import)
 - [x] controller (template, extension, options)
+- [x] dockercompose (folder, type, [...])
+- [ ] extension (file, type, name, [...])
 - [x] file (file, parent, template, [language,] import)
 - [x] htaccess (folder, type)
 - [x] indexphp (folder, type)
-- language (code, default, direction, locale, name, url, import)
+- [ ] language (code, default, direction, locale, name, url, import)
 - [x] model (template, options)
-- plugin (user, repository, folderprefix)
+- [ ] plugin (user, repository, folderprefix)
 - [x] robotstxt (folder)
 - [x] snippet (filename)
 - [x] template (template, extension, options)
@@ -79,48 +81,64 @@ plop content "Consistency made simple!" "blog/" blogpost
 
 ## Roadmap
 
-- [ ] extension (file, type, name, ...) => to append to config and plugins // add more types
+- [ ] extension (file, type, name, [...]) => add more types
 - [ ] setup (scaffolding) => creating default folders and index.html files
-- [ ] user (email, name, password, role, language) => needs uid and encrypt
+- [ ] user (email, name, password, role, language) => needs uid and encrypt php to js port
+- [ ] laravelmix (folder, options)
 
 > Please [create a new issue](https://github.com/bnomei/kirby3-plopfile/issues/new) if you want to suggest an idea or discuss existing generators.
 
 ## Examples
 
-*start interactive generator*
-`plop`
+**start interactive generator**
+```bash
+plop
+```
 
-*start blueprint genertor directly*
-`plop blueprint`
+**start blueprint genertor directly**
+```bash
+plop blueprint
+```
 
-*blueprint with bypassed prompts (values forwarded from command line)*
-`plop blueprint page article .yml {}`
-`plop blueprint --type page --template article --extension .yml --import {}`
+**blueprint with bypassed prompts (values forwarded from command line)**
+```bash
+plop blueprint page article .yml {}
+plop blueprint --type page --template article --extension .yml --import {}
+```
 
-*content with known parent and template but prompt for title*
-`plop content _ blog default {}`
-`plop content -- --parent blog --template default --import {}`
+**content with known parent and template but prompt for title**
+```bash
+plop content _ blog default {}
+plop content -- --parent blog --template default --import {}
+```
 > `_`/`--` let you skip bypassing a prompt.
 
-*blueprint cloning*
-`plop blueprint fields dvd .yml cd.yml`
+**blueprint cloning**
+```bash
+plop blueprint fields dvd .yml cd.yml
+```
 
-*config with options from escaped json string*
+**config with options from escaped json string**
 ```bash 
 plop config config.staging "{\"debug\": true, \"home\": \"staging\", \"ready\": \"function() { return ['my.option' => kirby()->root('index') . '/resources']; }\"}"
 ```
 
-*content with fields from json/yml file*
-`plop content "Consistency, made easy!" blog default n123.json`
+**content with fields from json/yml file**
+```bash
+plop content "Consistency, made easy!" blog default n123.json
+```
 
-*file with template and sorting number*
-`plop file imgs/i456.jpg blog/consitency-made-easy hero "{\"sort\": 4}"`
+**file with template and sorting number**
+```bash
+plop file imgs/i456.jpg blog/consitency-made-easy hero "{\"sort\": 4}"
+```
 > see [Kirby docs on sorting files](https://getkirby.com/docs/cookbook/content/sorting#sorting-files)
 
 ## Extending the plopfile
 
 You can add custom code to your new plopfile as inline code or using files with `plop.load()`.
 
+**plopfile.js**
 ```js
 module.exports = function (plop) {
     plop.load([
@@ -140,7 +158,7 @@ module.exports = function (plop) {
 - [js-yaml](https://github.com/nodeca/js-yaml)
 - [clipboardy](https://github.com/sindresorhus/clipboardy)
 
-All node_module dependencies (~400 files with ~4MB in total) are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip (without any further build step).
+All node_module dependencies (~400 files with ~4MB in total) are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip and without requiring any further build step.
 
 ## Disclaimer
 

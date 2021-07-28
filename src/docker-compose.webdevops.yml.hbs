@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  webserver:
+    image: {{{ image }}}
+    ports:
+      - 8000:80
+    environment:
+      WEB_DOCUMENT_ROOT: {{{ root }}}
+      WEB_ALIAS_DOMAIN: {{{ alias }}}
+    volumes:
+      - .:/app:rw
