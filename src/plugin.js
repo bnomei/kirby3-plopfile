@@ -1,16 +1,20 @@
 const Kirby = require('./helpers/kirby.js');
+const F = require('./helpers/f.js');
+const A = require('./helpers/a.js');
 const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
-    plop.setHelper('saveFilename', function (text) {
-        return text.toLowerCase()
-            .replace('.php', '');
+    plop.setHelper('toLowerCase', function (text) {
+        return text.toLowerCase();
+    });
+    plop.setHelper('ucfirst', function (text) {
+        return text.charAt(0).toUpperCase() + text.slice(1);
     });
 
     var basepath = Kirby.root('plugins');
     
     plop.setGenerator('plugin', {
-        description: 'make a plugin index.php file',
+        description: 'make a plugin index.php and composer.json file',
         prompts: [{
             type: 'input',
             name: 'user',
@@ -25,17 +29,42 @@ module.exports = function (plop) {
         },
         {
             type: 'input',
-            name: 'folderprefix',
-            message: 'Folder prefix',
-            default: '',
-        }],
-        actions: [{
+            name: 'prefix',
+            message: 'Plugin repository prefix',
+            default: 'kirby3-',
+        },
+        {
+            type: 'checkbox',
+            name: 'options',
+            message: 'Options',
+            choices: [
+                { name: '[index.php] declare strict types', value: 'declareStrictTypes', checked: false},
+                { name: '[index.php] include composer autoloader', value: 'includeComposerAutoloader', checked: false},
+                { name: '[index.php] add kirby autoloader', value: 'addKirbyAutoloader', checked: false},
+                { name: '[index.php] plugin options', value: 'pluginOptions', checked: true},
+                { name: '[index.php] plugin option cache', value: 'pluginOptionCache', checked: false},
+                { name: '[composer.json] PSR-4 autoloader', value: 'composerPsr4', checked: false},
+                // { name: '[composer.json] require getkirby/composer-installer', value: 'composerInstaller', checked: false},
+            ]
+        },
+        ],
+        actions:[
+        function (data)
+        {
+            data['options'] = A.flip(data['options']);
+        },
+        {
             type: 'add',
-            path: basepath + '/{{ folderprefix }}{{saveFilename repository }}/index.php',
-            templateFile: 'plugin.php.hbs'
+            path: basepath + '/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php',
+templateFile: 'plugin.index.php.hbs'
+        },
+        {
+            type: 'add',
+            path: basepath + '/{{toLowerCase prefix }}{{toLowerCase repository }}/composer.json',
+templateFile: 'plugin.composer.json.hbs'
         },
         function(data) {
-            let path = plop.renderString(basepath + '/{{ folderprefix }}{{saveFilename repository }}/index.php', data);
+            let path = plop.renderString(basepath + '/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php', data);
             console.log("\n" + F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'

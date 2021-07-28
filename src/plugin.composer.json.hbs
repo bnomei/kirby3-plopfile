@@ -1,0 +1,32 @@
+{
+  "name": "{{{toLowerCase user }}}/{{{toLowerCase prefix }}}{{{toLowerCase repository }}}",
+  "type": "kirby-plugin",
+  "description": "",
+  "version": "1.0.0",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "{{{ucfirst user}}}",
+      "email": ""
+    }
+  ],
+  "keywords": [],
+  {{#if options.composerPsr4}}
+  "autoload": {
+    "psr-4": {
+      "{{{ucfirst user }}}\\": "lib/"
+    }
+  },
+  {{/if}}
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "require": {
+    {{#if options.composerInstaller }}"getkirby/composer-installer": "^1.2",{{/if}}
+    "php": ">=7.3.0"
+  },
+  "require-dev": {},
+  "scripts": {},
+  "suggests": {}
+}

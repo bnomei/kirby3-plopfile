@@ -1,0 +1,22 @@
+<?php
+{{#if options.declareStrictTypes}}
+declare(strict_types=1);
+
+{{/if}}
+{{#if options.includeComposerAutoloader}}
+@include_once __DIR__ . '/vendor/autoload.php';
+{{/if}}
+{{#if options.addKirbyAutoloader}}
+load([
+    // '{{{ user }}}\\{{{ repository }}}\\superclass' => 'lib/Superclass.php'
+], __DIR__);
+{{/if}}
+
+Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
+    {{#if options.pluginOptions}}
+    'options' => [
+        {{#if options.pluginOptionCache}}'cache' => true,{{/if}}
+    ],
+    {{/if}}
+]);
+
