@@ -1,0 +1,11 @@
+<?php
+
+use \Kirby\Data\Yaml;
+
+$yaml = <<<EOD
+{{{ yaml }}}
+EOD;
+
+return array_merge_recursive(Yaml::decode($yaml), [
+    
+]);

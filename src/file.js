@@ -74,14 +74,14 @@ module.exports = function (plop) {
             templateFile: 'file.txt.hbs'
         },
         function (data) {
-            let source = F.findFile(data['file']); // TODO: this does not work for ./tests/img.png or tests/img.png
+            let source = F.findFile(data['file']);
             let target = plop.renderString(basepath + '/{{trimTrailingSlash parent }}/{{saveFilename file }}', data);
             FS.copyFileSync(source, target);
             return source + ' -> ' + target;
         },
         function(data) {
             let path = plop.renderString(basepath + '/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt', data);
-            console.log(F.read(path));
+            console.log("\n" + F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'
         }]

@@ -23,7 +23,7 @@ module.exports = function (plop) {
         },
         function(data) {
             let path = plop.renderString(basepath + '/{{saveFilename template }}.php', data);
-            console.log(F.read(path));
+            console.log("\n" + F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'
         }]

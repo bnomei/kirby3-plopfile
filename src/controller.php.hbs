@@ -1,22 +1,26 @@
 <?php
 
-{{#if declareStrictTypes}}
+{{#if options.declareStrictTypes}}
 declare(strict_types=1);
 
 {{/if}}
-{{#if useNamespaces}}
+{{#if options.useNamespaces}}
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
 use Kirby\Cms\Site;
 
 return function(Page $page, Site $site, App $kirby)
 {
-    return [];
+    return [
+        
+    ];
 };
 {{else}}
 return function($page, $site, $kirby)
 {
-    return [];
+    return [
+        
+    ];
 };
 {{/if}}
 

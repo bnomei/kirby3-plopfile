@@ -24,7 +24,7 @@ module.exports = function (plop) {
         },
         function(data) {
             let path = plop.renderString(basepath + '{{#if folder}}/{{saveFoldername folder }}{{/if}}/robots.txt', data);
-            console.log(F.read(path));
+            console.log("\n" + F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'
         }]

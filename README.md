@@ -9,8 +9,8 @@ Plopfile to generate various files for Kirby3 CMS using Plop.js
 ## Commerical Usage
 
 This plugin is free but if you use it in a commercial project please consider to 
-- [make a donation 🍻](https://www.paypal.me/bnomei/5) or
-- [buy me ☕](https://buymeacoff.ee/bnomei) or
+- [make a donation 🍻](https://www.paypal.me/bnomei/10) or
+- [buy me ☕☕](https://buymeacoff.ee/bnomei) or
 - [buy a Kirby license using this affiliate link](https://a.paddle.com/v2/click/1129/35731?link=1170)
 
 ## Installation
@@ -61,22 +61,29 @@ plop content "Consistency made simple!" "blog/" blogpost
 
 ## Generators
 
-- blueprint [type, template, extension, import]
-- config [filename, import]
-- content [title, parent, template, (language, slug), import]
-- controller [template]
-- file [file, parent, template, (language), import]
-- htaccess [folder]
-- indexphp [folder]
-- language [code]
-- model [template]
-- plugin [user, repository, folderprefix]
-- robotstxt [folder]
-- snippet [filename]
-- template [template, extension]
-- user [email, name, password, role, language]
+- [x] blueprint (type, template, extension, import)
+- [x] config (filename, import)
+- [x] content (title, parent, template, [language, slug,] import)
+- [x] controller (template, options)
+- [x] file (file, parent, template, [language,] import)
+- htaccess (folder)
+- indexphp (folder)
+- language (code)
+- model (template)
+- plugin (user, repository, folderprefix)
+- robotstxt (folder)
+- snippet (filename)
+- template (template, extension)
 
 > `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be properly escaped.
+
+## Roadmap
+
+- [ ] extension (file, type, name, ...)
+- [ ] setup (scaffolding)
+- [ ] user (email, name, password, role, language)
+
+> Please [create a new issue](https://github.com/bnomei/kirby3-plopfile/issues/new) if you have something in mind.
 
 ## Examples
 
@@ -108,7 +115,6 @@ plop config config.staging "{\"debug\": true, \"home\": \"staging\", \"ready\": 
 
 *file with template and sorting number*
 `plop file imgs/i456.jpg blog/consitency-made-easy hero "{\"sort\": 4}"`
-
 > see [Kirby docs on sorting files](https://getkirby.com/docs/cookbook/content/sorting#sorting-files)
 
 ## Extending the plopfile
@@ -131,6 +137,10 @@ module.exports = function (plop) {
 - [inquirer.js](https://github.com/SBoudrias/Inquirer.js)
 - [handlebars.js](https://github.com/handlebars-lang/handlebars.js)
 - [fast-glob](https://github.com/mrmlnc/fast-glob)
+- [js-yaml](https://github.com/nodeca/js-yaml)
+- [clipboardy](https://github.com/sindresorhus/clipboardy)
+
+All node_module dependencies (~450 files with ~2.5MB in total) are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip (without any further build step).
 
 ## Disclaimer
 

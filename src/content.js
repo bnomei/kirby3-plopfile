@@ -75,7 +75,7 @@ module.exports = function (plop) {
         },
         function(data) {
             let path = plop.renderString(basepath + '/{{trimTrailingSlash parent }}/{{slugify title }}/{{toLowerCase template }}{{#if language}}.{{ language }}{{/if}}.txt', data);
-            console.log(F.read(path));
+            console.log("\n" + F.read(path));
             Clipboardy.writeSync(path);
             return 'Path has been copied to clipboard.'
         }]
