@@ -149,6 +149,16 @@ module.exports = function (plop) {
 };
 ```
 
+**.env for VS Code**
+```
+PLOP_CLIPBOARD="code {{filepath}}:{{line}}:{{char}}"
+```
+
+**.env for Sublime Text**
+```
+PLOP_CLIPBOARD="subl {{filepath}}:{{line}}:{{char}}"
+```
+
 ## Major dependencies
 
 - [plop.js](https://github.com/plopjs/plop)

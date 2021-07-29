@@ -1,7 +1,6 @@
 const Kirby = require('./helpers/kirby.js');
 const Slugify = require('./helpers/slugify.js');
 const F = require('./helpers/f.js');
-const Clipboardy = require('clipboardy');
 const Path = require('path');
 const FS = require('fs');
 
@@ -81,9 +80,7 @@ module.exports = function (plop) {
         },
         function(data) {
             let path = plop.renderString(basepath + '/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt', data);
-            console.log("\n" + F.read(path));
-            Clipboardy.writeSync(path);
-            return 'Path has been copied to clipboard.'
+            return F.clipboard(plop, path, '@PLOP_CURSOR');
         }]
     });
 };

@@ -1,7 +1,6 @@
 const Kirby = require('./helpers/kirby.js');
 const F = require('./helpers/f.js');
 const A = require('./helpers/a.js');
-const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
     plop.setHelper('toLowerCase', function (text) {
@@ -68,9 +67,7 @@ templateFile: 'plugin.composer.json.hbs'
         },
         function(data) {
             let path = plop.renderString(basepath + '/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php', data);
-            console.log("\n" + F.read(path));
-            Clipboardy.writeSync(path);
-            return 'Path has been copied to clipboard.'
+            return F.clipboard(plop, path, '@PLOP_CURSOR');
         }]
     });
 };

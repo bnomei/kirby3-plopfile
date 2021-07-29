@@ -1,3 +1,5 @@
+require('dotenv').config();
+    
 module.exports = function (plop) {
     plop.load([
         './src/blueprint.js', 

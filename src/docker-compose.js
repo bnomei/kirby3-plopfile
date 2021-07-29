@@ -1,5 +1,4 @@
 const Kirby = require('./helpers/kirby.js');
-const Clipboardy = require('clipboardy');
 const F = require('./helpers/f.js');
 
 module.exports = function (plop) {
@@ -58,9 +57,7 @@ module.exports = function (plop) {
         },
         function(data) {
             let path = plop.renderString('{{#if folder}}{{saveFoldername folder }}{{else}}'+ basepath +'{{/if}}/docker-compose.yml', data);
-            console.log("\n" + F.read(path));
-            Clipboardy.writeSync(path);
-            return 'Path has been copied to clipboard.'
+            return F.clipboard(plop, path, '@PLOP_CURSOR');
         }]
     });
 };

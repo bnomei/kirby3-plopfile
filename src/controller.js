@@ -1,5 +1,4 @@
 const Kirby = require('./helpers/kirby.js');
-const Clipboardy = require('clipboardy');
 const F = require('./helpers/f.js');
 const A = require('./helpers/a.js');
 
@@ -54,9 +53,7 @@ module.exports = function (plop) {
         },
         function(data) {
             let path = plop.renderString(basepath + '/{{saveFilename template }}.{{trimFirstDot extension }}', data);
-            console.log("\n" + F.read(path));
-            Clipboardy.writeSync(path);
-            return 'Path has been copied to clipboard.'
+            return F.clipboard(plop, path, '@PLOP_CURSOR');
         }]
     });
 };

@@ -53,8 +53,7 @@ module.exports = function (plop) {
         },
         function(data) {
             let path = plop.renderString(basepath + '/{{userIdFrom email }}', data);
-            Clipboardy.writeSync(path);
-            return 'Path to folder has been copied to clipboard.'
+            return F.clipboard(plop, path, '@PLOP_CURSOR');
         }]
     });
 };

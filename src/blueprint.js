@@ -1,7 +1,6 @@
 const Kirby = require('./helpers/kirby.js');
 const YAML = require('js-yaml');
 const F = require('./helpers/f.js');
-const Clipboardy = require('clipboardy');
 
 module.exports = function (plop) {
     plop.setHelper('saveFilename', function (text) {
@@ -53,9 +52,7 @@ module.exports = function (plop) {
         },
         function(data) {
             let path = plop.renderString(basepath + '/{{ type }}/{{saveFilename template }}.{{trimFirstDot extension }}', data);
-            console.log("\n" + F.read(path));
-            Clipboardy.writeSync(path);
-            return 'Path has been copied to clipboard.'
+            return F.clipboard(plop, path, '@PLOP_CURSOR');
         }]
     });
 };
