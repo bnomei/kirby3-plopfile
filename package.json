@@ -11,5 +11,8 @@
     "dotenv": "^10.0.0",
     "fast-glob": "^3.2.7",
     "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "prettier": "2.3.2"
   }
 }

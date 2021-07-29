@@ -1,7 +1,7 @@
 // https://gist.github.com/mathewbyrne/1280286
 
 module.exports.parse = function (text, separator) {
-    text = text.toString().toLowerCase().trim()
+  text = text.toString().toLowerCase().trim();
 
   const sets = [
     { to: "a", from: "[ÀÁÂÃÅÆĀĂĄẠẢẤẦẨẪẬẮẰẲẴẶ]" },
@@ -32,11 +32,11 @@ module.exports.parse = function (text, separator) {
     { to: "y", from: "[ÝŶŸỲỴỶỸ]" },
     { to: "z", from: "[ŹŻŽ]" },
     { to: "-", from: "[·/_,:;']" },
-  ]
+  ];
 
   sets.forEach((set) => {
-      text = text.replace(new RegExp(set.from, "gi"), set.to)
-  })
+    text = text.replace(new RegExp(set.from, "gi"), set.to);
+  });
 
   text = text
     .toString()
@@ -46,11 +46,11 @@ module.exports.parse = function (text, separator) {
     .replace(/[^\w\-]+/g, "") // Remove all non-word chars
     .replace(/\--+/g, "-") // Replace multiple - with single -
     .replace(/^-+/, "") // Trim - from start of text
-    .replace(/-+$/, "") // Trim - from end of text
+    .replace(/-+$/, ""); // Trim - from end of text
 
   if (typeof separator !== "undefined" && separator !== "-") {
-      text = text.replace(/-/g, separator)
+    text = text.replace(/-/g, separator);
   }
 
-  return text
+  return text;
 };

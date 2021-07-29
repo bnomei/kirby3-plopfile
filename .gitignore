@@ -9,5 +9,8 @@
 /node_modules/*/tests/*
 /node_modules/*/benchmarks/*
 
+/node_modules/.bin/prettier
+/node_modules/prettier/*
+
 /tests/*
 !/tests/.gitkeep
