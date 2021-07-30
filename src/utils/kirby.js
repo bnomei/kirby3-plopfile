@@ -2,6 +2,7 @@ const fg = require("fast-glob");
 
 module.exports.root = function (root) {
   if (root == "user" || root == "users") root = "accounts";
+  root = process.env['PLOP_ROOT_" + root.toUpperCase()] ?? root;
   if (root == "index") {
     const indexphp = fg.sync(["**/index.php"], {
       onlyFiles: true,
