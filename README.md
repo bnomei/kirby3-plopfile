@@ -66,7 +66,28 @@ plop content "Consistency made simple!" "blog/" blogpost
 - [x] content (title, parent, template, [language, slug,] import)
 - [x] controller (folder, template, extension, options)
 - [x] dockercompose (folder, type, [...])
-- [x] ext-[...] (file, type, name, [...])
+- [ ] ext-api-data
+- [ ] ext-api-route
+- [ ] ext-blueprint
+- [ ] ext-collection
+- [ ] ext-collection-filter
+- [ ] ext-collection-method
+- [ ] ext-controller
+- [ ] ext-field-method
+- [x] ext-hook (file, key, params, todo)
+- [ ] ext-kirbytag 
+- [x] ext-option (file, key, value)
+- [ ] ext-page-method
+- [ ] ext-page-model
+- [ ] ext-pages-method
+- [x] ext-route (file, pattern, method, [language, ] todo)
+- [ ] ext-site-method
+- [ ] ext-snippet
+- [ ] ext-template
+- [ ] ext-user-method
+- [ ] ext-user-model
+- [ ] ext-users-method
+- [ ] ext-validator
 - [x] file (file, parent, template, [language,] import)
 - [x] htaccess (folder, type)
 - [x] indexphp (folder, type)
@@ -79,8 +100,11 @@ plop content "Consistency made simple!" "blog/" blogpost
 
 > `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be properly escaped.
 
+> `?` can be used on `folder` prompts to default to kirbys root.
+
 ## Roadmap
 
+- [ ] ext-[...] ([...]) => maybe add some more
 - [ ] setup (scaffolding) => creating default folders and index.html files
 - [ ] user (email, name, password, role, language) => needs uid and encrypt php to js port
 - [ ] laravelmix (folder, options)
@@ -88,8 +112,6 @@ plop content "Consistency made simple!" "blog/" blogpost
 > Please [create a new issue](https://github.com/bnomei/kirby3-plopfile/issues/new) if you want to suggest an idea or discuss existing generators.
 
 ## Examples
-
-`?` can be used on `folder` prompts to default to kirbys root.
 
 **start interactive generator**
 ```bash
@@ -103,8 +125,8 @@ plop blueprint
 
 **blueprint with bypassed prompts (values forwarded from command line)**
 ```bash
-plop blueprint page article .yml {}
-plop blueprint --type page --template article --extension .yml --import {}
+plop blueprint ? pages article .yml {}
+plop blueprint --folder ? --type pages --template article --extension .yml --import {}
 ```
 
 **content with known parent and template but prompt for title**
@@ -116,7 +138,7 @@ plop content -- --parent blog --template default --import {}
 
 **blueprint cloning**
 ```bash
-plop blueprint fields dvd .yml cd.yml
+plop blueprint ? fields dvd .yml cd.yml
 ```
 
 **config with options from escaped json string**
@@ -163,7 +185,9 @@ PLOP_CLIPBOARD="subl {{filepath}}:{{line}}:{{char}}"
 ```
 
 **overwrite roots**
+If you renamed a root the plugin will not find it. But you can set them in your .env file.
 ```
+# PLOP_ROOT_[uppercase version of original root name]
 PLOP_ROOT_TEMPLATES="site/different" # instead of "site/templates"
 ```
 

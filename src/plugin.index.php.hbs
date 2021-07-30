@@ -21,5 +21,17 @@ Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
         // @PLOP_EXT_OPTION
     ],
     {{/if}}
+    {{#if extensions.hook}}
+
+    'hooks' => [
+        // @PLOP_EXT_HOOK
+    ],
+    {{/if}}
+    {{#if extensions.route}}
+
+    'routes' => [
+        // @PLOP_EXT_ROUTE
+    ],
+    {{/if}}
 ]);
 
