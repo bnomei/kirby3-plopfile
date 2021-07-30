@@ -75,7 +75,7 @@ plop content "Consistency made simple!" "blog/" blogpost
 - [ ] ext-controller
 - [ ] ext-field-method
 - [x] ext-hook (file, key, params, todo)
-- [ ] ext-kirbytag 
+- [ ] ext-kirbytag
 - [x] ext-option (file, key, value)
 - [ ] ext-page-method
 - [ ] ext-page-model
@@ -95,12 +95,14 @@ plop content "Consistency made simple!" "blog/" blogpost
 - [x] model (folder, template, options)
 - [x] plugin (user, repository, prefix, options)
 - [x] robotstxt (folder)
-- [x] snippet (folder, filename)
+- [x] snippet (folder, filename, import)
 - [x] template (folder, template, extension, options)
 
-> `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be properly escaped.
+> Strings with whitespace need to wrapped in single quotes.
 
-> `?` can be used on `folder` prompts to default to kirbys root.
+> `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be wrapped in single quotes.
+
+> `?` can be used on `folder` prompts to default to kirbys root.q
 
 ## Roadmap
 
@@ -143,7 +145,7 @@ plop blueprint ? fields dvd .yml cd.yml
 
 **config with options from escaped json string**
 ```bash
-plop config config.staging "{\"debug\": true, \"home\": \"staging\", \"ready\": \"function() { return ['my.option' => kirby()->root('index') . '/resources']; }\"}"
+plop config config.staging '{"debug": true, "home": "staging", "ready": "function() { return ["my.option" => kirby()->root("index") . "/resources"]; }"}'
 ```
 
 **content with fields from json/yml file**
@@ -153,9 +155,35 @@ plop content "Consistency, made easy!" blog default n123.json
 
 **file with template and sorting number**
 ```bash
-plop file imgs/i456.jpg blog/consitency-made-easy hero "{\"sort\": 4}"
+plop file imgs/i456.jpg blog/consitency-made-easy hero '{"sort": 4}'
 ```
 > see [Kirby docs on sorting files](https://getkirby.com/docs/cookbook/content/sorting#sorting-files)
+
+**language with translations from json/yml file**
+```bash
+plop language de n ltr de_DE Deutsch de trans_de.yml
+```
+
+**plugin to add project specific extensions**
+```bash
+plop plugin myname projectxyz ''
+```
+
+**snippet with isset check for key with fallback**
+```bash
+plop snippet ? topnav _ '{ "title": "title fallback", "isOpen": null }'
+```
+
+**create snippet in plugin folder and then register it as an extension to that plugin**
+```bash
+plop snippet projextxyz slideshow
+plop ext-snippet projextxyz slideshow
+```
+
+**template for laravel blade rendering**
+```bash
+plop template ? booking .blade.php
+```
 
 ## Extending the plopfile
 

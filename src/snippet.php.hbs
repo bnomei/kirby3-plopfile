@@ -7,5 +7,12 @@ declare(strict_types=1);
 /** @var Kirby\Cms\App $kirby */
 /** @var Kirby\Cms\Site $site */
 /** @var Kirby\Cms\Page $page */
-{{/if}}
 
+{{/if}}
+{{#if data}}
+{{#each data}}
+${{{ @key }}} = ${{{ @key }}} ?? {{{wrapValue this }}};
+{{/each }}
+
+{{/if}}
+// @PLOP_CURSOR

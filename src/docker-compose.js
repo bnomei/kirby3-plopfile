@@ -48,10 +48,15 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path =
-          "{{#if folder}}{{trimTrailingSlash folder }}{{else}}" +
-          basepath +
-          "{{/if}}/docker-compose.yml";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{#if folder}}{{trimTrailingSlash folder }}{{else}}" +
+              basepath +
+              "{{/if}}/docker-compose.yml",
+            data
+          ),
+          basepath
+        );
       },
       {
         type: "add",

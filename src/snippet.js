@@ -10,16 +10,13 @@ module.exports = function (plop) {
 
   plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
   plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
+  plop.setHelper("wrapValue", helpers.wrapValue);
 
   plop.setGenerator("snippet", {
     description: "make a snippet file",
     prompts: [
       prompts.folder(basepath),
-      {
-        type: "input",
-        name: "filename",
-        message: "Filename",
-      },
+      prompts.file(),
       {
         type: "checkbox",
         name: "options",
@@ -29,12 +26,14 @@ module.exports = function (plop) {
           choices.typeHintCoreObjects(false),
         ],
       },
+      prompts.import(),
     ],
     actions: [
       function (data) {
+        data.data = F.load(data.import);
         data.path = kirby.autopath(
           plop.renderString(
-            "{{trimTrailingSlash folder }}/{{filenameWithoutExtension template }}.php",
+            "{{trimTrailingSlash folder }}/{{filenameWithoutExtension file }}.php",
             data
           ),
           basepath

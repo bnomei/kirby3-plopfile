@@ -10,6 +10,7 @@ module.exports = function (plop) {
 
   plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
   plop.setHelper("trimFirstDot", helpers.trimFirstDot);
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
   plop.setHelper("removeExtensionUnlessPHP", helpers.removeExtensionUnlessPHP);
 
   plop.setGenerator("template", {

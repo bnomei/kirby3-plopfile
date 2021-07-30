@@ -16,7 +16,7 @@ module.exports = function (plop) {
     description: "make a config file",
     prompts: [
       // prompts.folder(basepath),
-      prompts.file('config'),
+      prompts.file("config"),
       prompts.import(),
       {
         type: "checkbox",
@@ -33,7 +33,10 @@ module.exports = function (plop) {
       function (data) {
         data.folder = basepath;
         data.path = kirby.autopath(
-          plop.renderString("{{trimTrailingSlash folder}}/{{filenameWithoutExtension file }}.php", data),
+          plop.renderString(
+            "{{trimTrailingSlash folder}}/{{filenameWithoutExtension file }}.php",
+            data
+          ),
           basepath
         );
         data.data = F.load(data.import);

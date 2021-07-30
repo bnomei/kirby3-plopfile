@@ -34,7 +34,9 @@ module.exports = function (plop) {
           basepath
         );
         data.data = F.load(data.import);
-        data.yaml = yaml.dump(data.data); // TODO: does not seem to work: plop blueprint ? pages article .yml {}
+        data.yaml = Object.keys(data.data).length
+          ? yaml.dump(data.data)
+          : undefined;
         return data.data;
       },
       {

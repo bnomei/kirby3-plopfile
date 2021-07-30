@@ -59,6 +59,7 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
+        data.folder = basepath;
         data.path = kirby.autopath(
           plop.renderString(
             "{{trimTrailingSlash folder}}/{{toLowerCase code }}.php",

@@ -24,10 +24,15 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path =
-          "{{#if folder}}{{trimTrailingSlash folder }}{{else}}" +
-          basepath +
-          "{{/if}}/.htaccess";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{#if folder}}{{trimTrailingSlash folder }}{{else}}" +
+              basepath +
+              "{{/if}}/.htaccess",
+            data
+          ),
+          basepath
+        );
       },
       {
         type: "add",

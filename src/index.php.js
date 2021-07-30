@@ -27,10 +27,15 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path =
-          "{{#if folder}}{{trimTrailingSlash folder }}{{else}}" +
-          basepath +
-          "{{/if}}/index.php";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{#if folder}}{{trimTrailingSlash folder }}{{else}}" +
+              basepath +
+              "{{/if}}/index.php",
+            data
+          ),
+          basepath
+        );
       },
       {
         type: "add",

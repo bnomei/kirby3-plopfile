@@ -46,9 +46,11 @@ module.exports = function (plop) {
     actions: [
       function (data) {
         data.file = F.findFile(data.file);
-        data.path =
+        data.path = plop.renderString(
           basepath +
-          "/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt";
+            "/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt",
+          data
+        );
         data.data = F.load(data.import);
         return data.data;
       },

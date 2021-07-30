@@ -1,6 +1,6 @@
 <?php
 
-{{#if declareStrictTypes}}
+{{#if options.declareStrictTypes}}
 declare(strict_types=1);
 
 {{/if}}
@@ -10,6 +10,6 @@ use Kirby\Cms\Site;
 
 class {{camelize template}}Page extends Page
 {
-    
+    // @PLOP_CURSOR
 }
 

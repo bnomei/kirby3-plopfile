@@ -13,7 +13,7 @@ load([
 {{/if}}
 
 Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
-    {{#if extension.option }}
+    {{#if extensions.option }}
     'options' => [
         {{#each data}}
         '{{{ @key }}}' => {{{wrapValue this }}},

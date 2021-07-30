@@ -10,10 +10,15 @@ module.exports = function (plop) {
     prompts: [prompts.folder(basepath)],
     actions: [
       function (data) {
-        data.path =
-          "{{#if folder}}{{ folder }}{{else}}" +
-          basepath +
-          "{{/if}}/robots.txt";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{#if folder}}{{ folder }}{{else}}" +
+              basepath +
+              "{{/if}}/robots.txt",
+            data
+          ),
+          basepath
+        );
       },
       {
         type: "add",

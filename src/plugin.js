@@ -96,9 +96,11 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path =
+        data.path = plop.renderString(
           basepath +
-          "/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php";
+            "/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php",
+          data
+        );
         data.options = A.flip(data.options);
         data.extensions = A.flip(data.extensions);
       },
