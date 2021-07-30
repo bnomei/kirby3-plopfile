@@ -1,4 +1,5 @@
 const A = require("./utils/a.js");
+const choices = require("./utils/choices.js");
 const F = require("./utils/f.js");
 const helpers = require("./utils/helpers.js");
 const kirby = require("./utils/kirby.js");
@@ -52,21 +53,41 @@ module.exports = function (plop) {
             checked: false,
           },
           {
-            name: "[index.php] plugin options",
-            value: "pluginOptions",
-            checked: true,
-          },
-          {
-            name: "[index.php] plugin option cache",
-            value: "pluginOptionCache",
-            checked: false,
-          },
-          {
             name: "[composer.json] PSR-4 autoloader",
             value: "composerPsr4",
             checked: false,
           },
           // { name: '[composer.json] require getkirby/composer-installer', value: 'composerInstaller', checked: false},
+        ],
+      },
+      {
+        type: "checkbox",
+        name: "extensions",
+        message: "Extensions",
+        choices: [
+          choices.apidata(true),
+          choices.apiroute(true),
+          choices.blueprint(true),
+          choices.collection(true),
+          choices.collectionfilter(true),
+          choices.collectionmethod(true),
+          choices.controller(true),
+          choices.fieldmethod(true),
+          choices.filemethod(true),
+          choices.hook(true),
+          choices.kirbytag(true),
+          choices.option(true),
+          choices.pagemethod(true),
+          choices.pagemodel(true),
+          choices.pagesmethod(true),
+          choices.route(true),
+          choices.sitemethod(true),
+          choices.snippet(true),
+          choices.template(true),
+          choices.usermethod(true),
+          choices.usermodel(true),
+          choices.usersmethod(true),
+          choices.validator(true),
         ],
       },
       // TODO: confirm prompt: parcel package.js https://github.com/getkirby/pluginkit/blob/4-panel/package.json
@@ -79,6 +100,7 @@ module.exports = function (plop) {
           basepath +
           "/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php";
         data.options = A.flip(data.options);
+        data.extensions = A.flip(data.extensions);
       },
       {
         type: "add",

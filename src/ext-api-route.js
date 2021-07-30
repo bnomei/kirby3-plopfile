@@ -8,8 +8,8 @@ module.exports = function (plop) {
 
   plop.setHelper("wrapValue", helper.wrapValue);
 
-  plop.setGenerator("ext-option", {
-    description: "append option code to a file",
+  plop.setGenerator("ext-api-route", {
+    description: "append api-route code to a file",
     prompts: [prompts.file(basepath), prompts.key(), prompts.value()],
     actions: [
       function (data) {
@@ -18,11 +18,11 @@ module.exports = function (plop) {
       {
         path: "{{ file }}",
         type: "modify",
-        pattern: /^( *)(\/\/ @PLOP_EXT_OPTION)\r?\n/gim,
-        templateFile: "ext-option.php.hbs",
+        pattern: /^( *)(\/\/ @PLOP_EXT_API_ROUTE)\r?\n/gim,
+        templateFile: "ext-api-route.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.file, "@PLOP_EXT_OPTION");
+        return F.clipboard(plop, data.file, "@PLOP_EXT_API_ROUTE");
       },
     ],
   });

@@ -15,6 +15,7 @@ module.exports = function (plop) {
   plop.setGenerator("template", {
     description: "make a template file",
     prompts: [
+      prompts.folder(basepath),
       prompts.template(""),
       prompts.extension(".php"),
       {
@@ -26,9 +27,13 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path =
-          basepath +
-          "/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{trimTrailingSlash folder}}/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}",
+            data
+          ),
+          basepath
+        );
         data.options = A.flip(data.options);
       },
       {

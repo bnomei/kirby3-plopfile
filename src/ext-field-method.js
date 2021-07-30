@@ -8,8 +8,8 @@ module.exports = function (plop) {
 
   plop.setHelper("wrapValue", helper.wrapValue);
 
-  plop.setGenerator("ext-option", {
-    description: "append option code to a file",
+  plop.setGenerator("ext-field-method", {
+    description: "append field-method code to a file",
     prompts: [prompts.file(basepath), prompts.key(), prompts.value()],
     actions: [
       function (data) {
@@ -18,11 +18,11 @@ module.exports = function (plop) {
       {
         path: "{{ file }}",
         type: "modify",
-        pattern: /^( *)(\/\/ @PLOP_EXT_OPTION)\r?\n/gim,
-        templateFile: "ext-option.php.hbs",
+        pattern: /^( *)(\/\/ @PLOP_EXT_FIELD_METHOD)\r?\n/gim,
+        templateFile: "ext-field-method.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.file, "@PLOP_EXT_OPTION");
+        return F.clipboard(plop, data.file, "@PLOP_EXT_FIELD_METHOD");
       },
     ],
   });

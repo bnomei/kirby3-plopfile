@@ -45,7 +45,10 @@ module.exports = function (plop) {
     actions: [
       function (data) {
         data.folder = basepath + "/{{userIdFrom email }}";
-        data.path = basepath + "/{{userIdFrom email }}/index.php";
+        data.path = kirby.autopath(
+          basepath + "/{{userIdFrom email }}/index.php",
+          basepath
+        );
       },
       {
         type: "add",

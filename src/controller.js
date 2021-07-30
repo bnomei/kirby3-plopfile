@@ -11,10 +11,12 @@ module.exports = function (plop) {
   plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
   plop.setHelper("removeExtensionUnlessPHP", helpers.removeExtensionUnlessPHP);
   plop.setHelper("trimFirstDot", helpers.trimFirstDot);
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
 
   plop.setGenerator("controller", {
     description: "make a controller file",
     prompts: [
+      prompts.folder(basepath),
       prompts.template("default"),
       prompts.extension(".php"),
       {
@@ -29,9 +31,13 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path =
-          basepath +
-          "/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{trimTrailingSlash folder }}/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}",
+            data
+          ),
+          basepath
+        );
         data.options = A.flip(data.options);
       },
       {

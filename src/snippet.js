@@ -9,10 +9,12 @@ module.exports = function (plop) {
   const basepath = kirby.root("snippets");
 
   plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
 
   plop.setGenerator("snippet", {
     description: "make a snippet file",
     prompts: [
+      prompts.folder(basepath),
       {
         type: "input",
         name: "filename",
@@ -30,7 +32,13 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path = basepath + "/{{filenameWithoutExtension template }}.php";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{trimTrailingSlash folder }}/{{filenameWithoutExtension template }}.php",
+            data
+          ),
+          basepath
+        );
         data.options = A.flip(data.options);
       },
       {

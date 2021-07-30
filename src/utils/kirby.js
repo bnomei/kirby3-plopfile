@@ -1,8 +1,12 @@
 const fg = require("fast-glob");
 
+module.exports.autopath = function (path, basepath) {
+  return path.replace("?", basepath).replace("//", "/");
+};
+
 module.exports.root = function (root) {
   if (root == "user" || root == "users") root = "accounts";
-  root = process.env['PLOP_ROOT_" + root.toUpperCase()] ?? root;
+  root = process.env["PLOP_ROOT_" + root.toUpperCase()] ?? root;
   if (root == "index") {
     const indexphp = fg.sync(["**/index.php"], {
       onlyFiles: true,

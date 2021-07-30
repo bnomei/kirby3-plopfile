@@ -9,10 +9,12 @@ module.exports = function (plop) {
 
   plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
   plop.setHelper("trimFirstDot", helpers.trimFirstDot);
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
 
   plop.setGenerator("blueprint", {
     description: "make a blueprint file",
     prompts: [
+      prompts.folder(basepath),
       {
         type: "list",
         name: "type",
@@ -24,9 +26,13 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path =
-          basepath +
-          "/{{ type }}/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{trimTrailingSlash folder }}/{{ type }}/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}",
+            data
+          ),
+          basepath
+        );
         data.data = F.load(data.import);
         data.yaml = yaml.dump(data.data);
         return data.data;

@@ -8,6 +8,7 @@ module.exports = function (plop) {
   const existingLanguages = kirby.languages();
 
   plop.setHelper("toLowerCase", helpers.toLowerCase);
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
   plop.setHelper("wrapValue", helpers.wrapValue);
 
   plop.setGenerator("language", {
@@ -58,7 +59,13 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path = basepath + "/{{toLowerCase code }}.php";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{trimTrailingSlash folder}}/{{toLowerCase code }}.php",
+            data
+          ),
+          basepath
+        );
         data.data = F.load(data.import);
         return data.data;
       },

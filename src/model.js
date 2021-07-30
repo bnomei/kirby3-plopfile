@@ -10,11 +10,13 @@ module.exports = function (plop) {
 
   plop.setHelper("camelize", helpers.camelize);
   plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
   plop.setHelper("ucfirst", helpers.ucfirst);
 
   plop.setGenerator("model", {
     description: "make a model file",
     prompts: [
+      prompts.folder(basepath),
       prompts.template(),
       {
         type: "checkbox",
@@ -25,7 +27,13 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.path = basepath + "/{{filenameWithoutExtension template }}.php";
+        data.path = kirby.autopath(
+          plop.renderString(
+            "{{trimTrailingSlash folder }}/{{filenameWithoutExtension template }}.php",
+            data
+          ),
+          basepath
+        );
         data.options = A.flip(data.options);
       },
       {

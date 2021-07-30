@@ -61,27 +61,26 @@ plop content "Consistency made simple!" "blog/" blogpost
 
 ## Generators
 
-- [x] blueprint (type, template, extension, import)
+- [x] blueprint (folder, type, template, extension, import)
 - [x] config (filename, import)
 - [x] content (title, parent, template, [language, slug,] import)
-- [x] controller (template, extension, options)
+- [x] controller (folder, template, extension, options)
 - [x] dockercompose (folder, type, [...])
-- [ ] extension (file, type, name, [...])
+- [x] ext-[...] (file, type, name, [...])
 - [x] file (file, parent, template, [language,] import)
 - [x] htaccess (folder, type)
 - [x] indexphp (folder, type)
 - [x] language (code, default, direction, locale, name, url, import)
-- [x] model (template, options)
+- [x] model (folder, template, options)
 - [x] plugin (user, repository, prefix, options)
 - [x] robotstxt (folder)
-- [x] snippet (filename)
-- [x] template (template, extension, options)
+- [x] snippet (folder, filename)
+- [x] template (folder, template, extension, options)
 
 > `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be properly escaped.
 
 ## Roadmap
 
-- [ ] extension (file, type, name, [...]) => add more types
 - [ ] setup (scaffolding) => creating default folders and index.html files
 - [ ] user (email, name, password, role, language) => needs uid and encrypt php to js port
 - [ ] laravelmix (folder, options)
