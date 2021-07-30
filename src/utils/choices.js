@@ -96,15 +96,15 @@ module.exports.hook = function (checked = false) {
 
 module.exports.kirbytag = function (checked = false) {
   return {
-    name: "Exports",
-    value: "exports",
+    name: "Kirby Tags",
+    value: "kirbytag",
     checked: checked,
   };
 };
 
 module.exports.option = function (checked = false) {
   return {
-    name: "option",
+    name: "Options",
     value: "option",
     checked: checked,
   };
@@ -120,7 +120,7 @@ module.exports.pagemethod = function (checked = false) {
 
 module.exports.pagemodel = function (checked = false) {
   return {
-    name: "Page Model",
+    name: "Page Models",
     value: "pagemodel",
     checked: checked,
   };
@@ -128,7 +128,7 @@ module.exports.pagemodel = function (checked = false) {
 
 module.exports.pagesmethod = function (checked = false) {
   return {
-    name: "Pages Method",
+    name: "Pages Methods",
     value: "pagesmethod",
     checked: checked,
   };
@@ -136,7 +136,7 @@ module.exports.pagesmethod = function (checked = false) {
 
 module.exports.route = function (checked = false) {
   return {
-    name: "Route",
+    name: "Routes",
     value: "route",
     checked: checked,
   };
@@ -144,7 +144,7 @@ module.exports.route = function (checked = false) {
 
 module.exports.sitemethod = function (checked = false) {
   return {
-    name: "Site Method",
+    name: "Site Methods",
     value: "sitemethod",
     checked: checked,
   };

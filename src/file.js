@@ -45,6 +45,7 @@ module.exports = function (plop) {
     prompts: file_prompts,
     actions: [
       function (data) {
+        data.file = F.findFile(data.file);
         data.path =
           basepath +
           "/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt";

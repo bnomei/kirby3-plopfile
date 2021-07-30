@@ -1,3 +1,4 @@
+const A = require("./utils/a.js");
 const F = require("./utils/f.js");
 const helpers = require("./utils/helpers.js");
 const kirby = require("./utils/kirby.js");
@@ -8,17 +9,14 @@ module.exports = function (plop) {
   const basepath = kirby.root("config");
 
   plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
   plop.setHelper("wrapValue", helpers.wrapValue);
 
   plop.setGenerator("config", {
     description: "make a config file",
     prompts: [
-      {
-        type: "input",
-        name: "filename",
-        message: "Filename",
-        default: "config",
-      },
+      prompts.folder(basepath),
+      prompts.file('config'),
       prompts.import(),
       {
         type: "checkbox",
@@ -33,10 +31,12 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
+        console.log(data);
         data.path = kirby.autopath(
-          "{{trimTrailingSlash folder}}/{{filenameWithoutExtension filename }}.php",
+          plop.renderString("{{trimTrailingSlash folder}}/{{filenameWithoutExtension file }}.php", data),
           basepath
         );
+        console.log(data);
         data.data = F.load(data.import);
         data.extensions = A.flip(data.extensions);
         return data.data;
