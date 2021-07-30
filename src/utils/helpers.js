@@ -21,6 +21,10 @@ module.exports.trimFirstDot = function (text) {
   return text.replace(/^\./, "");
 };
 
+module.exports.commaSpace = function (text) {
+  return text.replace(",", ", ").replace("  ", " ");
+};
+
 module.exports.slugify = function (text) {
   return slugify.parse(text);
 };

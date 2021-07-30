@@ -1,8 +1,22 @@
 <?php
 
 return [
+    {{#if extensions.option}}
     {{#each data}}
     '{{{ @key }}}' => {{{wrapValue this }}},
     {{/each }}
     // @PLOP_EXT_OPTION
+    {{/if}}
+    {{#if extensions.hooks}}
+
+    'hooks' => [
+        // @PLOP_EXT_HOOK
+    ],
+    {{/if}}
+    {{#if extensions.route}}
+
+    'routes' => [
+        // @PLOP_EXT_ROUTE
+    ],
+    {{/if}}
 ];

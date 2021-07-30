@@ -59,6 +59,22 @@ module.exports.value = function () {
   };
 };
 
+module.exports.params = function () {
+  return {
+    type: "input",
+    name: "params",
+    message: "Function Parameters (example: '$first, $second')",
+  };
+};
+
+module.exports.todo = function () {
+  return {
+    type: "input",
+    name: "todo",
+    message: "Comment with TODO note",
+  };
+};
+
 module.exports.language = function (choices) {
   return {
     type: "list",

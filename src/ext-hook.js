@@ -6,11 +6,17 @@ const prompts = require("./utils/prompts.js");
 module.exports = function (plop) {
   const basepath = kirby.root("index");
 
+  plop.setHelper("commaSpace", helper.commaSpace);
   plop.setHelper("wrapValue", helper.wrapValue);
 
   plop.setGenerator("ext-hook", {
     description: "append hook code to a file",
-    prompts: [prompts.file(basepath), prompts.key(), prompts.value()],
+    prompts: [
+      prompts.file(basepath),
+      prompts.key(),
+      prompts.params(),
+      prompts.todo(),
+    ],
     actions: [
       function (data) {
         data.file = F.findFile(data.file);
