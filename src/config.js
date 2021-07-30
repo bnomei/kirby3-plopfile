@@ -15,7 +15,7 @@ module.exports = function (plop) {
   plop.setGenerator("config", {
     description: "make a config file",
     prompts: [
-      prompts.folder(basepath),
+      // prompts.folder(basepath),
       prompts.file('config'),
       prompts.import(),
       {
@@ -31,12 +31,11 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        console.log(data);
+        data.folder = basepath;
         data.path = kirby.autopath(
           plop.renderString("{{trimTrailingSlash folder}}/{{filenameWithoutExtension file }}.php", data),
           basepath
         );
-        console.log(data);
         data.data = F.load(data.import);
         data.extensions = A.flip(data.extensions);
         return data.data;

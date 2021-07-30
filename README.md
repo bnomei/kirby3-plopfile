@@ -8,7 +8,7 @@ Plopfile to generate various files for Kirby3 CMS using Plop.js
 
 ## Commerical Usage
 
-This plugin is free but if you use it in a commercial project please consider to 
+This plugin is free but if you use it in a commercial project please consider to
 - [make a donation 🍻](https://www.paypal.me/bnomei/10) or
 - [buy me ☕☕](https://buymeacoff.ee/bnomei) or
 - [buy a Kirby license using this affiliate link](https://a.paddle.com/v2/click/1129/35731?link=1170)
@@ -21,7 +21,7 @@ This plugin is free but if you use it in a commercial project please consider to
 
 ## Requirements
 
-Install [Plop.js globally](https://plopjs.com). 
+Install [Plop.js globally](https://plopjs.com).
 
 > Plop.js is simplified just glue code between [inquirer](https://github.com/SBoudrias/Inquirer.js/) prompts and [handlebar](https://github.com/wycats/handlebars.js/) templates.
 
@@ -29,7 +29,7 @@ Install [Plop.js globally](https://plopjs.com).
 npm install -g plop
 ```
 
-or 
+or
 
 ```bash
 yarn global add plop
@@ -57,7 +57,7 @@ plop template blogpost
 plop content "Consistency made simple!" "blog/" blogpost
 ```
 
-> INFO: The plugin will `glob` to find the locations of your [Kirby roots](https://getkirby.com/docs/guide/configuration#custom-folder-setup) automatically. 
+> INFO: The plugin will `glob` to find the locations of your [Kirby roots](https://getkirby.com/docs/guide/configuration#custom-folder-setup) automatically.
 
 ## Generators
 
@@ -89,6 +89,8 @@ plop content "Consistency made simple!" "blog/" blogpost
 
 ## Examples
 
+`?` can be used on `folder` prompts to default to kirbys root.
+
 **start interactive generator**
 ```bash
 plop
@@ -118,7 +120,7 @@ plop blueprint fields dvd .yml cd.yml
 ```
 
 **config with options from escaped json string**
-```bash 
+```bash
 plop config config.staging "{\"debug\": true, \"home\": \"staging\", \"ready\": \"function() { return ['my.option' => kirby()->root('index') . '/resources']; }\"}"
 ```
 
@@ -148,14 +150,21 @@ module.exports = function (plop) {
 };
 ```
 
+## .env File
+
 **.env for VS Code**
 ```
-PLOP_CLIPBOARD="code {{filepath}}:{{line}}:{{char}}"
+PLOP_CLIPBOARD="code {{filepath}}:{{line}}:{{char}}" # 'Code.exe' on Windows
 ```
 
 **.env for Sublime Text**
 ```
 PLOP_CLIPBOARD="subl {{filepath}}:{{line}}:{{char}}"
+```
+
+**overwrite roots**
+```
+PLOP_ROOT_TEMPLATES="site/different" # instead of "site/templates"
 ```
 
 ## Major dependencies
