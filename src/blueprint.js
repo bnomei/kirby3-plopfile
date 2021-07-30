@@ -1,16 +1,14 @@
-const Kirby = require("./helpers/kirby.js");
-const YAML = require("js-yaml");
-const F = require("./helpers/f.js");
+const F = require("./utils/f.js");
+const helpers = require("./utils/helpers.js");
+const kirby = require("./utils/kirby.js");
+const prompts = require("./utils/prompts.js");
+const yaml = require("js-yaml");
 
 module.exports = function (plop) {
-  plop.setHelper("saveFilename", function (text) {
-    return text.toLowerCase().replace(".php", "").replace(".yml", "");
-  });
-  plop.setHelper("trimFirstDot", function (text) {
-    return text.replace(/^\./, "");
-  });
+  const basepath = kirby.root("blueprints");
 
-  const basepath = Kirby.root("blueprints");
+  plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
+  plop.setHelper("trimFirstDot", helpers.trimFirstDot);
 
   plop.setGenerator("blueprint", {
     description: "make a blueprint file",
@@ -18,46 +16,28 @@ module.exports = function (plop) {
       {
         type: "list",
         name: "type",
-        choices: Kirby.blueprintTypes(),
+        choices: kirby.blueprintTypes(),
       },
-      {
-        type: "input",
-        name: "template", // subfolders can be done like this: 'mysub/tempname'
-        message: "Template",
-      },
-      {
-        type: "input",
-        name: "extension",
-        message: "Extension",
-        default: ".yml",
-      },
-      {
-        type: "input",
-        name: "import",
-        message: "Import data from json string, json or yml file (optional)",
-        default: "{}",
-      },
+      prompts.template(),
+      prompts.extension(".yml"),
+      prompts.import(),
     ],
     actions: [
       function (data) {
+        data.path =
+          basepath +
+          "/{{ type }}/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}";
         data.data = F.load(data.import);
-        data.yaml = YAML.dump(data.data);
+        data.yaml = yaml.dump(data.data);
         return data.data;
       },
       {
         type: "add",
-        path:
-          basepath +
-          "/{{ type }}/{{saveFilename template }}.{{trimFirstDot extension }}",
+        path: "{{ path }}",
         templateFile: "blueprint.{{trimFirstDot extension }}.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          basepath +
-            "/{{ type }}/{{saveFilename template }}.{{trimFirstDot extension }}",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

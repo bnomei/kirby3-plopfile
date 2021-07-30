@@ -1,22 +1,14 @@
-const Kirby = require("./helpers/kirby.js");
-const F = require("./helpers/f.js");
+const F = require("./utils/f.js");
+const helpers = require("./utils/helpers.js");
+const kirby = require("./utils/kirby.js");
+const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  plop.setHelper("saveFilename", function (text) {
-    return text.toLowerCase().replace(" ", "");
-  });
-  plop.setHelper("wrapValue", function (value) {
-    if (typeof value === "number" || typeof value === "boolean") {
-      return value;
-    }
-    if (typeof value === "string" && value.startsWith("function")) {
-      return value;
-    }
-    return "'" + value + "'";
-  });
+  const basepath = kirby.root("languages");
+  const existingLanguages = kirby.languages();
 
-  var basepath = Kirby.root("languages");
-  const existingLanguages = Kirby.languages();
+  plop.setHelper("toLowerCase", helpers.toLowerCase);
+  plop.setHelper("wrapValue", helpers.wrapValue);
 
   plop.setGenerator("language", {
     description: "make a language file",
@@ -66,20 +58,17 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
+        data.path = basepath + "/{{toLowerCase code }}.php";
         data.data = F.load(data.import);
         return data.data;
       },
       {
         type: "add",
-        path: basepath + "/{{saveFilename code }}.php",
+        path: "{{ path }}",
         templateFile: "language.php.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          basepath + "/{{saveFilename code }}.php",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

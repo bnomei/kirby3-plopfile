@@ -1,22 +1,17 @@
-const Kirby = require("./helpers/kirby.js");
-const F = require("./helpers/f.js");
+const F = require("./utils/f.js");
+const helpers = require("./utils/helpers.js");
+const kirby = require("./utils/kirby.js");
+const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  plop.setHelper("saveFoldername", function (text) {
-    return text.replace(".htaccess", "").replace(/\/$/, ""); // trim trailing slash
-  });
+  const basepath = kirby.root("index");
 
-  var basepath = Kirby.root("index");
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
 
   plop.setGenerator("htaccess", {
     description: "make htaccess file",
     prompts: [
-      {
-        type: "input",
-        name: "folder",
-        message: "Folder (optional)",
-        default: basepath,
-      },
+      prompts.folder(basepath),
       {
         type: "list",
         name: "type",
@@ -28,22 +23,19 @@ module.exports = function (plop) {
       },
     ],
     actions: [
+      function (data) {
+        data.path =
+          "{{#if folder}}{{trimTrailingSlash folder }}{{else}}" +
+          basepath +
+          "{{/if}}/.htaccess";
+      },
       {
         type: "add",
-        path:
-          "{{#if folder}}{{saveFoldername folder }}{{else}}" +
-          basepath +
-          "{{/if}}/.htaccess",
+        path: "{{ path }}",
         templateFile: "htaccess.{{ type }}.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          "{{#if folder}}{{saveFoldername folder }}{{else}}" +
-            basepath +
-            "{{/if}}/.htaccess",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

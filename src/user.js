@@ -1,16 +1,15 @@
-const Kirby = require("./helpers/kirby.js");
-const Slugify = require("./helpers/slugify.js");
-const Clipboardy = require("clipboardy");
+const kirby = require("./utils/kirby.js");
+const slugify = require("./utils/slugify.js");
 
 module.exports = function (plop) {
   plop.setHelper("userIdFrom", function (text) {
-    return Slugify.parse(text); // TODO
+    return slugify.parse(text); // TODO
   });
   plop.setHelper("encryptPassword", function (text) {
     return text; // TODO
   });
 
-  let basepath = Kirby.root("users");
+  const basepath = kirby.root("users");
 
   plop.setGenerator("user", {
     description: "make a user",
@@ -34,7 +33,7 @@ module.exports = function (plop) {
         type: "list",
         name: "role",
         message: "Role",
-        choices: Kirby.userRoles(),
+        choices: kirby.userRoles(),
       },
       {
         type: "input",
@@ -44,19 +43,22 @@ module.exports = function (plop) {
       },
     ],
     actions: [
+      function (data) {
+        data.folder = basepath + "/{{userIdFrom email }}";
+        data.path = basepath + "/{{userIdFrom email }}/index.php";
+      },
       {
         type: "add",
-        path: basepath + "/{{userIdFrom email }}/index.php",
+        path: "{{ folder }}/index.php",
         templateFile: "user.index.php.hbs",
       },
       {
         type: "add",
-        path: basepath + "/{{userIdFrom email }}/.htaccess",
+        path: basepath + "/{{ folder }}/.htaccess",
         templateFile: "user.htaccess.hbs",
       },
       function (data) {
-        let path = plop.renderString(basepath + "/{{userIdFrom email }}", data);
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

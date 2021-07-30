@@ -1,61 +1,40 @@
-const Kirby = require("./helpers/kirby.js");
-const F = require("./helpers/f.js");
-const A = require("./helpers/a.js");
+const A = require("./utils/a.js");
+const choices = require("./utils/choices.js");
+const F = require("./utils/f.js");
+const helpers = require("./utils/helpers.js");
+const prompts = require("./utils/prompts.js");
+const kirby = require("./utils/kirby.js");
 
 module.exports = function (plop) {
-  plop.setHelper("saveFilename", function (text) {
-    return text.toLowerCase().replace(".php", "");
-  });
-  plop.setHelper("ucfirst", function (text) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  });
-  plop.setHelper("camelize", function (text) {
-    // https://stackoverflow.com/a/2970667
-    text = text.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
-      if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
-      return index === 0 ? match.toLowerCase() : match.toUpperCase();
-    });
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  });
+  const basepath = kirby.root("models");
 
-  var basepath = Kirby.root("models");
+  plop.setHelper("camelize", helpers.camelize);
+  plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
+  plop.setHelper("ucfirst", helpers.ucfirst);
 
   plop.setGenerator("model", {
     description: "make a model file",
     prompts: [
-      {
-        type: "input",
-        name: "template",
-        message: "Template",
-      },
+      prompts.template(),
       {
         type: "checkbox",
         name: "options",
         message: "Options",
-        choices: [
-          {
-            name: "declare strict types",
-            value: "declareStrictTypes",
-            checked: false,
-          },
-        ],
+        choices: [choices.declareStrictTypes(false)],
       },
     ],
     actions: [
       function (data) {
+        data.path = basepath + "/{{filenameWithoutExtension template }}.php";
         data.options = A.flip(data.options);
       },
       {
         type: "add",
-        path: basepath + "/{{saveFilename template }}.php",
+        path: "{{ path }}",
         templateFile: "model.php.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          basepath + "/{{saveFilename template }}.php",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

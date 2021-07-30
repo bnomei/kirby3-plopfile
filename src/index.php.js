@@ -1,22 +1,17 @@
-const Kirby = require("./helpers/kirby.js");
-const F = require("./helpers/f.js");
+const F = require("./utils/f.js");
+const helpers = require("./utils/helpers.js");
+const kirby = require("./utils/kirby.js");
+const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  plop.setHelper("saveFoldername", function (text) {
-    return text.replace("index.php", "").replace(/\/$/, ""); // trim trailing slash
-  });
+  const basepath = kirby.root("index");
 
-  var basepath = Kirby.root("index");
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
 
   plop.setGenerator("indexphp", {
     description: "make a index.php file",
     prompts: [
-      {
-        type: "input",
-        name: "folder",
-        message: "Folder (optional)",
-        default: basepath,
-      },
+      prompts.folder(basepath),
       {
         type: "list",
         name: "type",
@@ -31,22 +26,19 @@ module.exports = function (plop) {
       },
     ],
     actions: [
+      function (data) {
+        data.path =
+          "{{#if folder}}{{trimTrailingSlash folder }}{{else}}" +
+          basepath +
+          "{{/if}}/index.php";
+      },
       {
         type: "add",
-        path:
-          "{{#if folder}}{{saveFoldername folder }}{{else}}" +
-          basepath +
-          "{{/if}}/index.php",
+        path: "{{ path }}",
         templateFile: "index.{{ type }}.php.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          "{{#if folder}}{{saveFoldername folder }}{{else}}" +
-            basepath +
-            "{{/if}}/index.php",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

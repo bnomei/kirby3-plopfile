@@ -1,70 +1,46 @@
-const Kirby = require("./helpers/kirby.js");
-const F = require("./helpers/f.js");
-const A = require("./helpers/a.js");
+const A = require("./utils/a.js");
+const choices = require("./utils/choices.js");
+const F = require("./utils/f.js");
+const helpers = require("./utils/helpers.js");
+const kirby = require("./utils/kirby.js");
+const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  plop.setHelper("saveFilename", function (text) {
-    if (text == undefined) text = "";
-    return text.toLowerCase().replace(".php", "");
-  });
-  plop.setHelper("trimFirstDot", function (text) {
-    return text.replace(/^\./, "");
-  });
-  plop.setHelper("removeExtensionUnlessPHP", function (text) {
-    return text == ".php" ? ".php" : ""; // match exactly for better blade/twig support
-  });
+  const basepath = kirby.root("controllers");
 
-  let basepath = Kirby.root("controllers");
+  plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
+  plop.setHelper("removeExtensionUnlessPHP", helpers.removeExtensionUnlessPHP);
+  plop.setHelper("trimFirstDot", helpers.trimFirstDot);
 
   plop.setGenerator("controller", {
     description: "make a controller file",
     prompts: [
-      {
-        type: "input",
-        name: "template",
-        message: "Template",
-        default: "default",
-      },
-      {
-        type: "input",
-        name: "extension",
-        message: "Extension",
-        default: ".php",
-      },
+      prompts.template("default"),
+      prompts.extension(".php"),
       {
         type: "checkbox",
         name: "options",
         message: "Options",
         choices: [
-          {
-            name: "declare strict types",
-            value: "declareStrictTypes",
-            checked: false,
-          },
-          {
-            name: "add type hints for $page, $site and $kirby",
-            value: "typeHintCoreObjects",
-            checked: false,
-          },
+          choices.declareStrictTypes(false),
+          choices.typeHintCoreObjects(false),
         ],
       },
     ],
     actions: [
       function (data) {
+        data.path =
+          basepath +
+          "/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}";
         data.options = A.flip(data.options);
       },
       {
         type: "add",
-        path:
-          basepath + "/{{saveFilename template }}.{{trimFirstDot extension }}",
+        path: "{{ path }}",
         templateFile: "controller{{removeExtensionUnlessPHP extension}}.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          basepath + "/{{saveFilename template }}.{{trimFirstDot extension }}",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

@@ -1,36 +1,27 @@
-const Kirby = require("./helpers/kirby.js");
-const F = require("./helpers/f.js");
+const F = require("./utils/f.js");
+const kirby = require("./utils/kirby.js");
+const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  var basepath = Kirby.root("index");
+  const basepath = kirby.root("index");
 
   plop.setGenerator("robotstxt", {
     description: "make a robots.txt file",
-    prompts: [
-      {
-        type: "input",
-        name: "folder",
-        message: "Folder (optional)",
-        default: basepath,
-      },
-    ],
+    prompts: [prompts.folder(basepath)],
     actions: [
-      {
-        type: "add",
-        path:
+      function (data) {
+        data.path =
           "{{#if folder}}{{ folder }}{{else}}" +
           basepath +
-          "{{/if}}/robots.txt",
+          "{{/if}}/robots.txt";
+      },
+      {
+        type: "add",
+        path: "{{ path }}",
         templateFile: "robots.txt.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          "{{#if folder}}{{ folder }}{{else}}" +
-            basepath +
-            "{{/if}}/robots.txt",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
       function () {
         return "[SUGGESTS] https://github.com/bnomei/kirby3-robots-txt";

@@ -1,81 +1,59 @@
-const Kirby = require("./helpers/kirby.js");
-const Slugify = require("./helpers/slugify.js");
-const F = require("./helpers/f.js");
-const Path = require("path");
-const FS = require("fs");
+const F = require("./utils/f.js");
+const fs = require("fs");
+const helpers = require("./utils/helpers.js");
+const kirby = require("./utils/kirby.js");
+const path = require("path");
+const prompts = require("./utils/prompts.js");
+const slugify = require("./utils/slugify.js");
 
 module.exports = function (plop) {
+  const basepath = kirby.root("content");
+
   plop.setHelper("saveFilename", function (text) {
-    let filename = Path.basename(text);
+    let filename = path.basename(text);
     return filename
       .split(".")
       .map(function (part) {
-        return Slugify.parse(part);
+        return slugify.parse(part);
       })
       .join(".");
   });
-  plop.setHelper("trimTrailingSlash", function (text) {
-    return text.replace(/\/$/, "");
-  });
-  plop.setHelper("toLowerCase", function (text) {
-    return text.toLowerCase();
-  });
-  plop.setHelper("ucfirst", function (text) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  });
+  plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
+  plop.setHelper("toLowerCase", helpers.toLowerCase);
+  plop.setHelper("ucfirst", helpers.toLowerCase);
 
-  let basepath = Kirby.root("content");
-
-  let prompts = [
-    {
-      type: "input",
-      name: "file",
-      message: "Source File",
-    },
+  let file_prompts = [
+    prompts.file(),
     {
       type: "input",
       name: "parent",
       message: "Enter UID of the parent folder",
       default: basepath + "/",
     },
-    {
-      type: "input",
-      name: "template",
-      message: "Template",
-      default: "",
-    },
+    prompts.template(""),
   ];
 
-  const existingLanguages = Kirby.languages();
+  const existingLanguages = kirby.languages();
   if (existingLanguages.length) {
-    prompts.push({
-      type: "list",
-      name: "language",
-      message: "Language",
-      choices: existingLanguages,
-    });
+    file_prompts.push(prompts.language(existingLanguages));
   }
 
-  prompts.push({
-    type: "input",
-    name: "import",
-    message: "Import data from json string, json or yml file (optional)",
-    default: "{}",
-  });
+  file_prompts.push(prompts.import());
 
   plop.setGenerator("file", {
     description: "copy file to a content folder",
-    prompts: prompts,
+    prompts: file_prompts,
     actions: [
       function (data) {
+        data.path =
+          basepath +
+          "/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt";
         data.data = F.load(data.import);
         return data.data;
       },
       {
         type: "add",
-        path:
-          basepath +
-          "/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt",
+        path: "{{ path }}",
         templateFile: "file.txt.hbs",
       },
       function (data) {
@@ -84,16 +62,11 @@ module.exports = function (plop) {
           basepath + "/{{trimTrailingSlash parent }}/{{saveFilename file }}",
           data
         );
-        FS.copyFileSync(source, target);
+        fs.copyFileSync(source, target);
         return source + " -> " + target;
       },
       function (data) {
-        let path = plop.renderString(
-          basepath +
-            "/{{trimTrailingSlash parent }}/{{saveFilename file }}{{#if language}}.{{ language }}{{/if}}.txt",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

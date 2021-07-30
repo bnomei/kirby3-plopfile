@@ -1,14 +1,14 @@
-const Kirby = require("./helpers/kirby.js");
-const F = require("./helpers/f.js");
-const A = require("./helpers/a.js");
+const A = require("./utils/a.js");
+const choices = require("./utils/choices.js");
+const F = require("./utils/f.js");
+const helpers = require("./utils/helpers.js");
+const kirby = require("./utils/kirby.js");
+const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  plop.setHelper("saveFilename", function (text) {
-    if (text == undefined) text = "";
-    return text.toLowerCase().replace(".php", "");
-  });
+  const basepath = kirby.root("snippets");
 
-  var basepath = Kirby.root("snippets");
+  plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
 
   plop.setGenerator("snippet", {
     description: "make a snippet file",
@@ -23,34 +23,23 @@ module.exports = function (plop) {
         name: "options",
         message: "Options",
         choices: [
-          {
-            name: "declare strict types",
-            value: "declareStrictTypes",
-            checked: false,
-          },
-          {
-            name: "add type hints for $page, $site and $kirby",
-            value: "typeHintCoreObjects",
-            checked: false,
-          },
+          choices.declareStrictTypes(false),
+          choices.typeHintCoreObjects(false),
         ],
       },
     ],
     actions: [
       function (data) {
+        data.path = basepath + "/{{filenameWithoutExtension template }}.php";
         data.options = A.flip(data.options);
       },
       {
         type: "add",
-        path: basepath + "/{{saveFilename template }}.php",
+        path: "{{ path }}",
         templateFile: "snippet.php.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          basepath + "/{{saveFilename template }}.php",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

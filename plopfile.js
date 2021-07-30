@@ -7,7 +7,7 @@ module.exports = function (plop) {
     "./src/content.js",
     "./src/controller.js",
     "./src/docker-compose.js",
-    //'./src/extension.js',
+    './src/ext-option.js',
     "./src/file.js",
     "./src/htaccess.js",
     "./src/index.php.js",

@@ -1,16 +1,14 @@
-const Kirby = require("./helpers/kirby.js");
-const F = require("./helpers/f.js");
-const A = require("./helpers/a.js");
+const A = require("./utils/a.js");
+const F = require("./utils/f.js");
+const helpers = require("./utils/helpers.js");
+const kirby = require("./utils/kirby.js");
+const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  plop.setHelper("toLowerCase", function (text) {
-    return text.toLowerCase();
-  });
-  plop.setHelper("ucfirst", function (text) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  });
+  const basepath = kirby.root("plugins");
 
-  var basepath = Kirby.root("plugins");
+  plop.setHelper("toLowerCase", helpers.toLowerCase);
+  plop.setHelper("ucfirst", helpers.ucfirst);
 
   plop.setGenerator("plugin", {
     description: "make a plugin index.php and composer.json file",
@@ -77,13 +75,14 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
+        data.path =
+          basepath +
+          "/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php";
         data.options = A.flip(data.options);
       },
       {
         type: "add",
-        path:
-          basepath +
-          "/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php",
+        path: "{{ path }}",
         templateFile: "plugin.index.php.hbs",
       },
       {
@@ -94,12 +93,7 @@ module.exports = function (plop) {
         templateFile: "plugin.composer.json.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          basepath +
-            "/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });

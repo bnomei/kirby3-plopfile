@@ -37,6 +37,16 @@
         }
     ],
     "scripts": {
+        "clean": [
+            "find tests/ -name '*.yml' -type f -delete",
+            "find tests/ -name '*.php' -type f -delete",
+            "find tests/ -name '*.txt' -type f -delete",
+            "rm -rf tests/content; mkdir tests/content",
+            "rm -rf tests/site/accounts; mkdir tests/site/accounts",
+            "rm -rf tests/site/plugins; mkdir tests/site/plugins",
+            "rm -rf tests/site/templates; mkdir tests/site/templates",
+            "tree tests"
+        ],
         "dist": [
             "composer install --no-dev --optimize-autoloader",
             "yarn upgrade",

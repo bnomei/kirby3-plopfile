@@ -1,7 +1,7 @@
 const fs = require("fs");
 const fg = require("fast-glob");
-const YAML = require("js-yaml");
-const Clipboardy = require("clipboardy");
+const yaml = require("js-yaml");
+const clipboardy = require("clipboardy");
 
 module.exports.clipboard = function (plop, filepath, query = undefined) {
   console.log("\n" + this.read(filepath));
@@ -10,7 +10,7 @@ module.exports.clipboard = function (plop, filepath, query = undefined) {
     process.env.PLOP_CLIPBOARD ?? "{{ filepath }}",
     { filepath: filepath, line: search.line, column: search.column }
   );
-  Clipboardy.writeSync(clip);
+  clipboardy.writeSync(clip);
   return "\n" + clip + "\n... has been copied to clipboard.";
 };
 
@@ -57,7 +57,7 @@ module.exports.parseJson = function (data) {
 
 module.exports.parseYaml = function (data) {
   try {
-    return YAML.load(data);
+    return yaml.load(data);
   } catch (err) {
     //console.log(err)
     return undefined;

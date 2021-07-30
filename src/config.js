@@ -1,21 +1,13 @@
-const Kirby = require("./helpers/kirby.js");
-const F = require("./helpers/f.js");
+const F = require("./utils/f.js");
+const helpers = require("./utils/helpers.js");
+const kirby = require("./utils/kirby.js");
+const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  plop.setHelper("saveFilename", function (text) {
-    return text.toLowerCase().replace(".php", "").replace(" ", "-");
-  });
-  plop.setHelper("wrapValue", function (value) {
-    if (typeof value === "number" || typeof value === "boolean") {
-      return value;
-    }
-    if (typeof value === "string" && value.startsWith("function")) {
-      return value;
-    }
-    return "'" + value + "'";
-  });
+  const basepath = kirby.root("config");
 
-  let basepath = Kirby.root("config");
+  plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
+  plop.setHelper("wrapValue", helpers.wrapValue);
 
   plop.setGenerator("config", {
     description: "make a config file",
@@ -26,29 +18,21 @@ module.exports = function (plop) {
         message: "Filename",
         default: "config",
       },
-      {
-        type: "input",
-        name: "import",
-        message: "Import data from json string, json or yml file (optional)",
-        default: "{}",
-      },
+      prompts.import(),
     ],
     actions: [
       function (data) {
+        data.path = basepath + "/{{filenameWithoutExtension filename }}.php";
         data.data = F.load(data.import);
         return data.data;
       },
       {
         type: "add",
-        path: basepath + "/{{saveFilename filename }}.php",
+        path: "{{ path }}",
         templateFile: "config.php.hbs",
       },
       function (data) {
-        let path = plop.renderString(
-          basepath + "/{{saveFilename filename }}.php",
-          data
-        );
-        return F.clipboard(plop, path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
       },
     ],
   });
