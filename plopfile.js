@@ -4,6 +4,9 @@ module.exports = function (plop) {
   plop.load([
     "./src/blueprint.js",
     "./src/config.js",
+    "./src/config-hook.js",
+    "./src/config-option.js",
+    "./src/config-route.js",
     "./src/content.js",
     "./src/controller.js",
     "./src/docker-compose.js",

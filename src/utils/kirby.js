@@ -1,7 +1,29 @@
 const fg = require("fast-glob");
+const fs = require("fs");
+const path = require("path");
+const F = require("./f.js");
 
 module.exports.autopath = function (path, basepath) {
-  return path.replace("?", basepath).replace("//", "/");
+  return path.replace("$", basepath).replace("//", "/");
+};
+
+module.exports.resolvePluginInclude = function (data, basepath) {
+  if (data.folder) {
+    data.folder = F.findFolder(this.autopath(data.folder, basepath));
+    data.indexphp = data.folder + "/index.php";
+  } else {
+    data.folder = basepath;
+  }
+  if (data.file) {
+    if (!fs.existsSync(data.file)) {
+      data.file = F.findFile(path.basename(data.file) + "*", data.folder); // the snippet
+    }
+    data.basenameWithoutExtension = path
+      .basename(data.file, path.extname(data.file))
+      .toLowerCase();
+    data.relativePath = data.file.replace(data.folder, "");
+  }
+  return data;
 };
 
 module.exports.root = function (root) {

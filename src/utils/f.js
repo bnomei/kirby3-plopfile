@@ -4,14 +4,19 @@ const yaml = require("js-yaml");
 const clipboardy = require("clipboardy");
 
 module.exports.clipboard = function (plop, filepath, query = undefined) {
-  console.log("\n" + this.read(filepath));
+  if (process.env.PLOP_DEBUG === "true") {
+    console.log("\n" + this.read(filepath));
+  }
   const search = this.searchLineAndColumn(filepath, query);
   const clip = plop.renderString(
     process.env.PLOP_CLIPBOARD ?? "{{ filepath }}",
     { filepath: filepath, line: search.line, column: search.column }
   );
-  clipboardy.writeSync(clip);
-  return "\n" + clip + "\n... has been copied to clipboard.";
+  if (process.env.PLOP_CLIPBOARD !== "false") {
+    clipboardy.writeSync(clip);
+    return "\n" + clip + "\n... has been copied to clipboard.";
+  }
+  return filepath;
 };
 
 module.exports.searchLineAndColumn = function (filepath, query = undefined) {
@@ -39,6 +44,9 @@ module.exports.read = function (filepath) {
 
 module.exports.findFile = function (filepath, base = "") {
   if (!fs.existsSync(filepath)) {
+    if (base.length && !base.endsWith("/")) {
+      base = base + "/";
+    }
     const files = fg.sync([base + "**/" + filepath], { onlyFiles: true });
     if (files.length) filepath = files[0];
     else return undefined;

@@ -1,3 +1,56 @@
+const A = require("./a.js");
+
+module.exports.make = function (arr, defaults) {
+  if (arr.length == 1 && arr[0] == "none") {
+    return [];
+  }
+  if (arr.length == 1 && arr[0] == "defaults") {
+    arr = [];
+    defaults.forEach(function (value, index, ar) {
+      if (defaults[index].checked == true) {
+        arr.push(defaults[index].value);
+      }
+    });
+  }
+  if (arr.length == 1 && arr[0] == "all") {
+    arr = [];
+    defaults.forEach(function (value, index, ar) {
+      arr.push(defaults[index].value);
+    });
+  }
+  // make it usable in handlebars
+  let yup = [];
+  arr.forEach(function (value, index, ar) {
+    yup[value] = true;
+  });
+
+  return yup;
+};
+
+module.exports.none = function (checked = false) {
+  return {
+    name: "['none' to check none when bypassing]",
+    value: "none",
+    checked: checked,
+  };
+};
+
+module.exports.defaults = function (checked = false) {
+  return {
+    name: "['defaults' to use defaults when bypassing]",
+    value: "defaults",
+    checked: checked,
+  };
+};
+
+module.exports.all = function (checked = false) {
+  return {
+    name: "['all' to use all when bypassing]",
+    value: "all",
+    checked: checked,
+  };
+};
+
 module.exports.declareStrictTypes = function (checked = false) {
   return {
     name: "declare strict types",

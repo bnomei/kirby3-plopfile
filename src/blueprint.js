@@ -26,6 +26,13 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
+        data.folder = F.findFolder(kirby.autopath(data.folder, basepath));
+        console.log(data.folder);
+        // add root if adding to plugins
+        let root = "/" + (process.env["PLOP_ROOT_BLUEPRINTS"] ?? "blueprints");
+        if (!data.folder.endsWith(root)) {
+          data.folder = data.folder + root;
+        }
         data.path = kirby.autopath(
           plop.renderString(
             "{{trimTrailingSlash folder }}/{{ type }}/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}",

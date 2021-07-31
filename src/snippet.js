@@ -12,6 +12,14 @@ module.exports = function (plop) {
   plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
   plop.setHelper("wrapValue", helpers.wrapValue);
 
+  let defaultChoices = [
+    choices.declareStrictTypes(false),
+    choices.typeHintCoreObjects(false),
+    choices.none(),
+    choices.defaults(),
+    choices.all(),
+  ];
+
   plop.setGenerator("snippet", {
     description: "make a snippet file",
     prompts: [
@@ -21,10 +29,7 @@ module.exports = function (plop) {
         type: "checkbox",
         name: "options",
         message: "Options",
-        choices: [
-          choices.declareStrictTypes(false),
-          choices.typeHintCoreObjects(false),
-        ],
+        choices: defaultChoices,
       },
       prompts.import(),
     ],
@@ -44,7 +49,7 @@ module.exports = function (plop) {
           ),
           basepath
         );
-        data.options = A.flip(data.options);
+        data.options = choices.make(data.options, defaultChoices);
       },
       {
         type: "add",

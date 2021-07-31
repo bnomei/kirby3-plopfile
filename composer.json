@@ -1,57 +1,57 @@
 {
-    "name": "bnomei/kirby3-plopfile",
-    "type": "kirby-plugin",
-    "version": "1.0.0",
-    "description": "Plopfile to generate various files for Kirby3 CMS using Plop.js",
-    "license": "MIT",
-    "keywords": [
-        "kirby3",
-        "kirby3-cms",
-        "cli",
-        "commandline",
-        "make",
-        "generator",
-        "generate",
-        "template",
-        "plop",
-        "prompt",
-        "inquirer",
-        "handlebars",
-        "hbs",
-        "automate",
-        "consistency",
-        "workflow"
-    ],
-    "config": {
-        "optimize-autoloader": true,
-        "sort-packages": true
-    },
-    "require": {
-        "php": ">=7.3.0",
-        "getkirby/composer-installer": "^1.2"
-    },
-    "authors": [
-        {
-            "name": "Bruno Meilick",
-            "email": "b@bnomei.com"
-        }
-    ],
-    "scripts": {
-        "clean": [
-            "find tests/ -name '*.yml' -type f -delete",
-            "find tests/ -name '*.php' -type f -delete",
-            "find tests/ -name '*.txt' -type f -delete",
-            "rm -rf tests/content; mkdir tests/content",
-            "rm -rf tests/site/accounts; mkdir tests/site/accounts",
-            "rm -rf tests/site/plugins; mkdir tests/site/plugins",
-            "rm -rf tests/site/templates; mkdir tests/site/templates",
-            "tree tests"
-        ],
-        "dist": [
-            "composer install --no-dev --optimize-autoloader",
-            "yarn upgrade",
-            "yarn prettier --write src",
-            "git rm -rf --cached .; git add .;"
-        ]
+  "name": "bnomei/kirby3-plopfile",
+  "type": "kirby-plugin",
+  "version": "1.0.0",
+  "description": "Plopfile to generate various files for Kirby3 CMS using Plop.js",
+  "license": "MIT",
+  "keywords": [
+    "kirby3",
+    "kirby3-cms",
+    "cli",
+    "commandline",
+    "make",
+    "generator",
+    "generate",
+    "template",
+    "plop",
+    "prompt",
+    "inquirer",
+    "handlebars",
+    "hbs",
+    "automate",
+    "consistency",
+    "workflow"
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "require": {
+    "php": ">=7.3.0",
+    "getkirby/composer-installer": "^1.2"
+  },
+  "authors": [
+    {
+      "name": "Bruno Meilick",
+      "email": "b@bnomei.com"
     }
+  ],
+  "scripts": {
+    "clean": [
+      "find tests/ -name '*.yml' -type f -delete",
+      "find tests/ -name '*.php' -type f -delete",
+      "find tests/ -name '*.txt' -type f -delete",
+      "rm -rf tests/content; mkdir tests/content",
+      "rm -rf tests/site/accounts; mkdir tests/site/accounts",
+      "rm -rf tests/site/plugins; mkdir tests/site/plugins",
+      "rm -rf tests/site/templates; mkdir tests/site/templates",
+      "tree tests"
+    ],
+    "dist": [
+      "composer install --no-dev --optimize-autoloader",
+      "yarn upgrade",
+      "yarn prettier --write src",
+      "git rm -rf --cached .; git add .;"
+    ]
+  }
 }

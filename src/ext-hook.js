@@ -4,7 +4,7 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("index");
+  const basepath = kirby.root("plugins");
 
   plop.setHelper("commaSpace", helper.commaSpace);
   plop.setHelper("wrapValue", helper.wrapValue);
@@ -12,23 +12,23 @@ module.exports = function (plop) {
   plop.setGenerator("ext-hook", {
     description: "append hook code to a file",
     prompts: [
-      prompts.file(basepath),
+      prompts.folder(basepath),
       prompts.key(),
       prompts.params(),
       prompts.todo(),
     ],
     actions: [
       function (data) {
-        data.file = F.findFile(data.file);
+        data = kirby.resolvePluginInclude(data, basepath);
       },
       {
-        path: "{{ file }}",
+        path: "{{ indexphp }}",
         type: "modify",
         pattern: /^( *)(\/\/ @PLOP_EXT_HOOK)\r?\n/gim,
         templateFile: "ext-hook.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.file, "@PLOP_EXT_HOOK");
+        return F.clipboard(plop, data.indexphp, "@PLOP_EXT_HOOK");
       },
     ],
   });

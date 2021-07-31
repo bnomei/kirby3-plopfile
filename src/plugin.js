@@ -11,6 +11,62 @@ module.exports = function (plop) {
   plop.setHelper("toLowerCase", helpers.toLowerCase);
   plop.setHelper("ucfirst", helpers.ucfirst);
 
+  let defaultOptions = [
+    {
+      name: "[index.php] declare strict types",
+      value: "declareStrictTypes",
+      checked: false,
+    },
+    {
+      name: "[index.php] include composer autoloader",
+      value: "includeComposerAutoloader",
+      checked: false,
+    },
+    {
+      name: "[index.php] add kirby autoloader",
+      value: "addKirbyAutoloader",
+      checked: false,
+    },
+    {
+      name: "[composer.json] PSR-4 autoloader",
+      value: "composerPsr4",
+      checked: false,
+    },
+    // { name: '[composer.json] require getkirby/composer-installer', value: 'composerInstaller', checked: false},
+    choices.none(),
+    choices.defaults(),
+    choices.all(),
+  ];
+
+  let defaultExtensions = [
+    choices.apidata(true),
+    choices.apiroute(true),
+    choices.blueprint(true),
+    choices.collection(true),
+    choices.collectionfilter(true),
+    choices.collectionmethod(true),
+    choices.controller(true),
+    choices.fieldmethod(true),
+    choices.filemethod(true),
+    choices.hook(true),
+    choices.kirbytag(true),
+    choices.option(true),
+    choices.pagemethod(true),
+    choices.pagemodel(true),
+    choices.pagesmethod(true),
+    choices.route(true),
+    choices.sitemethod(true),
+    choices.snippet(true),
+    choices.template(true),
+    choices.usermethod(true),
+    choices.usermodel(true),
+    choices.usersmethod(true),
+    choices.validator(true),
+    choices.none(),
+    choices.defaults(),
+    choices.all(),
+  ];
+
   plop.setGenerator("plugin", {
     description: "make a plugin index.php and composer.json file",
     prompts: [
@@ -36,59 +92,13 @@ module.exports = function (plop) {
         type: "checkbox",
         name: "options",
         message: "Options",
-        choices: [
-          {
-            name: "[index.php] declare strict types",
-            value: "declareStrictTypes",
-            checked: false,
-          },
-          {
-            name: "[index.php] include composer autoloader",
-            value: "includeComposerAutoloader",
-            checked: false,
-          },
-          {
-            name: "[index.php] add kirby autoloader",
-            value: "addKirbyAutoloader",
-            checked: false,
-          },
-          {
-            name: "[composer.json] PSR-4 autoloader",
-            value: "composerPsr4",
-            checked: false,
-          },
-          // { name: '[composer.json] require getkirby/composer-installer', value: 'composerInstaller', checked: false},
-        ],
+        choices: defaultOptions,
       },
       {
         type: "checkbox",
         name: "extensions",
         message: "Extensions",
-        choices: [
-          choices.apidata(true),
-          choices.apiroute(true),
-          choices.blueprint(true),
-          choices.collection(true),
-          choices.collectionfilter(true),
-          choices.collectionmethod(true),
-          choices.controller(true),
-          choices.fieldmethod(true),
-          choices.filemethod(true),
-          choices.hook(true),
-          choices.kirbytag(true),
-          choices.option(true),
-          choices.pagemethod(true),
-          choices.pagemodel(true),
-          choices.pagesmethod(true),
-          choices.route(true),
-          choices.sitemethod(true),
-          choices.snippet(true),
-          choices.template(true),
-          choices.usermethod(true),
-          choices.usermodel(true),
-          choices.usersmethod(true),
-          choices.validator(true),
-        ],
+        choices: defaultExtensions,
       },
       // TODO: confirm prompt: parcel package.js https://github.com/getkirby/pluginkit/blob/4-panel/package.json
       // TODO: confirm prompt: .gitignore https://github.com/getkirby/pluginkit/blob/4-panel/.gitignore & https://getkirby.com/docs/guide/plugins/plugin-setup-composer#support-for-plugin-installation-without-composer
@@ -102,8 +112,11 @@ module.exports = function (plop) {
             "/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php",
           data
         );
-        data.options = A.flip(data.options);
-        data.extensions = A.flip(data.extensions);
+        data.options = choices.make(data.options, defaultOptions);
+        data.extensions = choices.make(data.extensions, defaultExtensions);
+        data.extensions.api =
+          data.extensions.apidata != undefined ||
+          data.extensions.apiroute != undefined;
       },
       {
         type: "add",

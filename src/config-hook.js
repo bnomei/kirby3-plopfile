@@ -4,14 +4,15 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("site");
+  const basepath = kirby.root("config");
 
   plop.setHelper("commaSpace", helper.commaSpace);
+  plop.setHelper("wrapValue", helper.wrapValue);
 
-  plop.setGenerator("ext-api-data", {
-    description: "append api-data code to a file",
+  plop.setGenerator("config-hook", {
+    description: "append hook code to a config file",
     prompts: [
-      prompts.folder(basepath),
+      prompts.file(basepath),
       prompts.key(),
       prompts.params(),
       prompts.todo(),
@@ -21,13 +22,13 @@ module.exports = function (plop) {
         data = kirby.resolvePluginInclude(data, basepath);
       },
       {
-        path: "{{ indexphp }}",
+        path: "{{ file }}",
         type: "modify",
-        pattern: /^( *)(\/\/ @PLOP_EXT_API_DATA)\r?\n/gim,
-        templateFile: "ext-api-data.php.hbs",
+        pattern: /^( *)(\/\/ @PLOP_EXT_HOOK)\r?\n/gim,
+        templateFile: "ext-hook.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.indexphp, "@PLOP_EXT_API_DATA");
+        return F.clipboard(plop, data.file, "@PLOP_EXT_HOOK");
       },
     ],
   });

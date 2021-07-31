@@ -12,22 +12,27 @@ module.exports = function (plop) {
   plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
   plop.setHelper("wrapValue", helpers.wrapValue);
 
+  let defaultChoices = [
+    choices.hook(true),
+    choices.option(true),
+    choices.route(true),
+    choices.none(),
+    choices.defaults(),
+    choices.all(),
+  ];
+
   plop.setGenerator("config", {
     description: "make a config file",
     prompts: [
       // prompts.folder(basepath),
       prompts.file("config"),
-      prompts.import(),
       {
         type: "checkbox",
         name: "extensions",
         message: "Extensions",
-        choices: [
-          choices.hook(true),
-          choices.option(true),
-          choices.route(true),
-        ],
+        choices: defaultChoices,
       },
+      prompts.import(),
     ],
     actions: [
       function (data) {
@@ -40,7 +45,7 @@ module.exports = function (plop) {
           basepath
         );
         data.data = F.load(data.import);
-        data.extensions = A.flip(data.extensions);
+        data.extensions = choices.make(data.extensions, defaultChoices);
         return data.data;
       },
       {

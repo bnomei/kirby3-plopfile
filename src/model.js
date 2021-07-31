@@ -13,6 +13,13 @@ module.exports = function (plop) {
   plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
   plop.setHelper("ucfirst", helpers.ucfirst);
 
+  let defaultChoices = [
+    choices.declareStrictTypes(false),
+    choices.none(),
+    choices.defaults(),
+    choices.all(),
+  ];
+
   plop.setGenerator("model", {
     description: "make a model file",
     prompts: [
@@ -22,11 +29,17 @@ module.exports = function (plop) {
         type: "checkbox",
         name: "options",
         message: "Options",
-        choices: [choices.declareStrictTypes(false)],
+        choices: defaultChoices,
       },
     ],
     actions: [
       function (data) {
+        data.folder = F.findFolder(kirby.autopath(data.folder, basepath));
+        // add root if adding to plugins
+        let root = "/" + (process.env["PLOP_ROOT_MODELS"] ?? "models");
+        if (!data.folder.endsWith(root)) {
+          data.folder = data.folder + root;
+        }
         data.path = kirby.autopath(
           plop.renderString(
             "{{trimTrailingSlash folder }}/{{filenameWithoutExtension template }}.php",
@@ -34,7 +47,7 @@ module.exports = function (plop) {
           ),
           basepath
         );
-        data.options = A.flip(data.options);
+        data.options = choices.make(data.options, defaultChoices);
       },
       {
         type: "add",

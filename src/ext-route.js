@@ -4,24 +4,18 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("index");
+  const basepath = kirby.root("plugins");
 
   plop.setHelper("commaSpace", helper.commaSpace);
   plop.setHelper("toLowerCase", helper.toLowerCase);
   plop.setHelper("wrapValue", helper.wrapValue);
 
   let route_prompts = [
-    prompts.file(basepath),
-    {
-      type: "input",
-      name: "pattern",
-      message: "Pattern",
-    },
-    {
-      type: "input",
-      name: "method",
-      message: "Method",
-    },
+    prompts.folder(basepath),
+    prompts.pattern(),
+    prompts.params(),
+    prompts.method(),
+    prompts.todo(),
   ];
 
   const existingLanguages = kirby.languages();
@@ -36,16 +30,16 @@ module.exports = function (plop) {
     prompts: route_prompts,
     actions: [
       function (data) {
-        data.file = F.findFile(data.file);
+        data = kirby.resolvePluginInclude(data, basepath);
       },
       {
-        path: "{{ file }}",
+        path: "{{ indexphp }}",
         type: "modify",
         pattern: /^( *)(\/\/ @PLOP_EXT_ROUTE)\r?\n/gim,
         templateFile: "ext-route.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.file, "@PLOP_EXT_ROUTE");
+        return F.clipboard(plop, data.indexphp, "@PLOP_EXT_ROUTE");
       },
     ],
   });

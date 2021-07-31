@@ -4,25 +4,25 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("plugins");
+  const basepath = kirby.root("config");
 
   plop.setHelper("wrapValue", helper.wrapValue);
 
-  plop.setGenerator("ext-collection", {
-    description: "append collection code to a file",
-    prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
+  plop.setGenerator("config-option", {
+    description: "append option code to a config file",
+    prompts: [prompts.file(basepath), prompts.key(), prompts.value()],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);
       },
       {
-        path: "{{ indexphp }}",
+        path: "{{ file }}",
         type: "modify",
-        pattern: /^( *)(\/\/ @PLOP_EXT_COLLECTION)\r?\n/gim,
-        templateFile: "ext-collection.php.hbs",
+        pattern: /^( *)(\/\/ @PLOP_EXT_OPTION)\r?\n/gim,
+        templateFile: "ext-option.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.indexphp, "@PLOP_EXT_COLLECTION");
+        return F.clipboard(plop, data.file, "@PLOP_EXT_OPTION");
       },
     ],
   });

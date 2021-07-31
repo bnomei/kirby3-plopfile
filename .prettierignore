@@ -4,3 +4,4 @@ vendor
 
 *.php
 *.hbs
+*.lock

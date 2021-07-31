@@ -13,6 +13,14 @@ module.exports = function (plop) {
   plop.setHelper("trimFirstDot", helpers.trimFirstDot);
   plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
 
+  let defaultChoices = [
+    choices.declareStrictTypes(false),
+    choices.typeHintCoreObjects(false),
+    choices.none(),
+    choices.defaults(),
+    choices.all(),
+  ];
+
   plop.setGenerator("controller", {
     description: "make a controller file",
     prompts: [
@@ -23,14 +31,18 @@ module.exports = function (plop) {
         type: "checkbox",
         name: "options",
         message: "Options",
-        choices: [
-          choices.declareStrictTypes(false),
-          choices.typeHintCoreObjects(false),
-        ],
+        choices: defaultChoices,
       },
     ],
     actions: [
       function (data) {
+        data.folder = F.findFolder(kirby.autopath(data.folder, basepath));
+        // add root if adding to plugins
+        let root =
+          "/" + (process.env["PLOP_ROOT_CONTROLLERS"] ?? "controllers");
+        if (!data.folder.endsWith(root)) {
+          data.folder = data.folder + root;
+        }
         data.path = kirby.autopath(
           plop.renderString(
             "{{trimTrailingSlash folder }}/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}",
@@ -38,7 +50,7 @@ module.exports = function (plop) {
           ),
           basepath
         );
-        data.options = A.flip(data.options);
+        data.options = choices.make(data.options, defaultChoices);
       },
       {
         type: "add",

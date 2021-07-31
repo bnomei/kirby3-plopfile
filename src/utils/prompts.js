@@ -59,6 +59,20 @@ module.exports.value = function () {
   };
 };
 
+module.exports.pattern = function () {
+  return {
+    type: "input",
+    name: "pattern",
+    message: "Pattern",
+  };
+};
+module.exports.method = function () {
+  return {
+    type: "input",
+    name: "method",
+    message: "Method",
+  };
+};
 module.exports.params = function () {
   return {
     type: "input",
