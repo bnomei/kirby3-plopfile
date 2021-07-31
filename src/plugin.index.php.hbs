@@ -33,5 +33,11 @@ Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
         // @PLOP_EXT_ROUTE
     ],
     {{/if}}
+    {{#if extensions.snippet}}
+
+    'snippets' => [
+        // @PLOP_EXT_SNIPPET
+    ],
+    {{/if}}
 ]);
 

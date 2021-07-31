@@ -30,6 +30,12 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
+        data.folder = F.findFolder(kirby.autopath(data.folder, basepath));
+        // add root if adding to plugins
+        let root = "/" + (process.env["PLOP_ROOT_SNIPPETS"] ?? "snippets");
+        if (!data.folder.endsWith(root)) {
+          data.folder = data.folder + root;
+        }
         data.data = F.load(data.import);
         data.path = kirby.autopath(
           plop.renderString(

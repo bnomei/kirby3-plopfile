@@ -96,6 +96,7 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
+        data.prefix = data.prefix.replace(/\s/g, ""); // remove all spaces
         data.path = plop.renderString(
           basepath +
             "/{{toLowerCase prefix }}{{toLowerCase repository }}/index.php",

@@ -32,7 +32,7 @@ module.exports.apiroute = function (checked = false) {
 
 module.exports.blueprint = function (checked = false) {
   return {
-    name: "Blueprint",
+    name: "Blueprints",
     value: "blueprint",
     checked: checked,
   };
@@ -40,7 +40,7 @@ module.exports.blueprint = function (checked = false) {
 
 module.exports.collection = function (checked = false) {
   return {
-    name: "Collection",
+    name: "Collections",
     value: "collection",
     checked: checked,
   };
@@ -153,7 +153,7 @@ module.exports.sitemethod = function (checked = false) {
 module.exports.snippet = function (checked = false) {
   return {
     name: "Snippets",
-    value: "snippets",
+    value: "snippet",
     checked: checked,
   };
 };

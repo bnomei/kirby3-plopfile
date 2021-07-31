@@ -216,7 +216,7 @@ PLOP_CLIPBOARD="subl {{filepath}}:{{line}}:{{char}}"
 If you renamed a root the plugin will not find it. But you can set them in your .env file.
 ```
 # PLOP_ROOT_[uppercase version of original root name]
-PLOP_ROOT_TEMPLATES="site/different" # instead of "site/templates"
+PLOP_ROOT_TEMPLATES="different" # instead of "templates"
 ```
 
 ## Major dependencies

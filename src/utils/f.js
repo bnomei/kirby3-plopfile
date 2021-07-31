@@ -37,9 +37,21 @@ module.exports.read = function (filepath) {
   return fs.readFileSync(filepath, { encoding: "utf-8" });
 };
 
-module.exports.findFile = function (filepath) {
+module.exports.findFile = function (filepath, base = "") {
   if (!fs.existsSync(filepath)) {
-    const files = fg.sync(["**/" + filepath], { onlyFiles: true });
+    const files = fg.sync([base + "**/" + filepath], { onlyFiles: true });
+    if (files.length) filepath = files[0];
+    else return undefined;
+  }
+  return filepath;
+};
+
+module.exports.findFolder = function (filepath, base = "") {
+  if (!fs.existsSync(filepath)) {
+    const files = fg.sync([base + "**/" + filepath], {
+      onlyFiles: false,
+      deep: 6,
+    });
     if (files.length) filepath = files[0];
     else return undefined;
   }
