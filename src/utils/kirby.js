@@ -1,7 +1,32 @@
+const bcrypt = require("bcrypt");
 const fg = require("fast-glob");
 const fs = require("fs");
 const path = require("path");
 const F = require("./f.js");
+
+module.exports.createUserId = function (length) {
+  return this.randomString(length);
+};
+
+module.exports.randomString = function (length) {
+  // https://attacomsian.com/blog/javascript-generate-random-string
+  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let str = "";
+  for (let i = 0; i < length; i++) {
+    str += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return str;
+};
+
+module.exports.encryptPassword = function (password) {
+  // https://attacomsian.com/blog/nodejs-password-hashing-with-bcrypt
+  // https://stackoverflow.com/a/27341808
+  // https://www.npmjs.com/package/bcrypt
+  return bcrypt
+    .hashSync(password, bcrypt.genSaltSync(10))
+    .replace(/^\$2a(.+)$/i, "$2y$1")
+    .replace(/^\$2b(.+)$/i, "$2y$1");
+};
 
 module.exports.autopath = function (path, basepath) {
   return path.replace("$", basepath).replace("//", "/");

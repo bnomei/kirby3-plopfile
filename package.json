@@ -7,6 +7,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "clipboardy": "^2.3.0",
     "dotenv": "^10.0.0",
     "fast-glob": "^3.2.7",

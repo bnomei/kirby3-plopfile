@@ -116,11 +116,9 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] setup (setup)
 -   [x] snippet (folder, filename, options, import)
 -   [x] template (folder, template, extension, options)
+-   [x] user (email, name, password, role, language)
 
 ## Roadmap
-
--   [ ] ext-[...] => maybe add some more
--   [ ] user (email, name, password, role, language) => needs uid and encrypt php to js port
 
 > Please [create a new issue](https://github.com/bnomei/kirby3-plopfile/issues/new) if you want to suggest an idea or discuss existing generators.
 
@@ -295,7 +293,7 @@ PLOP_ROOT_TEMPLATES="different"
 -   [js-yaml](https://github.com/nodeca/js-yaml)
 -   [clipboardy](https://github.com/sindresorhus/clipboardy)
 
-All node_module dependencies (~400 files with ~4MB in total) are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip and without requiring any further build step.
+All non-dev node_module dependencies are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip and without requiring any further build step.
 
 ## Disclaimer
 

@@ -1,12 +1,10 @@
 const kirby = require("./utils/kirby.js");
 const slugify = require("./utils/slugify.js");
+const F = require("./utils/f.js");
 
 module.exports = function (plop) {
-  plop.setHelper("userIdFrom", function (text) {
-    return slugify.parse(text); // TODO
-  });
   plop.setHelper("encryptPassword", function (text) {
-    return text; // TODO
+    return kirby.encryptPassword(text);
   });
 
   const basepath = kirby.root("users");
@@ -44,21 +42,19 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.folder = basepath + "/{{userIdFrom email }}";
-        data.path = kirby.autopath(
-          "?/{{userIdFrom email }}/index.php",
-          basepath
-        );
+        data.userid = kirby.createUserId(8);
+        data.folder = basepath + "/" + data.userid;
+        data.path = data.folder + "/index.php";
       },
       {
         type: "add",
-        path: "{{ folder }}/index.php",
+        path: "{{ path }}",
         templateFile: "user.index.php.hbs",
       },
       {
         type: "add",
-        path: basepath + "/{{ folder }}/.htaccess",
-        templateFile: "user.htaccess.hbs",
+        path: "{{ folder }}/.htpasswd",
+        templateFile: "user.htpasswd.hbs",
       },
       function (data) {
         return F.clipboard(plop, data.path, "@PLOP_CURSOR");

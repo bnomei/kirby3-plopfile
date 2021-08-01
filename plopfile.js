@@ -43,6 +43,6 @@ module.exports = function (plop) {
     './src/setup.js',
     "./src/snippet.js",
     "./src/template.js",
-    //'./src/user.js',
+    "./src/user.js",
   ]);
 };
