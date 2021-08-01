@@ -6,6 +6,20 @@
 
 Plopfile to generate various files for Kirby3 CMS using Plop.js
 
+## What others say
+
+> 🤩
+> - <K-nerd/>
+
+> Never have I created files for Kirby faster. They just plop into my project! Sweet.
+> - Lasi Toiper
+
+> Finally a Kirby CLI on **plop**eroids with a gazzilion of appending generators.
+> - p10pa
+
+> I don't care how it works but it does!
+> - NewToThis
+
 ## Commerical Usage
 
 This plugin is free but if you use it in a commercial project please consider to
@@ -99,15 +113,14 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] model (folder, template, options)
 -   [x] plugin (user, repository, prefix, options)
 -   [x] robotstxt (folder)
+-   [x] setup (setup)
 -   [x] snippet (folder, filename, options, import)
 -   [x] template (folder, template, extension, options)
 
 ## Roadmap
 
 -   [ ] ext-[...] => maybe add some more
--   [ ] setup (scaffolding) => creating default folders and index.html files
 -   [ ] user (email, name, password, role, language) => needs uid and encrypt php to js port
--   [ ] laravelmix (folder, options)
 
 > Please [create a new issue](https://github.com/bnomei/kirby3-plopfile/issues/new) if you want to suggest an idea or discuss existing generators.
 
@@ -119,6 +132,8 @@ plop content "Consistency made simple!" blog blogpost
 -   `none`/`defaults`/`all` can be used on `options` and `extensions` to select checkboxes when bypassing.
 -   `y`/`n` can be used on confirmation prompts.
 -   `file` and `folder` will be globbed and support wildcards. So you could write `*mydo*` instead of writing `config.www.mydomain.net.php`.
+
+> ⚠️ If you use plop to generate files but set generator `extensions` to `none` or cherry pick them manually you might be missing some markers. I'd recommend to stick to `default` or `all` as values for these when bypassing or just press `enter` when using the interactive dialog. You can add the markers manually later.
 
 ## Examples
 
@@ -202,6 +217,32 @@ plop ext-snippet projectxyz slideshow
 
 ```bash
 plop template $ booking .blade.php defaults
+```
+
+## Usage of `config-` and `ext-` with existing files or when missing markers
+
+When creating files with `plop config` or `plop plugin` the generator will add markers to identify the location to append extensions. To make `config-` and `ext-` generators work with files not created by plop you have to manually add these strings to the respective files. They adher to the following pattern:
+
+```
+[language specific comment] @PLOP_EXT_[extension name in uppercase and singular]
+```
+
+**example for PHP files**
+```php
+// @PLOP_EXT_HOOK
+```
+
+**example site/config/config.php**
+```php
+<?php
+
+return [
+    'hooks' => [
+        // Do not forget adding a `,` after existing array items
+        'page.update:after' => function () { },
+        // @PLOP_EXT_HOOK
+    ],
+];
 ```
 
 ## Extending the plopfile

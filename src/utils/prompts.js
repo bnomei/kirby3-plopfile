@@ -108,3 +108,12 @@ module.exports.hooks = function (choices) {
     choices: choices,
   };
 };
+
+module.exports.setups = function (choices) {
+  return {
+    type: "list",
+    name: "setup",
+    message: "Setup",
+    choices: choices,
+  };
+};

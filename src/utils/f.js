@@ -9,8 +9,13 @@ module.exports.clipboard = function (plop, filepath, query = undefined) {
   }
   const search = this.searchLineAndColumn(filepath, query);
   const clip = plop.renderString(
-    process.env.PLOP_CLIPBOARD ?? "{{ filepath }}",
-    { filepath: filepath, line: search.line, column: search.column }
+    process.env.PLOP_CLIPBOARD ?? "{{ filepath }}:{{ line }}:{{ char }}",
+    {
+      filepath: filepath,
+      line: search.line,
+      column: search.column,
+      char: search.char,
+    }
   );
   if (process.env.PLOP_CLIPBOARD !== "false") {
     clipboardy.writeSync(clip);

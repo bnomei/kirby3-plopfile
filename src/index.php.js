@@ -2,6 +2,7 @@ const F = require("./utils/f.js");
 const helpers = require("./utils/helpers.js");
 const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
+const setups = require("./utils/setups.js");
 
 module.exports = function (plop) {
   const basepath = kirby.root("index");
@@ -10,21 +11,7 @@ module.exports = function (plop) {
 
   plop.setGenerator("indexphp", {
     description: "make a index.php file",
-    prompts: [
-      prompts.folder(basepath),
-      {
-        type: "list",
-        name: "type",
-        message: "Type",
-        choices: [
-          { name: "default", value: "default" },
-          {
-            name: "public folder for index and storage for persistent files",
-            value: "public-storage",
-          },
-        ],
-      },
-    ],
+    prompts: [prompts.folder(basepath), prompts.setups(setups.all())],
     actions: [
       function (data) {
         data.path = kirby.autopath(
@@ -40,7 +27,7 @@ module.exports = function (plop) {
       {
         type: "add",
         path: "{{ path }}",
-        templateFile: "index.{{ type }}.php.hbs",
+        templateFile: "index.{{ setup }}.php.hbs",
       },
       function (data) {
         return F.clipboard(plop, data.path, "@PLOP_CURSOR");

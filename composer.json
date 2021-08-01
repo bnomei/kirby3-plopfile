@@ -37,14 +37,16 @@
     }
   ],
   "scripts": {
-    "clean": [
-      "find tests/ -name '*.yml' -type f -delete",
-      "find tests/ -name '*.php' -type f -delete",
-      "find tests/ -name '*.txt' -type f -delete",
-      "rm -rf tests/content; mkdir tests/content",
-      "rm -rf tests/site/accounts; mkdir tests/site/accounts",
-      "rm -rf tests/site/plugins; mkdir tests/site/plugins",
-      "rm -rf tests/site/templates; mkdir tests/site/templates",
+    "prettier": "yarn prettier --write src",
+    "reset": [
+      "rm -rf tests; mkdir tests;",
+      "mkdir tests/content",
+      "mkdir tests/site",
+      "mkdir tests/site/accounts",
+      "mkdir tests/site/blueprints",
+      "mkdir tests/site/snippets",
+      "mkdir tests/site/templates",
+      "touch tests/image.png",
       "tree tests"
     ],
     "dist": [
