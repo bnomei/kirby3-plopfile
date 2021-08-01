@@ -8,6 +8,7 @@
 /node_modules/*/*.md*
 /node_modules/*/*.yaml
 /node_modules/*/*.json
+/node_modules/*/*.js.map
 /node_modules/*/tests/*
 /node_modules/*/benchmarks/*
 
