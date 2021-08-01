@@ -51,6 +51,8 @@
     ],
     "dist": [
       "composer install --no-dev --optimize-autoloader",
+      "rm -rf node_modules",
+      "yarn install",
       "yarn upgrade",
       "yarn prettier --write src",
       "git rm -rf --cached .; git add .;"
