@@ -6,7 +6,7 @@
 /node_modules/*/.*
 !/node_modules/*/LICENSE
 /node_modules/*/*.md
-/node_modules/*/*.md~
+/node_modules/*/*.markdown
 /node_modules/*/*.yaml
 /node_modules/*/*.json
 /node_modules/*/*.js.map
