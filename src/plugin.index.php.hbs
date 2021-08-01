@@ -36,10 +36,106 @@ Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
         {{/if}}
     ],
     {{/if}}
+    {{#if extensions.blueprint}}
+
+    'blueprints' => [
+        // @PLOP_EXT_BLUEPRINT
+    ],
+    {{/if}}
+    {{#if extensions.cachetype}}
+
+    'cacheTypes' => [
+        // @PLOP_EXT_CACHE_TYPE
+    ],
+    {{/if}}
+    {{#if extensions.collection}}
+
+    'collections' => [
+        // @PLOP_EXT_COLLECTION
+    ],
+    {{/if}}
+    {{#if extensions.collectionfilter}}
+
+    'collectionFilters' => [
+        // @PLOP_EXT_COLLECTION_FILTER
+    ],
+    {{/if}}
+    {{#if extensions.collectionmethod}}
+
+    'collectionMethods' => [
+        // @PLOP_EXT_COLLECTION_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.controller}}
+
+    'controllers' => [
+        // @PLOP_EXT_CONTROLLER
+    ],
+    {{/if}}
+    {{#if extensions.field}}
+
+    'fields' => [
+        // @PLOP_EXT_FIELDS
+    ],
+    {{/if}}
+    {{#if extensions.fieldmethod}}
+
+    'fieldMethods' => [
+        // @PLOP_EXT_FIELD_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.filemethod}}
+
+    'fileMethods' => [
+        // @PLOP_EXT_FILE_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.filesmethod}}
+
+    'filesMethods' => [
+        // @PLOP_EXT_FILES_METHOD
+    ],
+    {{/if}}
     {{#if extensions.hook}}
 
     'hooks' => [
         // @PLOP_EXT_HOOK
+    ],
+    {{/if}}
+    {{#if extensions.kirbytag}}
+
+    'tags' => [
+        // @PLOP_EXT_KIRBYTAG
+    ],
+    {{/if}}
+    {{#if extensions.pagemethod}}
+
+    'pageMethods' => [
+        // @PLOP_EXT_PAGE_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.pagemodel}}
+
+    'pageModels' => [
+        // @PLOP_EXT_PAGE_MODEL
+    ],
+    {{/if}}
+    {{#if extensions.pages}}
+
+    'pages' => [
+        // @PLOP_EXT_PAGES
+    ],
+    {{/if}}
+    {{#if extensions.pagesmethods}}
+
+    'pagesMethods' => [
+        // @PLOP_EXT_PAGES_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.permission}}
+
+    'permissions' => [
+        // @PLOP_EXT_PERMISSION
     ],
     {{/if}}
     {{#if extensions.route}}
@@ -48,10 +144,58 @@ Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
         // @PLOP_EXT_ROUTE
     ],
     {{/if}}
+    {{#if extensions.section}}
+
+    'sections' => [
+        // @PLOP_EXT_SECTION
+    ],
+    {{/if}}
+    {{#if extensions.sitemethod}}
+
+    'siteMethods' => [
+        // @PLOP_EXT_SITE_METHOD
+    ],
+    {{/if}}
     {{#if extensions.snippet}}
 
     'snippets' => [
         // @PLOP_EXT_SNIPPET
+    ],
+    {{/if}}
+    {{#if extensions.template}}
+
+    'templates' => [
+        // @PLOP_EXT_TEMPLATE
+    ],
+    {{/if}}
+    {{#if extensions.translation}}
+
+    'translations' => [
+        // @PLOP_EXT_TRANSLATION
+    ],
+    {{/if}}
+    {{#if extensions.usermethod}}
+
+    'userMethods' => [
+        // @PLOP_EXT_USER_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.usermodel}}
+
+    'userModels' => [
+        // @PLOP_EXT_USER_MODEL
+    ],
+    {{/if}}
+    {{#if extensions.usersmethod}}
+
+    'usersMethods' => [
+        // @PLOP_EXT_USERS_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.validator}}
+
+    'validators' => [
+        // @PLOP_EXT_VALIDATOR
     ],
     {{/if}}
 ]);

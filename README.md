@@ -84,24 +84,33 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] content (title, parent, template, [language, slug,] import)
 -   [x] controller (folder, template, extension, options)
 -   [x] dockercompose (folder, type, [...])
+-   [ ] ext-auth-challenge
 -   [x] ext-api-data (folder, key, params, todo)
 -   [x] ext-api-route (folder, params, pattern, method, todo)
 -   [ ] ext-blueprint
+-   [ ] ext-cachedriver
 -   [ ] ext-collection
 -   [ ] ext-collection-filter
 -   [ ] ext-collection-method
 -   [ ] ext-controller
+-   [ ] ext-field
 -   [ ] ext-field-method
+-   [ ] ext-file-method
+-   [ ] ext-files-method
 -   [x] ext-hook (folder, key, todo)
 -   [ ] ext-kirbytag
 -   [x] ext-option (folder, key, value)
 -   [ ] ext-page-method
 -   [ ] ext-page-model
+-   [ ] ext-pages
 -   [ ] ext-pages-method
+-   [ ] ext-permission
 -   [x] ext-route (folder, pattern, method, params, [language, ] todo)
+-   [ ] ext-section
 -   [ ] ext-site-method
 -   [x] ext-snippet
 -   [ ] ext-template
+-   [ ] ext-translation
 -   [ ] ext-user-method
 -   [ ] ext-user-model
 -   [ ] ext-users-method
@@ -222,12 +231,13 @@ plop template $ booking .blade.php defaults
 When creating files with `plop config` or `plop plugin` the generator will add markers to identify the location to append extensions. To make `config-` and `ext-` generators work with files not created by plop you have to manually add these strings to the respective files. They adher to the following pattern:
 
 ```
-[language specific comment] @PLOP_EXT_[extension name in uppercase and singular]
+[language specific comment] @PLOP_EXT_[extension name in uppercase, singular and low-dashes]
 ```
 
 **example for PHP files**
 ```php
 // @PLOP_EXT_HOOK
+// @PLOP_EXT_FILES_METHOD
 ```
 
 **example site/config/config.php**

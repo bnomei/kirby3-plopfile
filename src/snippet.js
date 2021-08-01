@@ -41,6 +41,7 @@ module.exports = function (plop) {
         if (!data.folder.endsWith(root)) {
           data.folder = data.folder + root;
         }
+        F.makeDir(data.folder);
         data.data = F.load(data.import);
         data.path = kirby.autopath(
           plop.renderString(

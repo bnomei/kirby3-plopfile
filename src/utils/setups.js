@@ -16,6 +16,12 @@ module.exports.all = function () {
         "site/snippets/index.html",
         "site/templates/default.php",
         "site/logs/index.html",
+        // plop folders
+        "site/config/index.html",
+        "site/controllers/index.html",
+        "site/languages/index.html",
+        "site/models/index.html",
+        "site/plugins/index.html",
       ],
     },
     {
@@ -34,6 +40,12 @@ module.exports.all = function () {
         "site/snippets/index.html",
         "site/templates/default.php",
         "storage/logs/index.html",
+        // plop folders
+        "site/config/index.html",
+        "site/controllers/index.html",
+        "site/languages/index.html",
+        "site/models/index.html",
+        "site/plugins/index.html",
       ],
     },
   ];

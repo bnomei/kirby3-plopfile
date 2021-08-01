@@ -43,6 +43,7 @@ module.exports = function (plop) {
         if (!data.folder.endsWith(root)) {
           data.folder = data.folder + root;
         }
+        F.makeDir(data.folder);
         data.path = kirby.autopath(
           plop.renderString(
             "{{trimTrailingSlash folder }}/{{filenameWithoutExtension template }}.{{trimFirstDot extension }}",

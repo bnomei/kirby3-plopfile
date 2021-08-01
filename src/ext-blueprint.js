@@ -13,7 +13,7 @@ module.exports = function (plop) {
     prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
     actions: [
       function (data) {
-        data = kirby.resolvePluginInclude(data, basepath);
+        data = kirby.resolvePluginInclude(data, basepath, "blueprints");
       },
       {
         path: "{{ indexphp }}",

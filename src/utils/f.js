@@ -3,6 +3,10 @@ const fg = require("fast-glob");
 const yaml = require("js-yaml");
 const clipboardy = require("clipboardy");
 
+module.exports.makeDir = function (dir, recursive = true) {
+  fs.mkdirSync(dir, { recursive: recursive });
+};
+
 module.exports.clipboard = function (plop, filepath, query = undefined) {
   if (process.env.PLOP_DEBUG === "true") {
     console.log("\n" + this.read(filepath));

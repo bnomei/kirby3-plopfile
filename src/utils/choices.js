@@ -67,6 +67,14 @@ module.exports.typeHintCoreObjects = function (checked = false) {
   };
 };
 
+module.exports.authchallenge = function (checked = false) {
+  return {
+    name: "Api Data",
+    value: "apidata",
+    checked: checked,
+  };
+};
+
 module.exports.apidata = function (checked = false) {
   return {
     name: "Api Data",
@@ -87,6 +95,14 @@ module.exports.blueprint = function (checked = false) {
   return {
     name: "Blueprints",
     value: "blueprint",
+    checked: checked,
+  };
+};
+
+module.exports.cachedriver = function (checked = false) {
+  return {
+    name: "Cachedrivers",
+    value: "cachedriver",
     checked: checked,
   };
 };
@@ -123,6 +139,14 @@ module.exports.controller = function (checked = false) {
   };
 };
 
+module.exports.field = function (checked = false) {
+  return {
+    name: "Fielda",
+    value: "field",
+    checked: checked,
+  };
+};
+
 module.exports.fieldmethod = function (checked = false) {
   return {
     name: "Field Methods",
@@ -135,6 +159,14 @@ module.exports.filemethod = function (checked = false) {
   return {
     name: "File Methods",
     value: "filemethod",
+    checked: checked,
+  };
+};
+
+module.exports.filesmethod = function (checked = false) {
+  return {
+    name: "Files Methods",
+    value: "filesmethod",
     checked: checked,
   };
 };
@@ -179,6 +211,14 @@ module.exports.pagemodel = function (checked = false) {
   };
 };
 
+module.exports.pages = function (checked = false) {
+  return {
+    name: "Pages",
+    value: "pages",
+    checked: checked,
+  };
+};
+
 module.exports.pagesmethod = function (checked = false) {
   return {
     name: "Pages Methods",
@@ -187,10 +227,26 @@ module.exports.pagesmethod = function (checked = false) {
   };
 };
 
+module.exports.permission = function (checked = false) {
+  return {
+    name: "Permissions",
+    value: "permission",
+    checked: checked,
+  };
+};
+
 module.exports.route = function (checked = false) {
   return {
     name: "Routes",
     value: "route",
+    checked: checked,
+  };
+};
+
+module.exports.section = function (checked = false) {
+  return {
+    name: "Sections",
+    value: "section",
     checked: checked,
   };
 };
@@ -215,6 +271,14 @@ module.exports.template = function (checked = false) {
   return {
     name: "Templates",
     value: "template",
+    checked: checked,
+  };
+};
+
+module.exports.translation = function (checked = false) {
+  return {
+    name: "Translations",
+    value: "translation",
     checked: checked,
   };
 };

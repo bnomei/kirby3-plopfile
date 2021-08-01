@@ -32,6 +32,10 @@ module.exports.slugify = function (text) {
   return text ? slugify.parse(text) : "";
 };
 
+module.exports.trimLeadingSlash = function (text) {
+  return text ? text.replace(/^\//, "") : "";
+};
+
 module.exports.trimTrailingSlash = function (text) {
   return text ? text.replace(/\/$/, "") : "";
 };
@@ -56,4 +60,14 @@ module.exports.camelize = function (text) {
     return index === 0 ? match.toLowerCase() : match.toUpperCase();
   });
   return text.charAt(0).toUpperCase() + text.slice(1);
+};
+
+module.exports.randomString = function (length) {
+  // https://attacomsian.com/blog/javascript-generate-random-string
+  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let str = "";
+  for (let i = 0; i < length; i++) {
+    str += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return str;
 };

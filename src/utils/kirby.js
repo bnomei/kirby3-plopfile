@@ -3,19 +3,10 @@ const fg = require("fast-glob");
 const fs = require("fs");
 const path = require("path");
 const F = require("./f.js");
+const helper = require("./helpers.js");
 
 module.exports.createUserId = function (length) {
-  return this.randomString(length);
-};
-
-module.exports.randomString = function (length) {
-  // https://attacomsian.com/blog/javascript-generate-random-string
-  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let str = "";
-  for (let i = 0; i < length; i++) {
-    str += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return str;
+  return helper.randomString(length);
 };
 
 module.exports.encryptPassword = function (password) {
@@ -32,7 +23,11 @@ module.exports.autopath = function (path, basepath) {
   return path.replace("$", basepath).replace("//", "/");
 };
 
-module.exports.resolvePluginInclude = function (data, basepath) {
+module.exports.resolvePluginInclude = function (
+  data,
+  basepath,
+  root = undefined
+) {
   if (data.folder) {
     data.folder = F.findFolder(this.autopath(data.folder, basepath));
     data.indexphp = data.folder + "/index.php";
@@ -46,7 +41,21 @@ module.exports.resolvePluginInclude = function (data, basepath) {
     data.basenameWithoutExtension = path
       .basename(data.file, path.extname(data.file))
       .toLowerCase();
-    data.relativePath = data.file.replace(data.folder, "");
+    data.relativePath = helper.trimLeadingSlash(
+      data.file.replace(data.folder, "")
+    );
+    data.relativePathWithoutExtensionAndRoot = data.relativePath.replace(
+      path.extname(data.file),
+      ""
+    );
+    if (root) {
+      root = process.env["PLOP_ROOT_" + root.toUpperCase()] ?? root;
+      data.relativePathWithoutExtensionAndRoot =
+        data.relativePathWithoutExtensionAndRoot.replace(
+          root.toLowerCase() + "/",
+          ""
+        );
+    }
   }
   return data;
 };
@@ -68,6 +77,7 @@ module.exports.root = function (root) {
     });
     if (folder.length) return folder[0];
   }
+  throw new Error("Root '" + root + "' not found. Does the folder exist?");
   return "./";
 };
 
