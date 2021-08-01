@@ -9,16 +9,16 @@ Plopfile to generate various files for Kirby3 CMS using Plop.js
 ## What others say
 
 > 🤩
-> - <K-nerd/>
+> _- K-nerd_
 
 > Never have I created files for Kirby faster. They just plop into my project! Sweet.
-> - Lasi Toiper
+> _- Lasi Toiper
 
 > Finally a Kirby CLI on **plop**eroids with a gazzilion of appending generators.
-> - p10pa
+> _- p10pa_
 
 > I don't care how it works but it does!
-> - NewToThis
+> _- NewToThis_
 
 ## Commerical Usage
 
