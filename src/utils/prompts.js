@@ -66,6 +66,7 @@ module.exports.pattern = function () {
     message: "Pattern",
   };
 };
+
 module.exports.method = function () {
   return {
     type: "input",
@@ -73,6 +74,7 @@ module.exports.method = function () {
     message: "Method",
   };
 };
+
 module.exports.params = function () {
   return {
     type: "input",
@@ -94,6 +96,15 @@ module.exports.language = function (choices) {
     type: "list",
     name: "language",
     message: "Language",
+    choices: choices,
+  };
+};
+
+module.exports.hooks = function (choices) {
+  return {
+    type: "list",
+    name: "hook",
+    message: "Hook",
     choices: choices,
   };
 };

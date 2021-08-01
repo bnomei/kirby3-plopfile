@@ -65,7 +65,7 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] blueprint (folder, type, template, extension, import)
 -   [x] config (filename, extensions, import)
 -   [x] config-option (file, key, value)
--   [x] config-hook (file, key, params, todo)
+-   [x] config-hook (file, key, todo)
 -   [x] config-route (file, pattern, method, [language, ] todo)
 -   [x] content (title, parent, template, [language, slug,] import)
 -   [x] controller (folder, template, extension, options)
@@ -78,7 +78,7 @@ plop content "Consistency made simple!" blog blogpost
 -   [ ] ext-collection-method
 -   [ ] ext-controller
 -   [ ] ext-field-method
--   [x] ext-hook (folder, key, params, todo)
+-   [x] ext-hook (folder, key, todo)
 -   [ ] ext-kirbytag
 -   [x] ext-option (folder, key, value)
 -   [ ] ext-page-method

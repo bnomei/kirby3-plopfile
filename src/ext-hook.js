@@ -1,4 +1,5 @@
 const F = require("./utils/f.js");
+const hooks = require("./utils/hooks.js");
 const helper = require("./utils/helpers.js");
 const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
@@ -13,13 +14,13 @@ module.exports = function (plop) {
     description: "append hook code to a file",
     prompts: [
       prompts.folder(basepath),
-      prompts.key(),
-      prompts.params(),
+      prompts.hooks(hooks.all()),
       prompts.todo(),
     ],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);
+        data.params = hooks.params(data.hook);
       },
       {
         path: "{{ indexphp }}",
