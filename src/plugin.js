@@ -9,6 +9,7 @@ module.exports = function (plop) {
   const basepath = kirby.root("plugins");
 
   plop.setHelper("toLowerCase", helpers.toLowerCase);
+  plop.setHelper("toUpperCase", helpers.toUpperCase);
   plop.setHelper("ucfirst", helpers.ucfirst);
 
   let defaultOptions = [
@@ -43,7 +44,7 @@ module.exports = function (plop) {
     choices.apidata(false),
     choices.apiroute(false),
     choices.blueprint(true),
-    choices.cachedriver(false),
+    choices.cachetype(false),
     choices.collection(true),
     choices.collectionfilter(false),
     choices.collectionmethod(false),
@@ -139,7 +140,7 @@ module.exports = function (plop) {
         templateFile: "plugin.composer.json.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path);
       },
     ],
   });

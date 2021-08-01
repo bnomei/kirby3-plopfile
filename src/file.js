@@ -69,7 +69,7 @@ module.exports = function (plop) {
         return source + " -> " + target;
       },
       function (data) {
-        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path);
       },
     ],
   });

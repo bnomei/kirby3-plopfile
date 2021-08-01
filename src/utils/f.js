@@ -28,17 +28,20 @@ module.exports.clipboard = function (plop, filepath, query = undefined) {
   return filepath;
 };
 
-module.exports.searchLineAndColumn = function (filepath, query = undefined) {
+module.exports.searchLineAndColumn = function (filepath, regexp = undefined) {
   let result = { line: 1, column: 1, char: 1 };
+  if (!regexp) return result;
+
   filepath = this.findFile(filepath);
-  if (query && filepath) {
+  if (filepath) {
     const data = this.read(filepath);
     const lines = data.split(/\r?\n/);
     let lc = 0;
     lines.forEach((line) => {
       lc = lc + 1;
-      const idx = line.indexOf(query);
-      if (idx != -1) {
+      if (regexp.test(line + "\n")) { // fake a linebreak for better regex support
+        const idx = line.indexOf("@PLOP_"); // @PLOP_ hack
+        if (idx < 1) idx = 1;
         result = { line: lc, column: idx, char: idx };
         return;
       }

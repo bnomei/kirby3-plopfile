@@ -5,20 +5,13 @@ const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
   const basepath = kirby.root("plugins");
-  const pattern = /^( *)(\/\/ @PLOP_EXT_COLLECTION)\r?\n/gim;
+  const pattern = /^( *)(\/\/ @PLOP_EXT_CACHE_TYPE)\r?\n/gim;
 
-  plop.setHelper("commaSpace", helper.commaSpace);
+  plop.setHelper("camelize", helper.camelize);
 
-  let route_prompts = [
-    prompts.folder(basepath),
-    prompts.key(),
-    prompts.params(),
-    prompts.todo(),
-  ];
-
-  plop.setGenerator("ext-collection", {
-    description: "append collection code to a file",
-    prompts: route_prompts,
+  plop.setGenerator("ext-cache-type", {
+    description: "append cache driver/type code to a file",
+    prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);
@@ -27,7 +20,7 @@ module.exports = function (plop) {
         path: "{{ indexphp }}",
         type: "modify",
         pattern: pattern,
-        templateFile: "ext-collection.php.hbs",
+        templateFile: "ext-cache-type.php.hbs",
       },
       function (data) {
         return F.clipboard(plop, data.indexphp, pattern);

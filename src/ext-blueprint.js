@@ -5,24 +5,26 @@ const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
   const basepath = kirby.root("plugins");
+  const pattern = /^( *)(\/\/ @PLOP_EXT_BLUEPRINT)\r?\n/gim;
 
   plop.setHelper("wrapValue", helper.wrapValue);
 
   plop.setGenerator("ext-blueprint", {
     description: "append blueprint code to a file",
-    prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
+    prompts: [prompts.folder(basepath), prompts.file()],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath, "blueprints");
+        console.log(data);
       },
       {
         path: "{{ indexphp }}",
         type: "modify",
-        pattern: /^( *)(\/\/ @PLOP_EXT_BLUEPRINT)\r?\n/gim,
+        pattern: pattern,
         templateFile: "ext-blueprint.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.indexphp, "@PLOP_EXT_BLUEPRINT");
+        return F.clipboard(plop, data.indexphp, pattern);
       },
     ],
   });

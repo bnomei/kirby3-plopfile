@@ -6,6 +6,7 @@ const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
   const basepath = kirby.root("config");
+  const pattern = /^( *)(\/\/ @PLOP_EXT_HOOK)\r?\n/gim;
 
   plop.setHelper("commaSpace", helper.commaSpace);
   plop.setHelper("wrapValue", helper.wrapValue);
@@ -29,7 +30,7 @@ module.exports = function (plop) {
         templateFile: "ext-hook.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.file, "@PLOP_EXT_HOOK");
+        return F.clipboard(plop, data.file, pattern);
       },
     ],
   });

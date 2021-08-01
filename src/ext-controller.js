@@ -4,13 +4,12 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("plugins");
-
-  plop.setHelper("wrapValue", helper.wrapValue);
+  const basepath = kirby.root("site");
+  const pattern = /^( *)(\/\/ @PLOP_EXT_CONTROLLER)\r?\n/gim;
 
   plop.setGenerator("ext-controller", {
-    description: "append controller code to a file",
-    prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
+    description: "append controller require to an index.php",
+    prompts: [prompts.folder(basepath), prompts.file()],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);
@@ -18,11 +17,11 @@ module.exports = function (plop) {
       {
         path: "{{ indexphp }}",
         type: "modify",
-        pattern: /^( *)(\/\/ @PLOP_EXT_CONTROLLER)\r?\n/gim,
+        pattern: pattern,
         templateFile: "ext-controller.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.indexphp, "@PLOP_EXT_CONTROLLER");
+        return F.clipboard(plop, data.indexphp, pattern);
       },
     ],
   });

@@ -5,6 +5,7 @@ const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
   const basepath = kirby.root("plugins");
+  const pattern = /^( *)(\/\/ @PLOP_EXT_API_ROUTE)\r?\n/gim;
 
   plop.setHelper("commaSpace", helper.commaSpace);
   plop.setHelper("toLowerCase", helper.toLowerCase);
@@ -28,11 +29,11 @@ module.exports = function (plop) {
       {
         path: "{{ indexphp }}",
         type: "modify",
-        pattern: /^( *)(\/\/ @PLOP_EXT_API_ROUTE)\r?\n/gim,
+        pattern: pattern,
         templateFile: "ext-api-route.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.indexphp, "@PLOP_EXT_API_ROUTE");
+        return F.clipboard(plop, data.indexphp, pattern);
       },
     ],
   });

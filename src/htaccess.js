@@ -40,7 +40,7 @@ module.exports = function (plop) {
         templateFile: "htaccess.{{ type }}.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path);
       },
     ],
   });

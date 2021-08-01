@@ -44,6 +44,10 @@ module.exports.toLowerCase = function (text) {
   return text ? text.toLowerCase() : "";
 };
 
+module.exports.toUpperCase = function (text) {
+  return text ? text.toLowerCase() : "";
+};
+
 module.exports.ucfirst = function (text) {
   return text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
 };

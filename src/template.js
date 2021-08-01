@@ -57,7 +57,7 @@ module.exports = function (plop) {
         templateFile: "template{{removeExtensionUnlessPHP extension}}.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path);
       },
     ],
   });

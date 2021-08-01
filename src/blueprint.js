@@ -53,7 +53,7 @@ module.exports = function (plop) {
         templateFile: "blueprint.{{trimFirstDot extension }}.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path);
       },
     ],
   });

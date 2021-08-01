@@ -5,6 +5,7 @@ const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
   const basepath = kirby.root("plugins");
+  const pattern = /^( *)(\/\/ @PLOP_EXT_TEMPLATE)\r?\n/gim;
 
   plop.setHelper("wrapValue", helper.wrapValue);
 
@@ -18,11 +19,11 @@ module.exports = function (plop) {
       {
         path: "{{ indexphp }}",
         type: "modify",
-        pattern: /^( *)(\/\/ @PLOP_EXT_TEMPLATE)\r?\n/gim,
+        pattern: pattern,
         templateFile: "ext-template.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.indexphp, "@PLOP_EXT_TEMPLATE");
+        return F.clipboard(plop, data.indexphp, pattern);
       },
     ],
   });

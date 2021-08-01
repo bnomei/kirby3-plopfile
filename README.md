@@ -84,16 +84,16 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] content (title, parent, template, [language, slug,] import)
 -   [x] controller (folder, template, extension, options)
 -   [x] dockercompose (folder, type, [...])
--   [ ] ext-auth-challenge
+-   [x] ext-auth-challenge (folder, key, value)
 -   [x] ext-api-data (folder, key, params, todo)
 -   [x] ext-api-route (folder, params, pattern, method, todo)
--   [ ] ext-blueprint
--   [ ] ext-cachedriver
--   [ ] ext-collection
--   [ ] ext-collection-filter
--   [ ] ext-collection-method
--   [ ] ext-controller
--   [ ] ext-field
+-   [x] ext-blueprint (folder, file)
+-   [x] ext-cache-type (folder, key, value)
+-   [x] ext-collection (folder, key, params, value, todo)
+-   [x] ext-collection-filter (folder, key, params, todo)
+-   [x] ext-collection-method (folder, key, params, todo)
+-   [x] ext-controller (folder, file)
+-   [x] ext-field (folder, key, todo)
 -   [ ] ext-field-method
 -   [ ] ext-file-method
 -   [ ] ext-files-method
@@ -140,7 +140,7 @@ plop content "Consistency made simple!" blog blogpost
 -   `y`/`n` can be used on confirmation prompts.
 -   `file` and `folder` will be globbed and support wildcards. So you could write `*mydo*` instead of writing `config.www.mydomain.net.php`.
 
-> ⚠️ If you use plop to generate files but set generator `extensions` to `none` or cherry pick them manually you might be missing some markers. I'd recommend to stick to `default` or `all` as values for these when bypassing or just press `enter` when using the interactive dialog. You can add the markers manually later.
+> ⚠️ If you use plop to generate files but set generator `extensions` to `none` or cherry pick them manually you might be missing some markers. I'd recommend to stick to `default` or `all` as values for these when bypassing or just press `enter` (aka default) when using the interactive dialog. You can always add the markers manually later.
 
 ## Examples
 
@@ -150,7 +150,7 @@ plop content "Consistency made simple!" blog blogpost
 plop
 ```
 
-**start blueprint genertor directly**
+**start blueprint generator directly**
 
 ```bash
 plop blueprint
@@ -206,6 +206,14 @@ plop language de n ltr de_DE Deutsch de trans_de.yml
 ```bash
 plop plugin myname projectxyz '' defaults
 ```
+
+**create blueprint in plugin and "extend" the plugin index.php**
+
+```bash
+plop blueprint projectxyz pages merch
+plop ext-blueprint projectxyz pages/merch
+```
+
 
 **snippet at /site/snippets with isset check for each key with fallback**
 

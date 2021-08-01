@@ -21,6 +21,12 @@ Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
         // @PLOP_EXT_OPTION
     ],
     {{/if}}
+    {{#if extensions.authchallenge}}
+
+    'authChallenges' => [
+        // @PLOP_EXT_AUTH_CHALLENGE
+    ],
+    {{/if}}
     {{#if extensions.api}}
 
     'api' => [
@@ -171,7 +177,11 @@ Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
     {{#if extensions.translation}}
 
     'translations' => [
-        // @PLOP_EXT_TRANSLATION
+        {{#each extensions.translation.languages }}
+        '{{ code }}' => [
+            // @PLOP_EXT_TRANSLATION_{{toUpperCase code }}
+        ],
+        {{/each}}
     ],
     {{/if}}
     {{#if extensions.usermethod}}

@@ -99,10 +99,10 @@ module.exports.blueprint = function (checked = false) {
   };
 };
 
-module.exports.cachedriver = function (checked = false) {
+module.exports.cachetype = function (checked = false) {
   return {
-    name: "Cachedrivers",
-    value: "cachedriver",
+    name: "Cache Types (aka Drivers)",
+    value: "cachetype", // yes. type not driver.
     checked: checked,
   };
 };

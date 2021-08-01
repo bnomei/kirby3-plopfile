@@ -58,7 +58,7 @@ module.exports = function (plop) {
         templateFile: "snippet.php.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path);
       },
     ],
   });
