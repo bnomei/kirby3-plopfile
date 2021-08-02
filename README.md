@@ -89,7 +89,7 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] ext-api-route (folder, params, pattern, method, todo)
 -   [x] ext-blueprint (folder, file)
 -   [x] ext-cache-type (folder, key, value)
--   [x] ext-collection-filter (folder, key, params, todo)
+-   [x] ext-collection-filter (folder, key, todo)
 -   [x] ext-collection-method (folder, key, params, todo)
 -   [x] ext-collection (folder, key, params, value, todo)
 -   [x] ext-controller (folder, file)
@@ -107,7 +107,7 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] ext-permission (folder, key, value)
 -   [x] ext-route (folder, pattern, method, params, [language, ] todo)
 -   [x] ext-section (folder, key, todo)
--   [ ] ext-site-method
+-   [x] ext-site-method
 -   [x] ext-snippet
 -   [ ] ext-template
 -   [ ] ext-translation

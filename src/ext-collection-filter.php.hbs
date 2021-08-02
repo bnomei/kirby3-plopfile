@@ -1,4 +1,5 @@
-$1'{{ key }}' => function ({{{commaSpace params }}}) { {{#if todo }}
+$1'{{ key }}' => function ($collection, $field, $test, $split = false) { {{#if todo }}
 $1    // TODO: {{{ todo }}}{{/if}}
+$1    return $collection;
 $1},
 $1$2

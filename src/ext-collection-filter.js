@@ -14,7 +14,6 @@ module.exports = function (plop) {
     prompts: [
       prompts.folder(basepath),
       prompts.key(),
-      prompts.params(),
       prompts.todo(),
     ],
     actions: [
