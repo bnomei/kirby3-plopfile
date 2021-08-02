@@ -254,7 +254,54 @@ plop template $ booking .blade.php defaults
 plop ext-hook myplugin page.changeStatus:after "if a blogpost is published make kirby send an email to client"
 ```
 
-## Usage of `config-` and `ext-` with existing files or when missing markers
+## .env File
+
+### clipboard
+
+```
+# Code.exe' on Windows, 'code' on OSX
+PLOP_CLIPBOARD="Code.exe {{filepath}}:{{line}}:{{char}}"
+
+# Sublime Text on OSX
+PLOP_CLIPBOARD="subl {{filepath}}:{{line}}:{{char}}"
+
+# disable copying to clipboard at end of generator
+PLOP_CLIPBOARD=false
+```
+
+### kirby roots
+
+If you renamed a root the generator will not find it unless you set it in your .env file.
+
+```
+# PLOP_ROOT_[uppercase version of original root name]
+PLOP_ROOT_TEMPLATES="different"
+# instead of "templates"
+```
+
+## New Projects
+
+Kirby offers various installation methods (zip, coomposer, composer project). Here is a new one.
+
+### generator-based composer project for public-storage setup
+
+**in your project root**
+```bash
+composer init
+jq -r '. + { config: { "optimize-autoloader": true } }' composer.json
+composer require php:">=7.3.0 <8.1.0" getkirby/cms:^3.5 bnomei/kirby3-plopfile:^1.0
+cp site/plugins/kirby3-plopfile/example.plopfile.js plopfile.js
+
+plop setup public-storage
+plop indexphp public public-storage
+plop htaccess
+plop robotstxt
+plop tdd
+```
+
+## Existing Projects
+
+### Usage of `config-` and `ext-` with existing files or when missing markers
 
 When creating files with `plop config` or `plop plugin` the generator will add markers to identify the location to append extensions. To make `config-` and `ext-` generators work with files not created by plop you have to manually add these strings to the respective files. They adher to the following pattern:
 
@@ -295,31 +342,6 @@ module.exports = function (plop) {
     ]);
     // or any plop code here
 };
-```
-
-## .env File
-
-### clipboard
-
-```
-# Code.exe' on Windows, 'code' on OSX
-PLOP_CLIPBOARD="Code.exe {{filepath}}:{{line}}:{{char}}"
-
-# Sublime Text on OSX
-PLOP_CLIPBOARD="subl {{filepath}}:{{line}}:{{char}}"
-
-# disable copying to clipboard at end of generator
-PLOP_CLIPBOARD=false
-```
-
-### kirby roots
-
-If you renamed a root the generator will not find it unless you set it in your .env file.
-
-```
-# PLOP_ROOT_[uppercase version of original root name]
-PLOP_ROOT_TEMPLATES="different"
-# instead of "templates"
 ```
 
 ## Major dependencies

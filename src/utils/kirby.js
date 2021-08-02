@@ -78,7 +78,9 @@ module.exports.root = function (root) {
     });
     if (folder.length) return folder[0];
   }
-  throw new Error("Root '" + root + "' not found. Does the folder exist?");
+  if (root != "index" && root != "base") {
+    throw new Error("Root '" + root + "' not found. Does the folder exist?");
+  }
   return "./";
 };
 

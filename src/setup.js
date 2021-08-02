@@ -6,7 +6,7 @@ const prompts = require("./utils/prompts.js");
 const setups = require("./utils/setups.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("index");
+  const basepath = kirby.root("base");
 
   plop.setGenerator("setup", {
     description: "create default files and folders (plainkit)",
