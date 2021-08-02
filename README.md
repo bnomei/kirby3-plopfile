@@ -78,11 +78,11 @@ plop plugin myname myplugin
 plop ext-collection myplugin allBlogpages
 
 # some files need to be referenced in the plugin index.php to work
-plop blueprint myplugin contactform
+plop blueprint myplugin pages contactform
 plop ext-blueprint myplugin contactform
 plop template myplugin contactform
 plop ext-template myplugin contactform
-plop ext-route myplugin form/submit POST
+plop ext-route myplugin form/submit '' POST
 ```
 
 ## Generators (52)
@@ -104,7 +104,7 @@ plop ext-route myplugin form/submit POST
 -   [x] ext-class-loader (folder, key, value)
 -   [x] ext-collection-filter (folder, key, todo)
 -   [x] ext-collection-method (folder, key, params, todo)
--   [x] ext-collection (folder, key, params, value, todo)
+-   [x] ext-collection (folder, key, params, todo)
 -   [x] ext-controller (folder, file)
 -   [x] ext-field-method (folder, key, params, todo)
 -   [x] ext-field (folder, key, todo)
@@ -150,6 +150,7 @@ plop ext-route myplugin form/submit POST
 
 -   Strings with whitespace need to wrapped in single quotes or double quotes.
 -   `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be wrapped in single quotes.
+-   `_` let you skip bypassing a prompt.
 -   `$` can be used on `folder` prompts to default to kirbys root. The plugin will `glob` to find the locations of your [Kirby roots](https://getkirby.com/docs/guide/configuration#custom-folder-setup) automatically, but the folders must exist.
 -   `none`/`defaults`/`all` can be used on `options` and `extensions` to select checkboxes when bypassing.
 -   `y`/`n` can be used on confirmation prompts.
@@ -175,10 +176,7 @@ plop blueprint
 
 ```bash
 plop blueprint $ pages article .yml {}
-plop blueprint --folder $ --type pages --template article --extension .yml --import {}
 ```
-
-> `_`/`--` let you skip bypassing a prompt.
 
 **content with known parent and template but prompt for title**
 
@@ -189,13 +187,14 @@ plop content _ blog default {}
 **blueprint cloning**
 
 ```bash
+plop blueprint $ fields cd .yml
 plop blueprint $ fields dvd .yml cd.yml
 ```
 
 **config with options from escaped json string**
 
 ```bash
-plop config config.staging '{"debug": true, "home": "staging", "ready": "function() { return ["my.option" => kirby()->root("index") . "/resources"]; }"}'
+plop config config.staging defaults '{"debug": true, "home": "staging" }'
 ```
 
 **content with fields from json/yml file**
@@ -219,14 +218,14 @@ plop language de n ltr de_DE Deutsch de trans_de.yml
 **plugin to add project specific extensions**
 
 ```bash
-plop plugin myname projectxyz '' defaults
+plop plugin myname myplugin '' defaults defaults
 ```
 
 **create blueprint in plugin and "extend" the plugin index.php**
 
 ```bash
-plop blueprint projectxyz pages merch
-plop ext-blueprint projectxyz pages/merch
+plop blueprint myplugin pages merch .yml {}
+plop ext-blueprint myplugin pages/merch
 ```
 
 
@@ -239,8 +238,8 @@ plop snippet $ topnav defaults '{ "title": "title fallback", "isOpen": null }'
 **create snippet in plugin folder and then register it as an extension to that plugin**
 
 ```bash
-plop snippet projectxyz slideshow
-plop ext-snippet projectxyz slideshow
+plop snippet myplugin slideshow defaults {}
+plop ext-snippet myplugin slideshow
 ```
 
 **template for laravel blade rendering**

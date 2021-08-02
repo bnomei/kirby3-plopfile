@@ -84,7 +84,7 @@ module.exports = function (plop) {
           });
         }
       });
-      console.log(data.files);
+
       let actions = [];
       data.files.forEach(function (value, index, arr) {
         actions.push({

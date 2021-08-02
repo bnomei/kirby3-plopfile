@@ -15,7 +15,6 @@ module.exports = function (plop) {
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath, "blueprints");
-        console.log(data);
       },
       {
         path: "{{ indexphp }}",

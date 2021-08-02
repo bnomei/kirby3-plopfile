@@ -22,6 +22,12 @@
     "consistency",
     "workflow"
   ],
+  "authors": [
+    {
+      "name": "Bruno Meilick",
+      "email": "b@bnomei.com"
+    }
+  ],
   "config": {
     "optimize-autoloader": true,
     "sort-packages": true
@@ -30,16 +36,23 @@
     "php": ">=7.3.0",
     "getkirby/composer-installer": "^1.2"
   },
-  "authors": [
-    {
-      "name": "Bruno Meilick",
-      "email": "b@bnomei.com"
-    }
-  ],
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
   "scripts": {
-    "prettier": [
+    "dev": [
+      "composer install",
+      "yarn upgrade",
       "yarn add prettier --dev",
       "yarn prettier --write src"
+    ],
+    "dist": [
+      "composer install --no-dev --optimize-autoloader",
+      "yarn prettier --write src",
+      "yarn remove prettier",
+      "rm -rf node_modules",
+      "yarn install",
+      "git rm -rf --cached .; git add .;"
     ],
     "reset": [
       "rm -rf tests; mkdir tests;",
@@ -57,14 +70,9 @@
       "touch tests/image.png",
       "tree tests"
     ],
-    "dist": [
-      "composer install --no-dev --optimize-autoloader",
-      "yarn prettier --write src",
-      "yarn remove prettier",
-      "rm -rf node_modules",
-      "yarn install",
-      "yarn upgrade",
-      "git rm -rf --cached .; git add .;"
+    "test": [
+      "composer reset",
+      "phpunit --configuration ./phpunit.xml"
     ]
   }
 }

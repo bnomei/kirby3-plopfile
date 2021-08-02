@@ -26,8 +26,11 @@ module.exports = function (plop) {
     ],
     actions: [
       function (data) {
-        data.folder = F.findFolder(kirby.autopath(data.folder, basepath));
-        console.log(data.folder);
+        const fo = kirby.autopath(data.folder, basepath);
+        data.folder = F.findFolder(fo);
+        if (data.folder == undefined) {
+          throw new Error("Folder '" + fo + "' was not found");
+        }
         // add root if adding to plugins
         let root = "/" + (process.env["PLOP_ROOT_BLUEPRINTS"] ?? "blueprints");
         if (!data.folder.endsWith(root)) {
@@ -42,9 +45,10 @@ module.exports = function (plop) {
           basepath
         );
         data.data = F.load(data.import);
-        data.yaml = Object.keys(data.data).length
-          ? yaml.dump(data.data)
-          : undefined;
+        data.yaml =
+          data.data && Object.keys(data.data).length
+            ? yaml.dump(data.data)
+            : undefined;
         return data.data;
       },
       {
