@@ -42,6 +42,7 @@ module.exports.all = function () {
         "site/templates/default.php",
         "storage/logs/index.html",
         // plop folders
+        "public/.gitkeep",
         "site/config/index.html",
         "site/controllers/index.html",
         "site/languages/index.html",
