@@ -63,13 +63,14 @@ module.exports.resolvePluginInclude = function (
 module.exports.root = function (root) {
   if (root == "user" || root == "users") root = "accounts";
   root = process.env["PLOP_ROOT_" + root.toUpperCase()] ?? root;
-  if (root == "index") {
+  if (root == "index" || root == "base") {
     const indexphp = fg.sync(["**/index.php"], {
       onlyFiles: true,
       absolute: true,
       deep: 2,
     });
-    if (indexphp.length) return indexphp[0].replace("/index.php", "");
+    if (indexphp.length && root == "index") return indexphp[0].replace("/index.php", "");
+    if (indexphp.length && root == "base") return indexphp[0].replace("/index.php", "").replace("/public","");
   } else {
     const folder = fg.sync(["**/" + root], {
       onlyDirectories: true,

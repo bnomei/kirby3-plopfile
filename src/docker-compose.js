@@ -4,7 +4,7 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("index");
+  const basepath = kirby.root("base");
 
   plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
 
