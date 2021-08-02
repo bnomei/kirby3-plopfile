@@ -6,10 +6,10 @@ declare(strict_types=1);
 {{#if options.includeComposerAutoloader }}
 @include_once __DIR__ . '/vendor/autoload.php';
 {{/if}}
-{{#if options.addKirbyAutoloader }}
+{{#if options.addClassLoader }}
 load([
     // '{{{ucfirst user }}}\\{{{ucfirst repository }}}\\FooBar' => 'src/FooBar.php',
-    // @PLOP_EXT_KIRBY_AUTOLOADER
+    // @PLOP_EXT_CLASS_LOADER
 ], __DIR__);
 {{/if}}
 {{#if options.addClassAlias }}

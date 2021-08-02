@@ -14,10 +14,11 @@ module.exports = function (plop) {
 
   plop.setGenerator("ext-pages", {
     description: "append pages code to a file",
-    prompts: [prompts.folder(basepath),
-    { type: 'input', name: 'title', message: 'Title' },
-    prompts.template(),
-    prompts.import(),
+    prompts: [
+      prompts.folder(basepath),
+      { type: "input", name: "title", message: "Title" },
+      prompts.template(),
+      prompts.import(),
     ],
     actions: [
       function (data) {

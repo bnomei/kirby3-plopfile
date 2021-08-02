@@ -25,7 +25,7 @@ module.exports = function (plop) {
     },
     {
       name: "[index.php] add kirby autoloader example",
-      value: "addKirbyAutoloader",
+      value: "addClassLoader",
       checked: false,
     },
     {

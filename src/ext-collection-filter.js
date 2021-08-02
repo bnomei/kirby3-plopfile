@@ -11,11 +11,7 @@ module.exports = function (plop) {
 
   plop.setGenerator("ext-collection-filter", {
     description: "append collection filter code to a file",
-    prompts: [
-      prompts.folder(basepath),
-      prompts.key(),
-      prompts.todo(),
-    ],
+    prompts: [prompts.folder(basepath), prompts.key(), prompts.todo()],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);
