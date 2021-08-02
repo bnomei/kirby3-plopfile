@@ -104,9 +104,9 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] ext-page-model (folder, key, value)
 -   [x] ext-pages-method (folder, key, params, todo)
 -   [x] ext-pages (folder, title, template, import)
--   [ ] ext-permission
+-   [x] ext-permission (folder, key, value)
 -   [x] ext-route (folder, pattern, method, params, [language, ] todo)
--   [ ] ext-section
+-   [x] ext-section (folder, key, todo)
 -   [ ] ext-site-method
 -   [x] ext-snippet
 -   [ ] ext-template
