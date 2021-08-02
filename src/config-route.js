@@ -16,7 +16,6 @@ module.exports = function (plop) {
     prompts.pattern(),
     prompts.params(),
     prompts.method(),
-    prompts.todo(),
   ];
 
   const existingLanguages = kirby.languages();
