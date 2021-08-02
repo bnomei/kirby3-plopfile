@@ -52,6 +52,7 @@ module.exports = function (plop) {
     "./src/robots.txt.js",
     './src/setup.js',
     "./src/snippet.js",
+    "./src/tdd.js",
     "./src/template.js",
     "./src/user.js",
   ]);

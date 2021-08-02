@@ -28,6 +28,7 @@ module.exports.all = function () {
       name: "public folder for index and storage for persistent files",
       value: "public-storage",
       files: [
+        "storage/index.html",
         "storage/content/site.txt",
         "storage/content/home/home.txt",
         "storage/content/error/error.txt",

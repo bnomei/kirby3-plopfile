@@ -64,7 +64,7 @@ module.exports = function (plop) {
         templateFile: "docker-compose.{{ type }}.yml.hbs",
       },
       function (data) {
-        return F.clipboard(plop, data.path, "@PLOP_CURSOR");
+        return F.clipboard(plop, data.path);
       },
     ],
   });

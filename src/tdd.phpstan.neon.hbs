@@ -1,0 +1,20 @@
+parameters:
+  level: max
+  fileExtensions:
+    - php
+  autoload_directories:
+    - tests
+    - site/models
+    - site/plugins
+  paths:
+    - tests
+    - site/controllers
+    - site/models
+    - site/plugins
+  checkMissingIterableValueType: false
+  inferPrivatePropertyTypeFromConstructor: true
+  checkGenericClassInNonGenericObjectType: false
+  ignoreErrors:
+    - '#Undefined variable: \$page#'
+    - '#Undefined variable: \$site#'
+    - '#Undefined variable: \$kirby#'

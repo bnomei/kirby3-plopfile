@@ -1,0 +1,88 @@
+# System files
+# ------------
+
+Icon
+.DS_Store
+
+# Temporary files
+# ------------
+
+/media/*
+!/media/index.html
+
+# Lock files
+# ---------------
+
+.lock
+
+# Editors
+# (sensitive workspace files)
+# ---------------------------
+*.sublime-workspace
+/.vscode
+/.idea
+
+# -------------SECURITY-------------
+# NEVER publish these files via Git!
+# -------------SECURITY-------------
+
+# Cache Files
+# ---------------
+
+/site/cache/*
+!/site/cache/index.html
+
+# Accounts
+# ---------------
+
+/site/accounts/*
+!/site/accounts/index.html
+
+# Sessions
+# ---------------
+
+/site/sessions/*
+!/site/sessions/index.html
+
+# License
+# ---------------
+
+/site/config/.license
+
+{{#if useNodeJS}}
+# NodeJS
+# ---------------
+/node_modules/*
+node_modules
+
+{{/if}}
+{{#if useComposer}}
+# Composer
+# ---------------
+# https://getkirby.com/docs/cookbook/setup/composer#starting-a-new-project
+/kirby
+/vendor
+.idea
+*.cache
+/site/plugins/kirby3-
+/site/plugins/kirby-
+/site/plugins/k3-
+
+{{/if}}
+# Public-Storage Folder Setup
+# ---------------
+/public/media/*
+/storage/*
+#!/storage/index.html
+#!/storage/accounts/index.html
+#!/storage/media/index.html
+
+# Enviroment
+# ---------------
+.env
+.env.*
+
+# Misc Apps
+# ---------------
+.vagrant
+*.parcel-cache

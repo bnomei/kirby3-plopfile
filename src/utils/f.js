@@ -7,20 +7,27 @@ module.exports.makeDir = function (dir, recursive = true) {
   fs.mkdirSync(dir, { recursive: recursive });
 };
 
-module.exports.clipboard = function (plop, filepath, query = undefined) {
+module.exports.clipboard = function (
+  plop,
+  filepath,
+  query = undefined,
+  render = true
+) {
   if (process.env.PLOP_DEBUG === "true") {
     console.log("\n" + this.read(filepath));
   }
   const search = this.searchLineAndColumn(filepath, query);
-  const clip = plop.renderString(
-    process.env.PLOP_CLIPBOARD ?? "{{ filepath }}:{{ line }}:{{ char }}",
-    {
-      filepath: filepath,
-      line: search.line,
-      column: search.column,
-      char: search.char,
-    }
-  );
+  const clip = render
+    ? plop.renderString(
+        process.env.PLOP_CLIPBOARD ?? "{{ filepath }}:{{ line }}:{{ char }}",
+        {
+          filepath: filepath,
+          line: search.line,
+          column: search.column,
+          char: search.char,
+        }
+      )
+    : filepath;
   if (process.env.PLOP_CLIPBOARD !== "false") {
     clipboardy.writeSync(clip);
     return "\n" + clip + "\n... has been copied to clipboard.";
@@ -52,7 +59,9 @@ module.exports.searchLineAndColumn = function (filepath, regexp = undefined) {
 };
 
 module.exports.read = function (filepath) {
-  return fs.readFileSync(filepath, { encoding: "utf-8" });
+  return fs.existsSync(filepath)
+    ? fs.readFileSync(filepath, { encoding: "utf-8" })
+    : filepath;
 };
 
 module.exports.findFile = function (filepath, base = "") {

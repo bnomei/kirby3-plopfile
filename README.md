@@ -133,10 +133,10 @@ plop ext-route myplugin form/submit POST
 -   [x] language (code, default, direction, locale, name, url, import)
 -   [x] model (folder, template, options)
 -   [x] plugin (user, repository, prefix, options)
--   [x] phpunit (folder, folder)
 -   [x] robotstxt (folder)
 -   [x] setup (setup)
 -   [x] snippet (folder, filename, options, import)
+-   [x] tdd (folder)
 -   [x] template (folder, template, extension, options)
 -   [x] user (email, name, password, role, language)
 
