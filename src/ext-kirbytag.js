@@ -7,14 +7,28 @@ module.exports = function (plop) {
   const basepath = kirby.root("plugins");
   const pattern = /^( *)(\/\/ @PLOP_EXT_KIRBYTAG)\r?\n/gim;
 
-  plop.setHelper("wrapValue", helper.wrapValue);
+  plop.setHelper("commaSpace", helper.commaSpace);
 
   plop.setGenerator("ext-kirbytag", {
     description: "append kirbytag code to a file",
-    prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
+    prompts: [
+      prompts.folder(basepath),
+      prompts.key(),
+      prompts.attr(),
+      prompts.params("$tag"),
+      prompts.todo(),
+    ],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);
+        data.attr = data.attr
+          .replace(" ", "")
+          .split(",")
+          .map((value) => {
+            return {
+              value: value,
+            };
+          });
       },
       {
         path: "{{ indexphp }}",

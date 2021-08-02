@@ -1,2 +1,10 @@
-$1'{{{ key }}}' => {{{wrapValue value}}},
+$1'{{ key }}' => [{{#if todo }}
+$1    // TODO: {{{ todo }}}{{/if}}{{#if attr }}
+$1    'attr' => [{{#each attr }}
+$1        '{{{ value }}}',{{/each}}
+$1    ],{{/if}}
+$1    'html' => function ({{{commaSpace params}}}) {
+$1        return '';	
+$1    },
+$1],
 $1$2

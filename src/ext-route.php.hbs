@@ -2,8 +2,8 @@ $1[
 $1    'pattern' => '{{{ pattern }}}',{{#if method}}
 $1    'method' => '{{{ method }}}',{{/if}}{{#if language}}
 $1    'language' => '{{{toLowerCase language }}}',{{/if}}
-$1    'action' => function ({{#if language}}$language, {{/if}}{{{commaSpace params }}}) {
-$1        {{#if todo }}// TODO: {{{ todo }}}{{/if}}
+$1    'action' => function ({{#if language}}$language, {{/if}}{{{commaSpace params }}}) { {{#if todo }}
+$1        // TODO: {{{ todo }}}{{/if}}
 $1    },
 $1],
 $1$2

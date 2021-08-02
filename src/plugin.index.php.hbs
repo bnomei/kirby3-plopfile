@@ -8,8 +8,11 @@ declare(strict_types=1);
 {{/if}}
 {{#if options.addKirbyAutoloader }}
 load([
-    // '{{{ user }}}\\{{{ repository }}}\\superclass' => 'lib/Superclass.php'
+    // '{{{ucfirst user }}}\\{{{ucfirst repository }}}\\FooBar' => 'classes/FooBar.php'
 ], __DIR__);
+{{/if}}
+{{#if options.addClassAlias }}
+class_alias('{{{ repository }}}\\FooBar', 'FooBar');
 {{/if}}
 
 Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [

@@ -1,0 +1,10 @@
+$1'{{slugify title}}' => new {{{camelize template}}}Page([
+$1    'slug' => '{{slugify title}}',
+$1    'template' => '{{toLowerCase template}}',
+$1        'content'  => [
+$1			  'title' => '{{{ title }}}',{{#each data}}
+$1            '{{{ @key }}}' => {{{wrapValue this }}},
+$1            {{/each}}
+$1         ],
+$1     ]),
+$1$2

@@ -1,2 +1,5 @@
-$1'{{{ key }}}' => {{{wrapValue value}}},
+$1'{{ key }}' => function ({{{commaSpace params }}}) { {{#if todo }}
+$1    // TODO: {{{ todo }}}{{/if}}
+$1    return $field;
+$1},
 $1$2

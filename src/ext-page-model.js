@@ -4,13 +4,11 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("plugins");
+  const basepath = kirby.root("site");
   const pattern = /^( *)(\/\/ @PLOP_EXT_PAGE_MODEL)\r?\n/gim;
 
-  plop.setHelper("wrapValue", helper.wrapValue);
-
   plop.setGenerator("ext-page-model", {
-    description: "append page-model code to a file",
+    description: "append page model to an index.php",
     prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
     actions: [
       function (data) {

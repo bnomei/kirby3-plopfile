@@ -75,11 +75,22 @@ module.exports.method = function () {
   };
 };
 
-module.exports.params = function () {
+module.exports.attr = function (def = undefined) {
+  return {
+    type: "input",
+    name: "attr",
+    message:
+      "Comma-seperated list of Attributes (example: 'class, ref, target')",
+    default: def,
+  };
+};
+
+module.exports.params = function (def = undefined) {
   return {
     type: "input",
     name: "params",
     message: "Function Parameters (example: '$first, $second')",
+    default: def,
   };
 };
 

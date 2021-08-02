@@ -7,11 +7,18 @@ module.exports = function (plop) {
   const basepath = kirby.root("plugins");
   const pattern = /^( *)(\/\/ @PLOP_EXT_FIELD_METHOD)\r?\n/gim;
 
+  plop.setHelper("commaSpace", helper.commaSpace);
+  plop.setHelper("toLowerCase", helper.toLowerCase);
   plop.setHelper("wrapValue", helper.wrapValue);
 
   plop.setGenerator("ext-field-method", {
-    description: "append field-method code to a file",
-    prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
+    description: "append field method code to a file",
+    prompts: [
+      prompts.folder(basepath),
+      prompts.key(),
+      prompts.params("$field"),
+      prompts.todo(),
+    ],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);

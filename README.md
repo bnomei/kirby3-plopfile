@@ -6,13 +6,13 @@
 
 Plopfile to generate various files for Kirby3 CMS using Plop.js
 
-## What others say
+## What others (might have) said about this Plugin
 
 > 🤩
 > _- K-nerd_
 
 > Never have I created files for Kirby faster. They just plop into my project! Sweet.
-> _- Lasi Toiper
+> _- Lasi Toiper_
 
 > Finally a Kirby CLI on **plop**eroids with a gazzilion of appending generators.
 > _- p10pa_
@@ -24,8 +24,8 @@ Plopfile to generate various files for Kirby3 CMS using Plop.js
 
 This plugin is free but if you use it in a commercial project please consider to
 
--   [make a donation 🍻](https://www.paypal.me/bnomei/10) or
--   [buy me ☕☕](https://buymeacoff.ee/bnomei) or
+-   [make a donation 🍻🍻🍻](https://www.paypal.me/bnomei/15) or
+-   [buy me ☕☕☕](https://buymeacoff.ee/bnomei) or
 -   [buy a Kirby license using this affiliate link](https://a.paddle.com/v2/click/1129/35731?link=1170)
 
 ## Installation
@@ -77,10 +77,10 @@ plop content "Consistency made simple!" blog blogpost
 ## Generators
 
 -   [x] blueprint (folder, type, template, extension, import)
--   [x] config (filename, extensions, import)
 -   [x] config-option (file, key, value)
 -   [x] config-hook (file, key, todo)
 -   [x] config-route (file, pattern, method, [language, ] todo)
+-   [x] config (filename, extensions, import)
 -   [x] content (title, parent, template, [language, slug,] import)
 -   [x] controller (folder, template, extension, options)
 -   [x] dockercompose (folder, type, [...])
@@ -89,21 +89,21 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] ext-api-route (folder, params, pattern, method, todo)
 -   [x] ext-blueprint (folder, file)
 -   [x] ext-cache-type (folder, key, value)
--   [x] ext-collection (folder, key, params, value, todo)
 -   [x] ext-collection-filter (folder, key, params, todo)
 -   [x] ext-collection-method (folder, key, params, todo)
+-   [x] ext-collection (folder, key, params, value, todo)
 -   [x] ext-controller (folder, file)
+-   [x] ext-field-method (folder, key, params, todo)
 -   [x] ext-field (folder, key, todo)
--   [ ] ext-field-method
--   [ ] ext-file-method
--   [ ] ext-files-method
+-   [x] ext-file-method (folder, key, params, todo)
+-   [x] ext-files-method (folder, key, params, todo)
 -   [x] ext-hook (folder, key, todo)
--   [ ] ext-kirbytag
+-   [x] ext-kirbytag (folder, key, attr, params, todo)
 -   [x] ext-option (folder, key, value)
--   [ ] ext-page-method
--   [ ] ext-page-model
--   [ ] ext-pages
--   [ ] ext-pages-method
+-   [x] ext-page-method (folder, key, params, todo)
+-   [x] ext-page-model (folder, key, value)
+-   [x] ext-pages-method (folder, key, params, todo)
+-   [x] ext-pages (folder, title, template, import)
 -   [ ] ext-permission
 -   [x] ext-route (folder, pattern, method, params, [language, ] todo)
 -   [ ] ext-section
@@ -294,7 +294,7 @@ PLOP_CLIPBOARD=false
 
 ### kirby roots
 
-If you renamed a root the generator will not find it unless you set them in your .env file.
+If you renamed a root the generator will not find it unless you set it in your .env file.
 
 ```
 # PLOP_ROOT_[uppercase version of original root name]

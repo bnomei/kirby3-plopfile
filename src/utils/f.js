@@ -39,7 +39,8 @@ module.exports.searchLineAndColumn = function (filepath, regexp = undefined) {
     let lc = 0;
     lines.forEach((line) => {
       lc = lc + 1;
-      if (regexp.test(line + "\n")) { // fake a linebreak for better regex support
+      if (regexp.test(line + "\n")) {
+        // fake a linebreak for better regex support
         const idx = line.indexOf("@PLOP_"); // @PLOP_ hack
         if (idx < 1) idx = 1;
         result = { line: lc, column: idx, char: idx };

@@ -5,12 +5,12 @@ const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
   const basepath = kirby.root("plugins");
-  const pattern = /^( *)(\/\/ @PLOP_EXT_PAGES_METHOD)\r?\n/gim;
+  const pattern = /^( *)(\/\/ @PLOP_EXT_FILES_METHOD)\r?\n/gim;
 
   plop.setHelper("commaSpace", helper.commaSpace);
 
-  plop.setGenerator("ext-pages-method", {
-    description: "append pages method code to a file",
+  plop.setGenerator("ext-files-method", {
+    description: "append files method code to a file",
     prompts: [
       prompts.folder(basepath),
       prompts.key(),
@@ -25,7 +25,7 @@ module.exports = function (plop) {
         path: "{{ indexphp }}",
         type: "modify",
         pattern: pattern,
-        templateFile: "ext-pages-method.php.hbs",
+        templateFile: "ext-files-method.php.hbs",
       },
       function (data) {
         return F.clipboard(plop, data.indexphp, pattern);

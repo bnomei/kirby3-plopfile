@@ -9,16 +9,14 @@ module.exports = function (plop) {
 
   plop.setHelper("commaSpace", helper.commaSpace);
 
-  let route_prompts = [
-    prompts.folder(basepath),
-    prompts.key(),
-    prompts.params(),
-    prompts.todo(),
-  ];
-
   plop.setGenerator("ext-collection-method", {
     description: "append collection method code to a file",
-    prompts: route_prompts,
+    prompts: [
+      prompts.folder(basepath),
+      prompts.key(),
+      prompts.params(),
+      prompts.todo(),
+    ],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);
