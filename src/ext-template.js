@@ -4,14 +4,12 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("plugins");
+  const basepath = kirby.root("site");
   const pattern = /^( *)(\/\/ @PLOP_EXT_TEMPLATE)\r?\n/gim;
 
-  plop.setHelper("wrapValue", helper.wrapValue);
-
   plop.setGenerator("ext-template", {
-    description: "append template code to a file",
-    prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
+    description: "append template include to an index.php",
+    prompts: [prompts.folder(basepath), prompts.file()],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);
