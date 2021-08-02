@@ -8,11 +8,13 @@ declare(strict_types=1);
 {{/if}}
 {{#if options.addKirbyAutoloader }}
 load([
-    // '{{{ucfirst user }}}\\{{{ucfirst repository }}}\\FooBar' => 'src/FooBar.php'
+    // '{{{ucfirst user }}}\\{{{ucfirst repository }}}\\FooBar' => 'src/FooBar.php',
+    // @PLOP_EXT_KIRBY_AUTOLOADER
 ], __DIR__);
 {{/if}}
 {{#if options.addClassAlias }}
 class_alias('{{{ repository }}}\\FooBar', 'FooBar');
+// @PLOP_EXT_CLASS_ALIAS
 {{/if}}
 
 Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [

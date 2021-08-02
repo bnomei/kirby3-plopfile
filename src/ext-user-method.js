@@ -7,11 +7,16 @@ module.exports = function (plop) {
   const basepath = kirby.root("plugins");
   const pattern = /^( *)(\/\/ @PLOP_EXT_USER_METHOD)\r?\n/gim;
 
-  plop.setHelper("wrapValue", helper.wrapValue);
+  plop.setHelper("commaSpace", helper.commaSpace);
 
   plop.setGenerator("ext-user-method", {
-    description: "append user-method code to a file",
-    prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
+    description: "append user method code to a file",
+    prompts: [
+      prompts.folder(basepath),
+      prompts.key(),
+      prompts.params(),
+      prompts.todo(),
+    ],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);

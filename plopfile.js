@@ -15,6 +15,8 @@ module.exports = function (plop) {
     "./src/ext-api-route.js",
     "./src/ext-cache-type.js",
     "./src/ext-blueprint.js",
+    "./src/ext-class-alias.js",
+    "./src/ext-class-loader.js",
     "./src/ext-collection.js",
     "./src/ext-collection-filter.js",
     "./src/ext-collection-method.js",

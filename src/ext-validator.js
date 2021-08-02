@@ -7,11 +7,15 @@ module.exports = function (plop) {
   const basepath = kirby.root("plugins");
   const pattern = /^( *)(\/\/ @PLOP_EXT_VALIDATOR)\r?\n/gim;
 
-  plop.setHelper("wrapValue", helper.wrapValue);
+  plop.setHelper("commaSpace", helper.commaSpace);
 
   plop.setGenerator("ext-validator", {
     description: "append validator code to a file",
-    prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],
+    prompts: [
+      prompts.folder(basepath),
+      prompts.key(),
+      prompts.todo(),
+    ],
     actions: [
       function (data) {
         data = kirby.resolvePluginInclude(data, basepath);

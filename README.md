@@ -8,17 +8,17 @@ Plopfile to generate various files for Kirby3 CMS using Plop.js
 
 ## What others (might have) said about this Plugin
 
-> 🤩
-> _- K-nerd_
+> 🤩<br>
+> <small>_- K-nerd_</small>
 
-> Never have I created files for Kirby faster. They just plop into my project! Sweet.
-> _- Lasi Toiper_
+> Never have I created files for Kirby faster. They just plop into my project! Sweet.<br>
+> <small>_- Lasi Toiper_</small>
 
-> Finally a Kirby CLI on **plop**eroids with a gazzilion of appending generators.
-> _- p10pa_
+> Finally a Kirby CLI on ploperoids with a gazzilion of appending generators.<br>
+> <small>_- p10pa_</small>
 
-> I don't care how it works but it does!
-> _- NewToThis_
+> I don't care how it works but it does!<br>
+> <small>_- NewToThis_</small>
 
 ## Commerical Usage
 
@@ -74,7 +74,7 @@ plop content "Consistency made simple!" blog blogpost
 
 > INFO: The plugin will `glob` to find the locations of your [Kirby roots](https://getkirby.com/docs/guide/configuration#custom-folder-setup) automatically.
 
-## Generators
+## Generators (51)
 
 -   [x] blueprint (folder, type, template, extension, import)
 -   [x] config-option (file, key, value)
@@ -89,6 +89,8 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] ext-api-route (folder, params, pattern, method, todo)
 -   [x] ext-blueprint (folder, file)
 -   [x] ext-cache-type (folder, key, value)
+-   [ ] ext-class-alias (folder, key, value)
+-   [ ] ext-class-loader (folder, key, value)
 -   [x] ext-collection-filter (folder, key, todo)
 -   [x] ext-collection-method (folder, key, params, todo)
 -   [x] ext-collection (folder, key, params, value, todo)
@@ -107,14 +109,13 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] ext-permission (folder, key, value)
 -   [x] ext-route (folder, pattern, method, params, [language, ] todo)
 -   [x] ext-section (folder, key, todo)
--   [x] ext-site-method
--   [x] ext-snippet
--   [ ] ext-template
--   [ ] ext-translation
--   [ ] ext-user-method
--   [ ] ext-user-model
--   [ ] ext-users-method
--   [ ] ext-validator
+-   [x] ext-site-method (folder, key, params, todo)
+-   [x] ext-snippet (folder, file)
+-   [x] ext-template (folder, file)
+-   [x] ext-user-method (folder, key, params, todo)
+-   [x] ext-user-model (folder, key, value)
+-   [x] ext-users-method (folder, key, params, todo)
+-   [x] ext-validator (folder, key, todo)
 -   [x] file (file, parent, template, [language,] import)
 -   [x] htaccess (folder, type)
 -   [x] indexphp (folder, type)
@@ -127,7 +128,9 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] template (folder, template, extension, options)
 -   [x] user (email, name, password, role, language)
 
-## Roadmap
+## Roadmap (1)
+
+-   [ ] ext-translation
 
 > Please [create a new issue](https://github.com/bnomei/kirby3-plopfile/issues/new) if you want to suggest an idea or discuss existing generators.
 
