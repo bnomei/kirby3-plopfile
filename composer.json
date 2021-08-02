@@ -37,7 +37,10 @@
     }
   ],
   "scripts": {
-    "prettier": "yarn prettier --write src",
+    "prettier": [
+      "yarn add prettier --dev",
+      "yarn prettier --write src"
+    ],
     "reset": [
       "rm -rf tests; mkdir tests;",
       "mkdir tests/content",
@@ -56,10 +59,11 @@
     ],
     "dist": [
       "composer install --no-dev --optimize-autoloader",
+      "yarn prettier --write src",
+      "yarn remove prettier",
       "rm -rf node_modules",
       "yarn install",
       "yarn upgrade",
-      "yarn prettier --write src",
       "git rm -rf --cached .; git add .;"
     ]
   }

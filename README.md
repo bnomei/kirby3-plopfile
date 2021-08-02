@@ -11,7 +11,7 @@ Plopfile to generate various files for Kirby3 CMS using Plop.js
 > 🤩<br>
 > <small>_- K-nerd_</small>
 
-> Never have I created files for Kirby faster. They just plop into my project! Sweet.<br>
+> Using generators is faster than grabbing and adjusting code from the officals docs? Really? Awesome!<br>
 > <small>_- Lasi Toiper_</small>
 
 > Finally a Kirby CLI on ploperoids with a gazzilion of appending generators.<br>
@@ -67,14 +67,25 @@ plop
 Or trigger a generator and [bypass some prompts](https://plopjs.com/documentation/#cli-usage) but being prompted for missing ones interactivly.
 
 ```bash
+# $ = kirbys default root for that generator
 plop blueprint $ pages blogpost
 plop template $ blogpost
 plop content "Consistency made simple!" blog blogpost
+plop snippet $ slideshow
+
+# adding inline code to plugins
+plop plugin myname myplugin
+plop ext-collection myplugin allBlogpages
+
+# some files need to be referenced in the plugin index.php to work
+plop blueprint myplugin contactform
+plop ext-blueprint myplugin contactform
+plop template myplugin contactform
+plop ext-template myplugin contactform
+plop ext-route myplugin form/submit POST
 ```
 
-> INFO: The plugin will `glob` to find the locations of your [Kirby roots](https://getkirby.com/docs/guide/configuration#custom-folder-setup) automatically.
-
-## Generators (51)
+## Generators (52)
 
 -   [x] blueprint (folder, type, template, extension, import)
 -   [x] config-option (file, key, value)
@@ -89,8 +100,8 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] ext-api-route (folder, params, pattern, method, todo)
 -   [x] ext-blueprint (folder, file)
 -   [x] ext-cache-type (folder, key, value)
--   [ ] ext-class-alias (folder, key, value)
--   [ ] ext-class-loader (folder, key, value)
+-   [x] ext-class-alias (folder, key, value)
+-   [x] ext-class-loader (folder, key, value)
 -   [x] ext-collection-filter (folder, key, todo)
 -   [x] ext-collection-method (folder, key, params, todo)
 -   [x] ext-collection (folder, key, params, value, todo)
@@ -122,6 +133,7 @@ plop content "Consistency made simple!" blog blogpost
 -   [x] language (code, default, direction, locale, name, url, import)
 -   [x] model (folder, template, options)
 -   [x] plugin (user, repository, prefix, options)
+-   [x] phpunit (folder, folder)
 -   [x] robotstxt (folder)
 -   [x] setup (setup)
 -   [x] snippet (folder, filename, options, import)
@@ -138,7 +150,7 @@ plop content "Consistency made simple!" blog blogpost
 
 -   Strings with whitespace need to wrapped in single quotes or double quotes.
 -   `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be wrapped in single quotes.
--   `$` can be used on `folder` prompts to default to kirbys root.
+-   `$` can be used on `folder` prompts to default to kirbys root. The plugin will `glob` to find the locations of your [Kirby roots](https://getkirby.com/docs/guide/configuration#custom-folder-setup) automatically, but the folders must exist.
 -   `none`/`defaults`/`all` can be used on `options` and `extensions` to select checkboxes when bypassing.
 -   `y`/`n` can be used on confirmation prompts.
 -   `file` and `folder` will be globbed and support wildcards. So you could write `*mydo*` instead of writing `config.www.mydomain.net.php`.
@@ -235,6 +247,12 @@ plop ext-snippet projectxyz slideshow
 
 ```bash
 plop template $ booking .blade.php defaults
+```
+
+**hook in plugin with todo comment**
+
+```bash
+plop ext-hook myplugin page.changeStatus:after "if a blogpost is published make kirby send an email to client"
 ```
 
 ## Usage of `config-` and `ext-` with existing files or when missing markers
