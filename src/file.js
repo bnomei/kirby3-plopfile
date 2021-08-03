@@ -20,7 +20,7 @@ module.exports = function (plop) {
   });
   plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
   plop.setHelper("toLowerCase", helpers.toLowerCase);
-  plop.setHelper("ucfirst", helpers.toLowerCase);
+  plop.setHelper("ucfirst", helpers.ucfirst);
 
   let file_prompts = [
     prompts.file(),
@@ -31,14 +31,13 @@ module.exports = function (plop) {
       default: basepath + "/",
     },
     prompts.template(""),
+    prompts.import(),
   ];
 
   const existingLanguages = kirby.languages();
   if (existingLanguages.length) {
     file_prompts.push(prompts.language(existingLanguages));
   }
-
-  file_prompts.push(prompts.import());
 
   plop.setGenerator("file", {
     description: "copy file to a content folder",

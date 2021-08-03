@@ -24,6 +24,7 @@ module.exports = function (plop) {
       default: basepath + "/",
     },
     prompts.template("default"),
+    prompts.import(),
   ];
 
   const existingLanguages = kirby.languages();
@@ -40,8 +41,6 @@ module.exports = function (plop) {
       message: "Language specific slug (optional)",
     });
   }
-
-  content_prompts.push(prompts.import());
 
   plop.setGenerator("content", {
     description: "make a content file",

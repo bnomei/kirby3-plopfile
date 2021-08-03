@@ -69,8 +69,8 @@ module.exports.typeHintCoreObjects = function (checked = false) {
 
 module.exports.authchallenge = function (checked = false) {
   return {
-    name: "Api Data",
-    value: "apidata",
+    name: "Auth Challenge",
+    value: "authchallenge",
     checked: checked,
   };
 };

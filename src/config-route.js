@@ -16,14 +16,13 @@ module.exports = function (plop) {
     prompts.pattern(),
     prompts.params(),
     prompts.method(),
+    prompts.todo(),
   ];
 
   const existingLanguages = kirby.languages();
   if (existingLanguages.length) {
     route_prompts.push(prompts.language(existingLanguages));
   }
-
-  route_prompts.push(prompts.todo());
 
   plop.setGenerator("config-route", {
     description: "append route code to a config file",

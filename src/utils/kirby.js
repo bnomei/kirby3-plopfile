@@ -69,8 +69,10 @@ module.exports.root = function (root) {
       absolute: true,
       deep: 2,
     });
-    if (indexphp.length && root == "index") return indexphp[0].replace("/index.php", "");
-    if (indexphp.length && root == "base") return indexphp[0].replace("/index.php", "").replace("/public","");
+    if (indexphp.length && root == "index")
+      return indexphp[0].replace("/index.php", "");
+    if (indexphp.length && root == "base")
+      return indexphp[0].replace("/index.php", "").replace("/public", "");
   } else {
     const folder = fg.sync(["**/" + root], {
       onlyDirectories: true,

@@ -8,6 +8,7 @@ module.exports = function (plop) {
   const pattern = /^( *)(\/\/ @PLOP_EXT_CLASS_LOADER)\r?\n/gim;
 
   plop.setHelper("wrapValue", helper.wrapValue);
+  plop.setHelper("camelize", helper.camelize);
 
   plop.setGenerator("ext-class-loader", {
     description: "append class loader to a file",

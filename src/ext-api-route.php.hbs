@@ -1,4 +1,8 @@
-$1'{{ key }}' => function ({{{commaSpace params }}}) { {{#if todo }}
-$1    // TODO: {{{ todo }}}{{/if}}
-$1},
+$1[
+$1    'pattern' => '{{{ pattern }}}',{{#if method}}
+$1    'method' => '{{{ method }}}',{{/if}}
+$1    'action' => function ({{{commaSpace params }}}) { {{#if todo }}
+$1        // TODO: {{{ todo }}}{{/if}}
+$1    },
+$1],
 $1$2

@@ -90,9 +90,9 @@ plop ext-route myplugin form/submit '' POST
 -   [x] blueprint (folder, type, template, extension, import)
 -   [x] config-option (file, key, value)
 -   [x] config-hook (file, key, todo)
--   [x] config-route (file, pattern, method, [language, ] todo)
+-   [x] config-route (file, pattern, method, todo, [language, ])
 -   [x] config (filename, extensions, import)
--   [x] content (title, parent, template, [language, slug,] import)
+-   [x] content (title, parent, template, import, [language, slug,])
 -   [x] controller (folder, template, extension, options)
 -   [x] dockercompose (folder, type, [...])
 -   [x] ext-auth-challenge (folder, key, value)
@@ -110,7 +110,7 @@ plop ext-route myplugin form/submit '' POST
 -   [x] ext-field (folder, key, todo)
 -   [x] ext-file-method (folder, key, params, todo)
 -   [x] ext-files-method (folder, key, params, todo)
--   [x] ext-hook (folder, key, todo)
+-   [x] ext-hook (folder, hook, todo)
 -   [x] ext-kirbytag (folder, key, attr, params, todo)
 -   [x] ext-option (folder, key, value)
 -   [x] ext-page-method (folder, key, params, todo)
@@ -118,7 +118,7 @@ plop ext-route myplugin form/submit '' POST
 -   [x] ext-pages-method (folder, key, params, todo)
 -   [x] ext-pages (folder, title, template, import)
 -   [x] ext-permission (folder, key, value)
--   [x] ext-route (folder, pattern, method, params, [language, ] todo)
+-   [x] ext-route (folder, pattern, method, params, todo, [language, ])
 -   [x] ext-section (folder, key, todo)
 -   [x] ext-site-method (folder, key, params, todo)
 -   [x] ext-snippet (folder, file)
@@ -127,7 +127,7 @@ plop ext-route myplugin form/submit '' POST
 -   [x] ext-user-model (folder, key, value)
 -   [x] ext-users-method (folder, key, params, todo)
 -   [x] ext-validator (folder, key, todo)
--   [x] file (file, parent, template, [language,] import)
+-   [x] file (file, parent, template, import, [language,])
 -   [x] htaccess (folder, type)
 -   [x] indexphp (folder, type)
 -   [x] language (code, default, direction, locale, name, url, import)
@@ -337,7 +337,7 @@ You can add custom code to your new plopfile as inline code or using files with 
 ```js
 module.exports = function (plop) {
     plop.load([
-        "site/plugins/kirby3-plopfile/plopfile.js",
+        "./site/plugins/kirby3-plopfile/plopfile.js",
         // add your custom files here...
     ]);
     // or any plop code here
