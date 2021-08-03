@@ -149,7 +149,7 @@ final class PlopfileTest extends TestCase
 
         $this->assertTrue(empty(shell_exec('plop blueprint myplug pages hello .yml {}')));
         $this->assertTrue(empty(shell_exec('plop ext-blueprint myplug pages/hello')));
-        $this->assertStringContainsString('/pages/hello.yml', file_get_contents($file));
+        $this->assertStringContainsString('/blueprints/pages/hello.yml', file_get_contents($file));
 
         $this->assertTrue(empty(shell_exec('plop ext-cache-type myplug ctkey ctvalue')));
         $this->assertStringContainsString('ctkey', file_get_contents($file));
@@ -160,6 +160,7 @@ final class PlopfileTest extends TestCase
 
         $this->assertTrue(empty(shell_exec('plop ext-class-loader myplug clkey clvalue')));
         $this->assertStringContainsString('Clkey', file_get_contents($file));
+        $this->assertStringContainsString('clvalue.php', file_get_contents($file));
 
         $this->assertTrue(empty(shell_exec('plop ext-collection-filter myplug cfkey cftodo')));
         $this->assertStringContainsString('cfkey', file_get_contents($file));
@@ -279,6 +280,36 @@ final class PlopfileTest extends TestCase
         $this->assertTrue(empty(shell_exec('plop ext-validator myplug vakey vatodo')));
         $this->assertStringContainsString('vakey', file_get_contents($file));
         $this->assertStringContainsString('vatodo', file_get_contents($file));
+    }
+
+    public function testRightReferncesInFullMtcButSameNames() {
+        $file = $this->root . '/site/plugins/myplug/index.php';
+        $this->assertTrue(empty(shell_exec('plop plugin myname myplug "" all all')));
+        $this->assertFileExists($file);
+
+        $this->assertTrue(empty(shell_exec('plop blueprint myplug pages hello .yml {}')));
+        $this->assertTrue(empty(shell_exec('plop ext-blueprint myplug pages/hello')));
+        $this->assertStringContainsString('/blueprints/pages/hello.yml', file_get_contents($file));
+
+        $this->assertTrue(empty(shell_exec('plop blueprint myplug fields hello .yml {}')));
+        $this->assertTrue(empty(shell_exec('plop ext-blueprint myplug fields/hello')));
+        $this->assertStringContainsString('/blueprints/fields/hello.yml', file_get_contents($file));
+
+        $this->assertTrue(empty(shell_exec('plop model myplug hello all')));
+        $this->assertTrue(empty(shell_exec('plop ext-page-model myplug hello helloPage')));
+        $this->assertStringContainsString('HelloPage', file_get_contents($file));
+
+        $this->assertTrue(empty(shell_exec('plop template myplug hello .php all')));
+        $this->assertTrue(empty(shell_exec('plop ext-template myplug hello')));
+        $this->assertStringContainsString('/templates/hello.php', file_get_contents($file));
+
+        $this->assertTrue(empty(shell_exec('plop controller myplug hello .php defaults')));
+        $this->assertTrue(empty(shell_exec('plop ext-controller myplug hello')));
+        $this->assertStringContainsString('require \'controllers/hello.php', file_get_contents($file));
+
+        $this->assertTrue(empty(shell_exec('plop snippet myplug hello all {}')));
+        $this->assertTrue(empty(shell_exec('plop ext-snippet myplug hello')));
+        $this->assertStringContainsString('/snippets/hello.php', file_get_contents($file));
     }
 
     public function testSnippet()

@@ -20,6 +20,10 @@ module.exports.filenameWithoutExtension = function (text) {
   return text ? text.toLowerCase().replace(".php", "").replace(".yml", "") : "";
 };
 
+module.exports.appendPHPExtensionIfMissing = function (text) {
+  return text ? (text.endsWith(".php") === false ? text + ".php" : text) : "";
+};
+
 module.exports.trimFirstDot = function (text) {
   return text ? text.replace(/^\./, "") : "";
 };

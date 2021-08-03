@@ -14,6 +14,7 @@ module.exports = function (plop) {
     prompts: [prompts.folder(basepath), prompts.file()],
     actions: [
       function (data) {
+        data.root = "blueprints";
         data = kirby.resolvePluginInclude(data, basepath, "blueprints");
       },
       {

@@ -1,7 +1,7 @@
 {
   "name": "bnomei/kirby3-plopfile",
   "type": "kirby-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Plopfile to generate and append to various files for Kirby3 CMS using Plop.js",
   "license": "MIT",
   "keywords": [

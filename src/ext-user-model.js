@@ -4,7 +4,7 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("site");
+  const basepath = kirby.root("plugins");
   const pattern = /^( *)(\/\/ @PLOP_EXT_USER_MODEL)\r?\n/gim;
 
   plop.setHelper("camelize", helper.camelize);

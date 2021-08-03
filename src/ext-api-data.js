@@ -4,7 +4,7 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("site");
+  const basepath = kirby.root("plugins");
   const pattern = /^( *)(\/\/ @PLOP_EXT_API_DATA)\r?\n/gim;
 
   plop.setHelper("commaSpace", helper.commaSpace);

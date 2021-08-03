@@ -9,6 +9,10 @@ module.exports = function (plop) {
 
   plop.setHelper("wrapValue", helper.wrapValue);
   plop.setHelper("camelize", helper.camelize);
+  plop.setHelper(
+    "appendPHPExtensionIfMissing",
+    helper.appendPHPExtensionIfMissing
+  );
 
   plop.setGenerator("ext-class-loader", {
     description: "append class loader to a file",

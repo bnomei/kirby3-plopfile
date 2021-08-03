@@ -4,7 +4,7 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("site");
+  const basepath = kirby.root("plugins");
   const pattern = /^( *)(\/\/ @PLOP_EXT_TEMPLATE)\r?\n/gim;
 
   plop.setGenerator("ext-template", {
@@ -12,6 +12,7 @@ module.exports = function (plop) {
     prompts: [prompts.folder(basepath), prompts.file()],
     actions: [
       function (data) {
+        data.root = "templates";
         data = kirby.resolvePluginInclude(data, basepath);
       },
       {

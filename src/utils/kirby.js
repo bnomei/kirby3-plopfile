@@ -36,7 +36,8 @@ module.exports.resolvePluginInclude = function (
   }
   if (data.file) {
     if (!fs.existsSync(data.file)) {
-      data.file = F.findFile(path.basename(data.file) + "*", data.folder); // the snippet
+      const r = data.root ? data.root + "/**/" : "";
+      data.file = F.findFile(r + path.basename(data.file) + "*", data.folder);
     }
     data.basenameWithoutExtension = path
       .basename(data.file, path.extname(data.file))
