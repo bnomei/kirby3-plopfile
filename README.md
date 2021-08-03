@@ -4,7 +4,7 @@
 ![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-plopfile?color=272822)
 [![Twitter](https://flat.badgen.net/badge/twitter/bnomei?color=66d9ef)](https://twitter.com/bnomei)
 
-Plopfile to generate various files for Kirby3 CMS using Plop.js
+Plopfile to generate and append to various files for Kirby3 CMS using Plop.js
 
 ## What others (might have) said about this Plugin
 
@@ -17,7 +17,7 @@ Plopfile to generate various files for Kirby3 CMS using Plop.js
 > Finally a Kirby CLI on ploperoids with a gazzilion of appending generators.<br>
 > <small>_- p10pa_</small>
 
-> I don't care how it works but it does!<br>
+> I don't care how it works but it does! Unittests FTW.<br>
 > <small>_- NewToThis_</small>
 
 ## Commerical Usage
@@ -30,15 +30,9 @@ This plugin is free but if you use it in a commercial project please consider to
 
 ## Installation
 
--   unzip [master.zip](https://github.com/bnomei/kirby3-plopfile/archive/master.zip) as folder `site/plugins/kirby3-plopfile` or
--   `git submodule add https://github.com/bnomei/kirby3-plopfile.git site/plugins/kirby3-plopfile` or
--   `composer require bnomei/kirby3-plopfile`
+### Plop.js
 
-## Requirements
-
-Install [Plop.js globally](https://plopjs.com).
-
-> Plop.js is simplified just glue code between [inquirer](https://github.com/SBoudrias/Inquirer.js/) prompts and [handlebar](https://github.com/wycats/handlebars.js/) templates.
+Install [Plop.js globally](https://plopjs.com). Plop.js is simplified just glue code between [inquirer](https://github.com/SBoudrias/Inquirer.js/) prompts and [handlebar](https://github.com/wycats/handlebars.js/) templates.
 
 ```bash
 npm install -g plop
@@ -50,7 +44,13 @@ or
 yarn global add plop
 ```
 
-## Setup
+### Kirby Plugin
+
+-   unzip [master.zip](https://github.com/bnomei/kirby3-plopfile/archive/master.zip) as folder `site/plugins/kirby3-plopfile` or
+-   `git submodule add https://github.com/bnomei/kirby3-plopfile.git site/plugins/kirby3-plopfile` or
+-   `composer require bnomei/kirby3-plopfile`
+
+### Plopfile for your project
 
 Copy `example.plopfile.js` from the plugin directory to your project root.
 
@@ -58,20 +58,30 @@ Copy `example.plopfile.js` from the plugin directory to your project root.
 cp site/plugins/kirby3-plopfile/example.plopfile.js plopfile.js
 ```
 
-## Use Plop to generate files
+## Usage
+
+### Use Plop to generate or append to files
+
+Plop provides an interactive terminal UI. It let's you choose a generator and fill each prompt step by step.
 
 ```bash
 plop
 ```
 
-Or trigger a generator and [bypass some prompts](https://plopjs.com/documentation/#cli-usage) but being prompted for missing ones interactivly.
+But you can also trigger a generator and [bypass some prompts](https://plopjs.com/documentation/#cli-usage). You can provide all prompts or choose to be prompted for some using `_` as an value. Generators that create files need a target folder. The plugin tries its best to guess your setup using `glob`. When bypassing the `folder`-prompt you can use `$` to default to your kirby root for that specific generator (like `site/templates` for `plop template $`).
 
 ```bash
 # $ = kirbys default root for that generator
 plop blueprint $ pages blogpost
 plop template $ blogpost
 plop content "Consistency made simple!" blog blogpost
+plop content _ blog blogpost
 plop snippet $ slideshow
+```
+
+Kirby Plugins `index.php` and Config files created using `plop config`/`plop plugin` can be appended with lots of [Kirbys extensions](https://getkirby.com/docs/reference/plugins/extensions). These generators have the prefix `ext-`. Some of them might require you to add a file to the plugin folder first before appending a reference to that file.
+
+```bash
 
 # adding inline code to plugins
 plop plugin myname myplugin
@@ -82,10 +92,55 @@ plop blueprint myplugin pages contactform
 plop ext-blueprint myplugin contactform
 plop template myplugin contactform
 plop ext-template myplugin contactform
+
+# some extensions do not have a file on their own but are inlined to index.php
 plop ext-route myplugin form/submit '' POST
 ```
 
-## Generators (52)
+### Usage of `config-` and `ext-` with existing files or when missing markers
+
+When creating files with `plop config` or `plop plugin` the generator will add markers to identify the location to append extensions. To make `config-` and `ext-` generators work with files not created by plop you have to manually add these strings to the respective files. Do not be afraid. It's very simple. The markers adhere to the following pattern:
+
+```
+[language specific comment] @PLOP_EXT_[extension name in uppercase, singular and low-dashes]
+```
+
+**example for PHP files**
+```php
+// @PLOP_EXT_HOOK
+// @PLOP_EXT_FILES_METHOD
+```
+
+**example site/config/config.php**
+```php
+<?php
+
+return [
+    'hooks' => [
+        // Do not forget adding a `,` after existing array items
+        'page.update:after' => function () { },
+        // @PLOP_EXT_HOOK
+    ],
+];
+```
+
+### Extending the plopfile
+
+You can add custom code to your new plopfile as inline code or using files with `plop.load()`. This allows you to add your own generators.
+
+**plopfile.js**
+
+```js
+module.exports = function (plop) {
+    plop.load([
+        "./site/plugins/kirby3-plopfile/plopfile.js",
+        // add your custom files here...
+    ]);
+    // or any plop code here
+};
+```
+
+### Generators (52)
 
 -   [x] blueprint (folder, type, template, extension, import)
 -   [x] config-option (file, key, value)
@@ -140,13 +195,13 @@ plop ext-route myplugin form/submit '' POST
 -   [x] template (folder, template, extension, options)
 -   [x] user (email, name, password, role, language)
 
-## Roadmap (1)
+### Roadmap (1)
 
 -   [ ] ext-translation
 
 > Please [create a new issue](https://github.com/bnomei/kirby3-plopfile/issues/new) if you want to suggest an idea or discuss existing generators.
 
-## Bypassing
+### Bypassing prompts
 
 -   Strings with whitespace need to wrapped in single quotes or double quotes.
 -   `import` can be a json string, relative or absolute path to a json or yml file. Bypassed json strings need to be wrapped in single quotes.
@@ -159,102 +214,89 @@ plop ext-route myplugin form/submit '' POST
 > ⚠️ If you use plop to generate files but set generator `extensions` to `none` or cherry pick them manually you might be missing some markers. I'd recommend to stick to `default` or `all` as values for these when bypassing or just press `enter` (aka default) when using the interactive dialog. You can always add the markers manually later.
 
 ## Examples
-
-**start interactive generator**
+#### start interactive generator
 
 ```bash
 plop
 ```
-
-**start blueprint generator directly**
+#### start blueprint generator directly
 
 ```bash
 plop blueprint
 ```
-
-**blueprint with bypassed prompts (values forwarded from command line)**
+#### blueprint with bypassed prompts (values forwarded from command line)
 
 ```bash
 plop blueprint $ pages article .yml {}
 ```
-
-**content with known parent and template but prompt for title**
+#### content with known parent and template but prompt for title
 
 ```bash
 plop content _ blog default {}
 ```
-
-**blueprint cloning**
+#### blueprint cloning
 
 ```bash
 plop blueprint $ fields cd .yml
 plop blueprint $ fields dvd .yml cd.yml
 ```
-
-**config with options from escaped json string**
+#### config with options from escaped json string
 
 ```bash
 plop config config.staging defaults '{"debug": true, "home": "staging" }'
 ```
-
-**content with fields from json/yml file**
+#### content with fields from json/yml file
 
 ```bash
 plop content "Consistency, made easy!" blog default n123.json
 ```
-
-**file with template and sorting number**
+#### file with template and sorting number
 
 ```bash
 plop file imgs/i456.jpg blog/consitency-made-easy hero '{"sort": 4}'
 ```
-
-**language with translations from json/yml file**
+#### language with translations from json/yml file
 
 ```bash
 plop language de n ltr de_DE Deutsch de trans_de.yml
 ```
-
-**plugin to add project specific extensions**
+#### plugin to add project specific extensions
 
 ```bash
 plop plugin myname myplugin '' defaults defaults
 ```
-
-**create blueprint in plugin and "extend" the plugin index.php**
+#### create blueprint in plugin and "extend" the plugin index.php
 
 ```bash
 plop blueprint myplugin pages merch .yml {}
 plop ext-blueprint myplugin pages/merch
 ```
 
-
-**snippet at /site/snippets with isset check for each key with fallback**
+#### snippet at /site/snippets with isset check for each key with fallback
 
 ```bash
 plop snippet $ topnav defaults '{ "title": "title fallback", "isOpen": null }'
 ```
-
-**create snippet in plugin folder and then register it as an extension to that plugin**
+#### create snippet in plugin folder and then register it as an extension to that plugin
 
 ```bash
 plop snippet myplugin slideshow defaults {}
 plop ext-snippet myplugin slideshow
 ```
-
-**template for laravel blade rendering**
+#### template for laravel blade rendering
 
 ```bash
 plop template $ booking .blade.php defaults
 ```
-
-**hook in plugin with todo comment**
+#### hook in plugin with todo comment
 
 ```bash
 plop ext-hook myplugin page.changeStatus:after "if a blogpost is published make kirby send an email to client"
 ```
 
 ## .env File
+
+You can add variables to your `.env` file to customize the plugins behaviour.
 
 ### clipboard
 
@@ -271,7 +313,7 @@ PLOP_CLIPBOARD=false
 
 ### kirby roots
 
-If you renamed a root the generator will not find it unless you set it in your .env file.
+If you renamed a root the generator will not find it unless you set it in your `.env` file.
 
 ```
 # PLOP_ROOT_[uppercase version of original root name]
@@ -279,69 +321,38 @@ PLOP_ROOT_TEMPLATES="different"
 # instead of "templates"
 ```
 
-## New Projects
+## Scaffolding or generating new projects with mostly plop
 
-Kirby offers various installation methods (zip, coomposer, composer project). Here is a new one.
+Kirby offers various [installation methods](https://getkirby.com/docs/guide/quickstart#requirements__alternative-ways-to-install-kirby) from basic zip download to gitsubmodule and composer. Here is a new one using composer and plop.
 
 ### generator-based composer project for public-storage setup
 
-**in your project root**
+Run the following commands in your project root. Create composer.json file, install Kirby and this plugin plus grabbing the plopfile.
+
 ```bash
 composer init
 jq -r '. + { config: { "optimize-autoloader": true } }' composer.json
 composer require php:">=7.3.0 <8.1.0" getkirby/cms:^3.5 bnomei/kirby3-plopfile:^1.0
 cp site/plugins/kirby3-plopfile/example.plopfile.js plopfile.js
+```
 
+Then create the basic folder structure and file using generators.
+
+```bash
 plop setup public-storage
 plop indexphp public public-storage
 plop htaccess
 plop robotstxt
-plop tdd
 ```
 
-## Existing Projects
+Optionally you could add php libraries for `Test Driven Development` (TDD) and use a ready-made docker image to serve your project locally.
 
-### Usage of `config-` and `ext-` with existing files or when missing markers
+```bash
+plop tdd $ all
+# then use ctr-v + enter to install composer dev-requirements
 
-When creating files with `plop config` or `plop plugin` the generator will add markers to identify the location to append extensions. To make `config-` and `ext-` generators work with files not created by plop you have to manually add these strings to the respective files. They adher to the following pattern:
-
-```
-[language specific comment] @PLOP_EXT_[extension name in uppercase, singular and low-dashes]
-```
-
-**example for PHP files**
-```php
-// @PLOP_EXT_HOOK
-// @PLOP_EXT_FILES_METHOD
-```
-
-**example site/config/config.php**
-```php
-<?php
-
-return [
-    'hooks' => [
-        // Do not forget adding a `,` after existing array items
-        'page.update:after' => function () { },
-        // @PLOP_EXT_HOOK
-    ],
-];
-```
-
-## Extending the plopfile
-
-You can add custom code to your new plopfile as inline code or using files with `plop.load()`.
-
-**plopfile.js**
-
-```js
-module.exports = function (plop) {
-    plop.load([
-        "./site/plugins/kirby3-plopfile/plopfile.js",
-        // add your custom files here...
-    ]);
-    // or any plop code here
-};
+plop dockercompose $ webdevops
+docker-compose up
 ```
 
 ## Major dependencies
