@@ -33,7 +33,7 @@ module.exports.all = function () {
         "storage/content/home/home.txt",
         "storage/content/error/error.txt",
         "storage/media/index.html",
-        "storage/accounts.html",
+        "storage/accounts/index.html",
         "site/blueprints/site.yml",
         "site/blueprints/pages/default.yml",
         "storage/cache/index.html",
