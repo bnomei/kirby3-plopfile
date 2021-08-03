@@ -79,7 +79,7 @@ plop content _ blog blogpost
 plop snippet $ slideshow
 ```
 
-Kirby Plugins `index.php` and Config files created using `plop config`/`plop plugin` can be appended with lots of [Kirbys extensions](https://getkirby.com/docs/reference/plugins/extensions). These generators have the prefix `ext-`. Some of them might require you to add a file to the plugin folder first before appending a reference to that file.
+Kirby Plugins `index.php` and Config files created using `plop config`/`plop plugin` can be appended with lots of [Kirbys extensions](https://getkirby.com/docs/reference/plugins/extensions). These generators have the prefix `conf-`/`ext-`. Some of them might require you to add a file to the plugin folder first before appending a reference to that file.
 
 ```bash
 
@@ -126,7 +126,7 @@ return [
 
 ### Extending the plopfile
 
-You can add custom code to your new plopfile as inline code or using files with `plop.load()`. This allows you to add your own generators.
+You can add custom code to your `./plopfile.js` as inline code or using files with `plop.load()`. This allows you to add your own generators.
 
 **plopfile.js**
 
@@ -311,9 +311,9 @@ PLOP_CLIPBOARD="subl {{filepath}}:{{line}}:{{char}}"
 PLOP_CLIPBOARD=false
 ```
 
-### kirby roots
+### Kirby Roots
 
-If you renamed a root the generator will not find it unless you set it in your `.env` file.
+If you renamed a [root](https://getkirby.com/docs/guide/configuration#custom-folder-setup) the generator will not find it unless you set it in your `.env` file.
 
 ```
 # PLOP_ROOT_[uppercase version of original root name]
@@ -321,31 +321,34 @@ PLOP_ROOT_TEMPLATES="different"
 # instead of "templates"
 ```
 
-## Scaffolding or generating new projects with mostly plop
+## Scaffolding: Generating new projects with composer and plop
 
 Kirby offers various [installation methods](https://getkirby.com/docs/guide/quickstart#requirements__alternative-ways-to-install-kirby) from basic zip download to gitsubmodule and composer. Here is a new one using composer and plop.
 
 ### generator-based composer project for public-storage setup
 
-Run the following commands in your project root. Create composer.json file, install Kirby and this plugin plus grabbing the plopfile.
+Run the following commands in your project root. Create composer.json file, alter it with [jq](https://github.com/stedolan/jq), install Kirby and this plugin plus copying the plopfile to your project root folder. 
 
 ```bash
+yarn init
 composer init
 jq -r '. + { config: { "optimize-autoloader": true } }' composer.json
 composer require php:">=7.3.0 <8.1.0" getkirby/cms:^3.5 bnomei/kirby3-plopfile:^1.0
 cp site/plugins/kirby3-plopfile/example.plopfile.js plopfile.js
 ```
 
-Then create the basic folder structure and file using generators.
+> Since I will be using tailwind and laravel mix in most of my projects I am calling `yarn init` as well. The `setup` generator will then automatically exclude the `node_modules` folder via the created `.gitignore` file based on the existance of the `package.json` file. But you could allways add stuff like this later manually.
+
+Then create the basic folder structure and core website files using generators.
 
 ```bash
 plop setup public-storage
 plop indexphp public public-storage
-plop htaccess
-plop robotstxt
+plop htaccess $
+plop robotstxt $
 ```
 
-Optionally you could add php libraries for `Test Driven Development` (TDD) and use a ready-made docker image to serve your project locally.
+Optionally you could add php libraries with default config files for `Test Driven Development` (TDD) or use a customizable `docker-compose.yml` to serve your project locally.
 
 ```bash
 plop tdd $ all
