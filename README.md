@@ -191,7 +191,7 @@ module.exports = function (plop) {
 -   [x] robotstxt (folder)
 -   [x] setup (setup)
 -   [x] snippet (folder, filename, options, import)
--   [x] tdd (folder)
+-   [x] tdd (folder, options, ide)
 -   [x] template (folder, template, extension, options)
 -   [x] user (email, name, password, role, language)
 
@@ -337,7 +337,7 @@ composer require php:">=7.3.0 <8.1.0" getkirby/cms:^3.5 bnomei/kirby3-plopfile:^
 cp site/plugins/kirby3-plopfile/example.plopfile.js plopfile.js
 ```
 
-> Since I will be using tailwind and laravel mix in most of my projects I am calling `yarn init` as well. The `setup` generator will then automatically exclude the `node_modules` folder via the created `.gitignore` file based on the existance of the `package.json` file. But you could allways add stuff like this later manually.
+> Since I will be using tailwind and laravel mix in most of my projects I am calling `yarn init` as well. The `setup` generator will then automatically exclude the `node_modules` folder via the created `.gitignore` file based on the existence of the `package.json` file. But you could always add stuff like this later manually.
 
 Then create the basic folder structure and core website files using generators.
 
@@ -351,7 +351,7 @@ plop robotstxt $
 Optionally you could add php libraries with default config files for `Test Driven Development` (TDD) or use a customizable `docker-compose.yml` to serve your project locally.
 
 ```bash
-plop tdd $ all
+plop tdd $ all sublime
 # then use ctr-v + enter to install composer dev-requirements
 
 plop dockercompose $ webdevops
