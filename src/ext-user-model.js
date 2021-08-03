@@ -7,6 +7,8 @@ module.exports = function (plop) {
   const basepath = kirby.root("site");
   const pattern = /^( *)(\/\/ @PLOP_EXT_USER_MODEL)\r?\n/gim;
 
+  plop.setHelper("camelize", helper.camelize);
+
   plop.setGenerator("ext-user-model", {
     description: "append user model to an index.php",
     prompts: [prompts.folder(basepath), prompts.key(), prompts.value()],

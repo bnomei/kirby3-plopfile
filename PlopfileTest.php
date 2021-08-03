@@ -219,11 +219,13 @@ final class PlopfileTest extends TestCase
         $this->assertStringContainsString('pmparams', file_get_contents($file));
         $this->assertStringContainsString('pmtodo', file_get_contents($file));
 
-        $this->assertTrue(empty(shell_exec('plop ext-page-model myplug pamkey pamvalue')));
-        $this->assertStringContainsString('pamkey', file_get_contents($file));
-        $this->assertStringContainsString('pamvalue', file_get_contents($file));
+        // $this->assertTrue(empty(shell_exec('plop model myplug idefix all')));
+        // + class alias 
+        $this->assertTrue(empty(shell_exec('plop ext-page-model myplug idefix IdefixPage')));
+        $this->assertStringContainsString('idefix', file_get_contents($file));
+        $this->assertStringContainsString('IdefixPage', file_get_contents($file));
 
-        $this->assertTrue(empty(shell_exec('plop ext-pages-method myplug pasmkey pasmparams pamtodo')));
+        $this->assertTrue(empty(shell_exec('plop ext-pages-method myplug pasmkey pasmparams pasmtodo')));
         $this->assertStringContainsString('pasmkey', file_get_contents($file));
         $this->assertStringContainsString('pasmparams', file_get_contents($file));
         $this->assertStringContainsString('pasmtodo', file_get_contents($file));
@@ -267,7 +269,7 @@ final class PlopfileTest extends TestCase
 
         $this->assertTrue(empty(shell_exec('plop ext-user-model myplug umokey umovalue')));
         $this->assertStringContainsString('umokey', file_get_contents($file));
-        $this->assertStringContainsString('umovalue', file_get_contents($file));
+        $this->assertStringContainsString('Umovalue', file_get_contents($file));
 
         $this->assertTrue(empty(shell_exec('plop ext-users-method myplug umekey umeparams umetodo')));
         $this->assertStringContainsString('umekey', file_get_contents($file));
