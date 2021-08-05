@@ -6,12 +6,12 @@
 
 Plopfile to generate and append to various files for Kirby3 CMS using Plop.js
 
-## What others (might have) said about this Plugin
+## What others (might have) said about this plugin
 
 > 🤩<br>
 > <small>_- K-nerd_</small>
 
-> Using generators is faster than grabbing and adjusting code from the officals docs? Really? Awesome!<br>
+> Using generators is faster than grabbing and adjusting code from the official docs? Really? Awesome!<br>
 > <small>_- Lasi Toiper_</small>
 
 > Finally a Kirby CLI on ploperoids with a gazzilion of appending generators.<br>
@@ -307,6 +307,9 @@ PLOP_CLIPBOARD="Code.exe {{filepath}}:{{line}}:{{char}}"
 # Sublime Text on OSX
 PLOP_CLIPBOARD="subl {{filepath}}:{{line}}:{{char}}"
 
+# OniVim2
+PLOP_CLIPBOARD="oni2 -c ':call cursor({{line}},{{char}}) {{filepath}}'"
+
 # disable copying to clipboard at end of generator
 PLOP_CLIPBOARD=false
 ```
@@ -327,7 +330,7 @@ Kirby offers various [installation methods](https://getkirby.com/docs/guide/quic
 
 ### generator-based composer project for public-storage setup
 
-Run the following commands in your project root. Create composer.json file, alter it with [jq](https://github.com/stedolan/jq), install Kirby and this plugin plus copying the plopfile to your project root folder. 
+Run the following commands in your project root. Create composer.json file, alter it with [jq](https://github.com/stedolan/jq), install Kirby and this plugin plus copying the plopfile to your project root folder.
 
 ```bash
 yarn init
@@ -348,7 +351,7 @@ plop htaccess $
 plop robotstxt $
 ```
 
-Optionally you could add php libraries with default config files for `Test Driven Development` (TDD) or use a customizable `docker-compose.yml` to serve your project locally.
+Optionally you could add php libraries with default config files for **Test Driven Development** (TDD) or use a customizable `docker-compose.yml` to serve your project locally.
 
 ```bash
 plop tdd $ all sublime
