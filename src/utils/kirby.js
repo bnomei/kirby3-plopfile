@@ -76,6 +76,7 @@ module.exports.root = function (root) {
       return indexphp[0].replace("/index.php", "").replace("/public", "");
   } else {
     const folder = fg.sync(["**/" + root], {
+      ignore: ["kirby/**"],
       onlyDirectories: true,
       absolute: true,
     });

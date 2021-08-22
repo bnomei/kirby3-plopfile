@@ -1,6 +1,6 @@
 {
   "name": "kirby3-plopfile",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "git@github.com:bnomei/kirby3-plopfile.git",
   "author": "Bruno Meilick <b@bnomei.com>",
