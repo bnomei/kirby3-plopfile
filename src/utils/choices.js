@@ -141,7 +141,7 @@ module.exports.controller = function (checked = false) {
 
 module.exports.field = function (checked = false) {
   return {
-    name: "Fielda",
+    name: "Field",
     value: "field",
     checked: checked,
   };

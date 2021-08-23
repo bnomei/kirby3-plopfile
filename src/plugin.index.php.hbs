@@ -1,4 +1,5 @@
 <?php
+
 {{#if options.declareStrictTypes }}
 declare(strict_types=1);
 
@@ -16,6 +17,8 @@ load([
 class_alias('{{{ repository }}}\\FooBar', 'FooBar');
 // @PLOP_EXT_CLASS_ALIAS
 {{/if}}
+
+use Kirby\Cms\App as Kirby;
 
 Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
     {{#if extensions.option }}
