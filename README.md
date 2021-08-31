@@ -124,6 +124,25 @@ return [
 ];
 ```
 
+### Autoloading of extensions
+
+Some extensions can be autoloaded using the [autoloader-for-kirby](https://github.com/bnomei/autoloader-for-kirby) composer package. Once required with composer you add the autoloader for each extension type you want once and it will register all files in subfolders correctly. This might save you calling the most frequently used `ext-` plop generators again and again.
+
+**/site/plugins/example/index.php**
+```php
+<?php
+
+Kirby::plugin('bnomei/example', [
+    'options' => [
+        // options
+    ],
+    // autoloader for two extension typs
+    'snippets' => autoloader(__DIR__)->snippets(),
+    'templates' => autoloader(__DIR__)->templates(),
+    // other extensions
+]);
+```
+
 ### Extending the plopfile
 
 You can add custom code to your `./plopfile.js` as inline code or using files with `plop.load()`. This allows you to add your own generators.

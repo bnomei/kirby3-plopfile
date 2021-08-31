@@ -1,7 +1,7 @@
 {
   "name": "bnomei/kirby3-plopfile",
   "type": "kirby-plugin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Plopfile to generate and append to various files for Kirby3 CMS using Plop.js",
   "license": "MIT",
   "keywords": [
@@ -61,5 +61,8 @@
       "composer reset",
       "phpunit --configuration ./phpunit.xml"
     ]
+  },
+  "suggest": {
+    "bnomei/autoloader-for-kirby": "Helper Class to automatically load various Kirby extensions in a plugin"
   }
 }
