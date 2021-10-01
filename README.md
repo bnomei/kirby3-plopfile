@@ -20,7 +20,7 @@ Plopfile to generate and append to various files for Kirby3 CMS using Plop.js
 > I don't care how it works but it does! Unittests FTW.<br>
 > <small>_- NewToThis_</small>
 
-## Commerical Usage
+## Commercial Usage
 
 > <br>
 ><b>Support open source!</b><br><br>
