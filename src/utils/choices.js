@@ -91,6 +91,30 @@ module.exports.apiroute = function (checked = false) {
   };
 };
 
+module.exports.blockmethod = function (checked = false) {
+  return {
+    name: "Block Methods",
+    value: "blockmethod",
+    checked: checked,
+  };
+};
+
+module.exports.blocksmethod = function (checked = false) {
+  return {
+    name: "Blocks Methods",
+    value: "blocksmethod",
+    checked: checked,
+  };
+};
+
+module.exports.blockmodel = function (checked = false) {
+  return {
+    name: "Block Models",
+    value: "blockmodel",
+    checked: checked,
+  };
+};
+
 module.exports.blueprint = function (checked = false) {
   return {
     name: "Blueprints",
@@ -183,6 +207,31 @@ module.exports.kirbytag = function (checked = false) {
   return {
     name: "Kirby Tags",
     value: "kirbytag",
+    checked: checked,
+  };
+};
+
+
+module.exports.layoutcolumnmethod = function (checked = false) {
+  return {
+    name: "Layout Column Methods",
+    value: "layoutcolumnmethod",
+    checked: checked,
+  };
+};
+
+module.exports.layoutmethod = function (checked = false) {
+  return {
+    name: "Layout Methods",
+    value: "layoutmethod",
+    checked: checked,
+  };
+};
+
+module.exports.layoutsmethod = function (checked = false) {
+  return {
+    name: "Layouts Methods",
+    value: "layoutsmethod",
     checked: checked,
   };
 };

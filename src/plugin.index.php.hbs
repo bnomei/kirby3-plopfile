@@ -50,6 +50,24 @@ Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
         {{/if}}
     ],
     {{/if}}
+    {{#if extensions.blockmodel}}
+
+    'blockModels' => [
+        // @PLOP_EXT_BLOCK_MODEL
+    ],
+    {{/if}}
+    {{#if extensions.blockmethod}}
+
+    'blockMethods' => [
+        // @PLOP_EXT_BLOCK_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.blocksmethod}}
+
+    'blocksMethods' => [
+        // @PLOP_EXT_BLOCKS_METHOD
+    ],
+    {{/if}}
     {{#if extensions.blueprint}}
 
     'blueprints' => [
@@ -114,6 +132,24 @@ Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
 
     'hooks' => [
         // @PLOP_EXT_HOOK
+    ],
+    {{/if}}
+    {{#if extensions.layoutcolumnmethod}}
+
+    'layoutColumnMethods' => [
+        // @PLOP_EXT_LAYOUTCOLUMN_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.layoutmethod}}
+
+    'layoutMethods' => [
+        // @PLOP_EXT_LAYOUT_METHOD
+    ],
+    {{/if}}
+    {{#if extensions.layoutsmethod}}
+
+    'layoutsMethods' => [
+        // @PLOP_EXT_LAYOUTS_METHOD
     ],
     {{/if}}
     {{#if extensions.kirbytag}}

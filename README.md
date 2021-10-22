@@ -165,7 +165,7 @@ module.exports = function (plop) {
 };
 ```
 
-### Generators (52)
+### Generators (58)
 
 -   [x] blueprint (folder, type, template, extension, import)
 -   [x] config-option (file, key, value)
@@ -178,6 +178,9 @@ module.exports = function (plop) {
 -   [x] ext-auth-challenge (folder, key, value)
 -   [x] ext-api-data (folder, key, params, todo)
 -   [x] ext-api-route (folder, params, pattern, method, todo)
+-   [x] ext-block-method (folder, key, params, todo)
+-   [x] ext-block-model (folder, key, value)
+-   [x] ext-blocks-method (folder, key, params, todo)
 -   [x] ext-blueprint (folder, file)
 -   [x] ext-cache-type (folder, key, value)
 -   [x] ext-class-alias (folder, key, value)
@@ -191,6 +194,9 @@ module.exports = function (plop) {
 -   [x] ext-file-method (folder, key, params, todo)
 -   [x] ext-files-method (folder, key, params, todo)
 -   [x] ext-hook (folder, hook, todo)
+-   [x] ext-layoutcolumn-method (folder, key, params, todo)
+-   [x] ext-layout-method (folder, key, params, todo)
+-   [x] ext-layouts-method (folder, key, params, todo)
 -   [x] ext-kirbytag (folder, key, attr, params, todo)
 -   [x] ext-option (folder, key, value)
 -   [x] ext-page-method (folder, key, params, todo)
