@@ -36,19 +36,21 @@ Plopfile to generate and append to various files for Kirby3 CMS using Plop.js
 
 ## Installation
 
-### Plop.js
+### Plop.js (version 2)
 
 Install [Plop.js globally](https://plopjs.com). Plop.js is simplified just glue code between [inquirer](https://github.com/SBoudrias/Inquirer.js/) prompts and [handlebar](https://github.com/wycats/handlebars.js/) templates.
 
 ```bash
-npm install -g plop
+npm install -g plop@2
 ```
 
 or
 
 ```bash
-yarn global add plop
+yarn global add plop@2
 ```
+
+> NOTE: plop.js version 3 is not supported yet since all js files would need to be converted to ESM syntax.
 
 ### Kirby Plugin
 
