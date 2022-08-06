@@ -403,7 +403,7 @@ docker-compose up
 -   [js-yaml](https://github.com/nodeca/js-yaml)
 -   [clipboardy](https://github.com/sindresorhus/clipboardy)
 
-All non-dev node_module dependencies are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip and without requiring any further build step.
+All non-dev node_module dependencies are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip and without requiring any further build step. The uploaded assets are for INTEL based mac/pcs. To use this plugin on an Mac M1 then after downloading remove the `node_modules` folder and `package-lock.json` file and run `npm i` in the plugin folder.
 
 ## Disclaimer
 
