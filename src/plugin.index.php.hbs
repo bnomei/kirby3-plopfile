@@ -98,6 +98,12 @@ Kirby::plugin('{{{toLowerCase user }}}/{{{toLowerCase repository }}}', [
         // @PLOP_EXT_COLLECTION_METHOD
     ],
     {{/if}}
+    {{#if extensions.command}}
+
+    'commands' => [
+        // @PLOP_EXT_COMMAND
+    ],
+    {{/if}}
     {{#if extensions.controller}}
 
     'controllers' => [

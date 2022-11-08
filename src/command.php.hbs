@@ -1,0 +1,17 @@
+<?php
+
+{{#if options.declareStrictTypes}}
+declare(strict_types=1);
+
+{{/if}}
+
+use Kirby\CLI\CLI;
+
+return [
+  'description' => 'Nice command',
+  'args' => [],
+  'command' => static function (CLI $cli): void {
+      $cli->success('Nice command!');
+  }
+];
+

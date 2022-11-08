@@ -3,6 +3,7 @@ require("dotenv").config();
 module.exports = function (plop) {
   plop.load([
     "./src/blueprint.js",
+    "./src/command.js",
     "./src/config.js",
     "./src/config-hook.js",
     "./src/config-option.js",
@@ -20,6 +21,7 @@ module.exports = function (plop) {
     "./src/ext-collection.js",
     "./src/ext-collection-filter.js",
     "./src/ext-collection-method.js",
+    "./src/ext-command.js",
     "./src/ext-controller.js",
     "./src/ext-field.js",
     "./src/ext-field-method.js",

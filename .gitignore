@@ -2,11 +2,12 @@
 
 *.log
 *.cache
+/.idea
 
-!/node_modules/*
+/node_modules/*
 /node_modules/**/.*
-!/node_modules/**/.bin/*
-!/node_modules/**/LICENSE
+/node_modules/**/.bin/*
+/node_modules/**/LICENSE
 /node_modules/**/*.md
 /node_modules/**/*.markdown
 /node_modules/**/*.js.map

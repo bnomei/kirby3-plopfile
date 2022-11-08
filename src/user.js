@@ -1,5 +1,4 @@
 const kirby = require("./utils/kirby.js");
-const slugify = require("./utils/slugify.js");
 const F = require("./utils/f.js");
 
 module.exports = function (plop) {

@@ -1,6 +1,4 @@
 const fs = require("fs");
-const F = require("./utils/f.js");
-const helpers = require("./utils/helpers.js");
 const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 const setups = require("./utils/setups.js");

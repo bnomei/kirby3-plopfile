@@ -180,6 +180,12 @@ final class PlopfileTest extends TestCase
         $this->assertTrue(empty(shell_exec('plop ext-controller myplug cooni')));
         $this->assertStringContainsString('require \'controllers/cooni.php', file_get_contents($file));
 
+        $this->assertTrue(empty(shell_exec('plop command $ comman all')));
+        $this->assertTrue(empty(shell_exec('plop ext-command myplug cdkey cdparams cdtodo')));
+        $this->assertStringContainsString('cdkey', file_get_contents($file));
+        $this->assertStringContainsString('cdparams', file_get_contents($file));
+        $this->assertStringContainsString('cdtodo', file_get_contents($file));
+
         $this->assertTrue(empty(shell_exec('plop ext-field-method myplug fmkey fmparams fmtodo')));
         $this->assertStringContainsString('fmkey', file_get_contents($file));
         $this->assertStringContainsString('fmparams', file_get_contents($file));
@@ -221,7 +227,7 @@ final class PlopfileTest extends TestCase
         $this->assertStringContainsString('pmtodo', file_get_contents($file));
 
         // $this->assertTrue(empty(shell_exec('plop model myplug idefix all')));
-        // + class alias 
+        // + class alias
         $this->assertTrue(empty(shell_exec('plop ext-page-model myplug idefix IdefixPage')));
         $this->assertStringContainsString('idefix', file_get_contents($file));
         $this->assertStringContainsString('IdefixPage', file_get_contents($file));

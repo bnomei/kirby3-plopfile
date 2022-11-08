@@ -155,6 +155,14 @@ module.exports.collectionmethod = function (checked = false) {
   };
 };
 
+module.exports.command = function (checked = false) {
+  return {
+    name: "Commands",
+    value: "command",
+    checked: checked,
+  };
+};
+
 module.exports.controller = function (checked = false) {
   return {
     name: "Controllers",
@@ -210,7 +218,6 @@ module.exports.kirbytag = function (checked = false) {
     checked: checked,
   };
 };
-
 
 module.exports.layoutcolumnmethod = function (checked = false) {
   return {

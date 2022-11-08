@@ -28,7 +28,7 @@ module.exports = function (plop) {
         type: "input",
         name: "image",
         message: "Image",
-        default: "webdevops/php-apache:7.4",
+        default: "webdevops/php-apache:8.1",
         when: (data) => data.type === "webdevops",
       },
       {

@@ -1,7 +1,7 @@
 {
   "name": "bnomei/kirby3-plopfile",
   "type": "kirby-plugin",
-  "version": "1.0.6",
+  "version": "1.2.0",
   "description": "Plopfile to generate and append to various files for Kirby3 CMS using Plop.js",
   "license": "MIT",
   "keywords": [
@@ -30,10 +30,13 @@
   ],
   "config": {
     "optimize-autoloader": true,
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "getkirby/composer-installer": true
+    }
   },
   "require": {
-    "php": ">=7.3.0",
+    "php": ">=8.0",
     "getkirby/composer-installer": "^1.2"
   },
   "require-dev": {
@@ -55,7 +58,7 @@
       "git rm -rf --cached .; git add .;"
     ],
     "reset": [
-      "rm -rf tests; mkdir tests;mkdir tests/content;mkdir tests/site;mkdir tests/site/accounts;mkdir tests/site/blueprints;mkdir tests/site/config;mkdir tests/site/controllers;mkdir tests/site/languages;mkdir tests/site/models;mkdir tests/site/plugins;mkdir tests/site/snippets;mkdir tests/site/templates;touch tests/image.png"
+      "rm -rf tests; mkdir tests;mkdir tests/content;mkdir tests/site;mkdir tests/site/accounts;mkdir tests/site/blueprints;mkdir tests/site/commands;mkdir tests/site/config;mkdir tests/site/controllers;mkdir tests/site/languages;mkdir tests/site/models;mkdir tests/site/plugins;mkdir tests/site/snippets;mkdir tests/site/templates;touch tests/image.png"
     ],
     "test": [
       "composer reset",

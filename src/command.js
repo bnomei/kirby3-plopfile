@@ -5,7 +5,7 @@ const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
-  const basepath = kirby.root("snippets");
+  const basepath = kirby.root("commands");
 
   plop.setHelper("filenameWithoutExtension", helpers.filenameWithoutExtension);
   plop.setHelper("trimTrailingSlash", helpers.trimTrailingSlash);
@@ -13,14 +13,13 @@ module.exports = function (plop) {
 
   let defaultChoices = [
     choices.declareStrictTypes(false),
-    choices.typeHintCoreObjects(false),
     choices.none(),
     choices.defaults(),
     choices.all(),
   ];
 
-  plop.setGenerator("snippet", {
-    description: "make a snippet file",
+  plop.setGenerator("command", {
+    description: "make a command file",
     prompts: [
       prompts.folder(basepath),
       prompts.file(),
@@ -30,18 +29,17 @@ module.exports = function (plop) {
         message: "Options",
         choices: defaultChoices,
       },
-      prompts.import(),
     ],
     actions: [
       function (data) {
         data.folder = F.findFolder(kirby.autopath(data.folder, basepath));
         // add root if adding to plugins
-        let root = "/" + (process.env["PLOP_ROOT_SNIPPETS"] ?? "snippets");
+        let root = "/" + (process.env["PLOP_ROOT_COMMANDS"] ?? "commands");
         if (!data.folder.endsWith(root)) {
           data.folder = data.folder + root;
         }
         F.makeDir(data.folder);
-        data.data = F.load(data.import);
+        // data.data = F.load(data.import);
         data.path = kirby.autopath(
           plop.renderString(
             "{{trimTrailingSlash folder }}/{{filenameWithoutExtension file }}.php",
@@ -54,7 +52,7 @@ module.exports = function (plop) {
       {
         type: "add",
         path: "{{ path }}",
-        templateFile: "snippet.php.hbs",
+        templateFile: "command.php.hbs",
       },
       function (data) {
         return F.clipboard(plop, data.path);

@@ -1,4 +1,3 @@
-const A = require("./utils/a.js");
 const choices = require("./utils/choices.js");
 const F = require("./utils/f.js");
 const helpers = require("./utils/helpers.js");

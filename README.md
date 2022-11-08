@@ -56,7 +56,7 @@ yarn global add plop@2
 
 -   unzip [master.zip](https://github.com/bnomei/kirby3-plopfile/archive/master.zip) as folder `site/plugins/kirby3-plopfile` or
 -   `git submodule add https://github.com/bnomei/kirby3-plopfile.git site/plugins/kirby3-plopfile` or
--   `composer require bnomei/kirby3-plopfile`
+-   `composer require bnomei/kirby3-plopfile --dev`
 
 ### Plopfile for your project
 
@@ -65,6 +65,10 @@ Copy `example.plopfile.js` from the plugin directory to your project root.
 ```bash
 cp site/plugins/kirby3-plopfile/example.plopfile.js plopfile.js
 ```
+
+### Node dependencies
+
+No node_module dependencies are included. To use this plugin run `npm i` or `yarn` in the plugin folder.
 
 ## Usage
 
@@ -167,7 +171,7 @@ module.exports = function (plop) {
 };
 ```
 
-### Generators (58)
+### Generators (60)
 
 -   [x] blueprint (folder, type, template, extension, import)
 -   [x] config-option (file, key, value)
@@ -175,6 +179,7 @@ module.exports = function (plop) {
 -   [x] config-route (file, pattern, method, todo, [language, ])
 -   [x] config (filename, extensions, import)
 -   [x] content (title, parent, template, import, [language, slug,])
+-   [x] command (folder, file, options)
 -   [x] controller (folder, template, extension, options)
 -   [x] dockercompose (folder, type, [...])
 -   [x] ext-auth-challenge (folder, key, value)
@@ -190,6 +195,7 @@ module.exports = function (plop) {
 -   [x] ext-collection-filter (folder, key, todo)
 -   [x] ext-collection-method (folder, key, params, todo)
 -   [x] ext-collection (folder, key, params, todo)
+-   [x] ext-command (folder, key, params, todo))
 -   [x] ext-controller (folder, file)
 -   [x] ext-field-method (folder, key, params, todo)
 -   [x] ext-field (folder, key, todo)
@@ -223,7 +229,7 @@ module.exports = function (plop) {
 -   [x] plugin (user, repository, prefix, options)
 -   [x] robotstxt (folder)
 -   [x] setup (setup)
--   [x] snippet (folder, filename, options, import)
+-   [x] snippet (folder, file, options, import)
 -   [x] tdd (folder, options, ide)
 -   [x] template (folder, template, extension, options)
 -   [x] user (email, name, password, role, language)
@@ -403,7 +409,7 @@ docker-compose up
 -   [js-yaml](https://github.com/nodeca/js-yaml)
 -   [clipboardy](https://github.com/sindresorhus/clipboardy)
 
-All non-dev node_module dependencies are included since Kirby CMS Plugins are supposed to work just by downloading the repository zip and without requiring any further build step. The uploaded assets are for INTEL based mac/pcs. To use this plugin on an Mac M1 then after downloading remove the `node_modules` folder and `package-lock.json` file and run `npm i` in the plugin folder.
+No node_module dependencies are included. To use this plugin run `npm i` or `yarn` in the plugin folder.
 
 ## Disclaimer
 

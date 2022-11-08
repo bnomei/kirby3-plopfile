@@ -1,5 +1,4 @@
 const F = require("./utils/f.js");
-const helper = require("./utils/helpers.js");
 const kirby = require("./utils/kirby.js");
 const prompts = require("./utils/prompts.js");
 

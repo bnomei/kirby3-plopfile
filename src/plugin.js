@@ -1,9 +1,7 @@
-const A = require("./utils/a.js");
 const choices = require("./utils/choices.js");
 const F = require("./utils/f.js");
 const helpers = require("./utils/helpers.js");
 const kirby = require("./utils/kirby.js");
-const prompts = require("./utils/prompts.js");
 
 module.exports = function (plop) {
   const basepath = kirby.root("plugins");
@@ -54,6 +52,7 @@ module.exports = function (plop) {
     choices.blueprint(true),
     choices.cachetype(false),
     choices.collection(true),
+    choices.command(true),
     choices.collectionfilter(false),
     choices.collectionmethod(false),
     choices.controller(true),
