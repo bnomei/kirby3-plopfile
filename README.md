@@ -195,7 +195,7 @@ module.exports = function (plop) {
 -   [x] ext-collection-filter (folder, key, todo)
 -   [x] ext-collection-method (folder, key, params, todo)
 -   [x] ext-collection (folder, key, params, todo)
--   [x] ext-command (folder, key, params, todo))
+-   [x] ext-command (folder, key, params, todo)
 -   [x] ext-controller (folder, file)
 -   [x] ext-field-method (folder, key, params, todo)
 -   [x] ext-field (folder, key, todo)
