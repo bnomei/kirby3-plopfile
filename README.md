@@ -375,7 +375,7 @@ Run the following commands in your project root. Create composer.json file, alte
 yarn init
 composer init
 jq -r '. + { config: { "optimize-autoloader": true } }' composer.json
-composer require php:">=7.3.0 <8.1.0" getkirby/cms:^3.5 bnomei/kirby3-plopfile:^1.0
+composer require php:">=8.0 <8.2.0" getkirby/cms:^3.8 bnomei/kirby3-plopfile:^1.2
 cp site/plugins/kirby3-plopfile/example.plopfile.js plopfile.js
 ```
 

@@ -1278,4 +1278,4 @@ RewriteRule ^(.*) index.php [L]
 </IfModule>
 
 # pass the Authorization header to PHP
-SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+SetEnvIf Authorization "(.+)" HTTP_AUTHORIZATION=$1
