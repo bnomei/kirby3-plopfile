@@ -346,8 +346,8 @@ PLOP_CLIPBOARD="Code.exe {{filepath}}:{{line}}:{{char}}"
 # Sublime Text on OSX
 PLOP_CLIPBOARD="subl {{filepath}}:{{line}}:{{char}}"
 
-# OniVim2
-PLOP_CLIPBOARD="oni2 -c ':call cursor({{line}},{{char}}) {{filepath}}'"
+# PHPStorm
+PLOP_CLIPBOARD="phpstorm --line {{line}} --column {{char}} {{filepath}}"
 
 # disable copying to clipboard at end of generator
 PLOP_CLIPBOARD=false
