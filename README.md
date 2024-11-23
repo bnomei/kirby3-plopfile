@@ -1,4 +1,4 @@
-# Kirby3 Plopfile
+# Kirby Plopfile
 
 ![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-plopfile?color=ae81ff)
 ![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-plopfile?color=272822)
@@ -19,20 +19,6 @@ Plopfile to generate and append to various files for Kirby3 CMS using Plop.js
 
 > I don't care how it works but it does! Unittests FTW.<br>
 > <small>_- NewToThis_</small>
-
-## Commercial Usage
-
-> <br>
-><b>Support open source!</b><br><br>
-> This plugin is free but if you use it in a commercial project please consider to sponsor me or make a donation.<br>
-> If my work helped you to make some cash it seems fair to me that I might get a little reward as well, right?<br><br>
-> Be kind. Share a little. Thanks.<br><br>
-> &dash; Bruno<br>
-> &nbsp; 
-
-| M | O | N | E | Y |
-|---|----|---|---|---|
-| [Github sponsor](https://github.com/sponsors/bnomei) | [Patreon](https://patreon.com/bnomei) | [Buy Me a Coffee](https://buymeacoff.ee/bnomei) | [Paypal dontation](https://www.paypal.me/bnomei/15) | [Hire me](mailto:b@bnomei.com?subject=Kirby) |
 
 ## Installation
 
